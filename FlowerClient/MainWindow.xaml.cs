@@ -16,41 +16,23 @@ using System.Windows.Shapes;
 
 namespace FlowerClient
 {
-    /// <summary>
-    /// Логика взаимодействия для MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
         public MainWindow()
         {
-
             InitializeComponent();
-
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                //string connectionString = "Server="+txt_adress.Text+";Port=5432;User Id=" + txt_login.Text
-                //        + ";Password=" + txt_password.Password + ";Database=flower;";
-                //Например: "Server=127.0.0.1;Port=5432;User Id=postgres;Password=mypass;Database=mybase;"
-                //string sql = "select * from test";
-                //NpgsqlConnection conn = new NpgsqlConnection(connectionString);
-                //NpgsqlCommand comm = new NpgsqlCommand(sql, conn);
-                //conn.Open(); //Открываем соединение.
-                //var result = comm.ExecuteScalar().ToString(); //Выполняем нашу команду.
-                //conn.Close(); //Закрываем соединение.
-
-
-                ////
                 string connectionString = "Server=" + txt_adress.Text + ";Port=5432;User Id=" + txt_login.Text
                 + ";Password=" + txt_password.Password + ";Database=flower;";
                 Mediator.instance.SQL = "select * from test";
                 Mediator.instance.Connection = new NpgsqlConnection(connectionString);
-                Mediator.instance.Command = new NpgsqlCommand(Mediator.instance.SQL, Mediator.instance.Connection);
                 Mediator.instance.Connection.Open();
-                var result = Mediator.instance.Command.ExecuteNonQuery();
+                Mediator.instance.Execute();
                 Mediator.instance.Connection.Close();
             }
             catch (Exception ex)

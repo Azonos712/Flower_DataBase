@@ -14,5 +14,11 @@ namespace FlowerClient
         public NpgsqlConnection Connection { get; set; }
         public string SQL { get; set; }
         public NpgsqlCommand Command { get; set; }
+
+        public void Execute()
+        {
+            instance.Command = new NpgsqlCommand(instance.SQL, instance.Connection);
+            instance.Command.ExecuteNonQuery();
+        }
     }
 }
