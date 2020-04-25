@@ -22,7 +22,9 @@ namespace FlowerClient
     {
         public MainWindow()
         {
+
             InitializeComponent();
+        
         }
     }
 }
