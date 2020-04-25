@@ -41,6 +41,10 @@ namespace FlowerClient
                 conn.Open(); //Открываем соединение.
                 var result = comm.ExecuteScalar().ToString(); //Выполняем нашу команду.
                 conn.Close(); //Закрываем соединение.
+
+
+                ////
+                Mediator.instance.Connection = new NpgsqlConnection(connectionString);
             }
             catch (Exception ex)
             {
