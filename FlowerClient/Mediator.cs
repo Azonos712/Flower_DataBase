@@ -9,7 +9,7 @@ namespace FlowerClient
 {
     class Mediator
     {
-        public static Mediator instance;
+        public static Mediator instance = new Mediator();
 
         public NpgsqlConnection Connection { get; set; }
         public string SQL { get; set; }
