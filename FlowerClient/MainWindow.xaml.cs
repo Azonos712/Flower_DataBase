@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Npgsql;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -25,6 +26,19 @@ namespace FlowerClient
 
             InitializeComponent();
         
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            string connectionString = "Server=31.6.122.95;Port=5432;User Id=" + txt_login
+                    + ";Password=" + txt_password + ";Database=flower;";
+            //Например: "Server=127.0.0.1;Port=5432;User Id=postgres;Password=mypass;Database=mybase;"
+            string sql = "select * from test";
+            NpgsqlConnection conn = new NpgsqlConnection(connectionString);
+            NpgsqlCommand comm = new NpgsqlCommand(sql, conn);
+            conn.Open(); //Открываем соединение.
+            var result = comm.ExecuteScalar().ToString(); //Выполняем нашу команду.
+            conn.Close(); //Закрываем соединение.
         }
     }
 }
