@@ -33,7 +33,7 @@ namespace FlowerClient
             try
             {
                 string connectionString = "Server="+txt_adress.Text+";Port=5432;User Id=" + txt_login.Text
-                        + ";Password=" + txt_password.Text + ";Database=flower;";
+                        + ";Password=" + txt_password.Password + ";Database=flower;";
                 //Например: "Server=127.0.0.1;Port=5432;User Id=postgres;Password=mypass;Database=mybase;"
                 string sql = "select * from test";
                 NpgsqlConnection conn = new NpgsqlConnection(connectionString);
