@@ -12,5 +12,7 @@ namespace FlowerClient
         public static Mediator instance;
 
         public NpgsqlConnection Connection { get; set; }
+        public string SQL { get; set; }
+        public NpgsqlCommand Command { get; set; }
     }
 }
