@@ -25,20 +25,27 @@ namespace FlowerClient
         {
 
             InitializeComponent();
-        
+
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            string connectionString = "Server=31.6.122.95;Port=5432;User Id=" + txt_login
-                    + ";Password=" + txt_password + ";Database=flower;";
-            //Например: "Server=127.0.0.1;Port=5432;User Id=postgres;Password=mypass;Database=mybase;"
-            string sql = "select * from test";
-            NpgsqlConnection conn = new NpgsqlConnection(connectionString);
-            NpgsqlCommand comm = new NpgsqlCommand(sql, conn);
-            conn.Open(); //Открываем соединение.
-            var result = comm.ExecuteScalar().ToString(); //Выполняем нашу команду.
-            conn.Close(); //Закрываем соединение.
+            try
+            {
+                string connectionString = "Server="+txt_adress.Text+";Port=5432;User Id=" + txt_login.Text
+                        + ";Password=" + txt_password.Text + ";Database=flower;";
+                //Например: "Server=127.0.0.1;Port=5432;User Id=postgres;Password=mypass;Database=mybase;"
+                string sql = "select * from test";
+                NpgsqlConnection conn = new NpgsqlConnection(connectionString);
+                NpgsqlCommand comm = new NpgsqlCommand(sql, conn);
+                conn.Open(); //Открываем соединение.
+                var result = comm.ExecuteScalar().ToString(); //Выполняем нашу команду.
+                conn.Close(); //Закрываем соединение.
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
     }
 }
