@@ -63,8 +63,8 @@ namespace FlowerClient
                     temp_str = "Не определён";
                     break;
             }
-
-            MessageBox.Show("Вы вошли в систему!(" + temp_str + ")");
+            new MsgBox("Вы вошли в систему!(" + temp_str + ")","Оповещение").ShowDialog();
+            //MessageBox.Show("Вы вошли в систему!(" + temp_str + ")");
         }
     }
 }
