@@ -9,19 +9,14 @@
     <Grid>
         <DockPanel>
             <DataGrid x:Name="users_table" IsReadOnly="True" ItemsSource="{Binding}" AutoGenerateColumns="True" Margin="10" DockPanel.Dock="Left" Width="500"></DataGrid>
-            <Grid DockPanel.Dock="Left" Margin="0 100 0 100">
-                <Grid.RowDefinitions>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                </Grid.RowDefinitions>
-                <ComboBox Grid.Row="0" x:Name="cbx_roles" SelectionChanged="cbx_roles_SelectionChanged" Margin="10">
+            <StackPanel DockPanel.Dock="Left" Height="200">
+                <ComboBox x:Name="cbx_roles" SelectionChanged="cbx_roles_SelectionChanged" Margin="10">
                     <ComboBoxItem Content="Пользователи"></ComboBoxItem>
                     <ComboBoxItem Content="Администраторы"></ComboBoxItem>
                 </ComboBox>
-                <Button Grid.Row="1" Content="Добавить" VerticalAlignment="Center" Margin="10"></Button>
-                <Button Grid.Row="2" Content="Удалить" VerticalAlignment="Center" Margin="10"></Button>
-            </Grid>
+                <Button Content="Добавить" VerticalAlignment="Center" Margin="10"></Button>
+                <Button Content="Удалить" VerticalAlignment="Center" Margin="10"></Button>
+            </StackPanel>
         </DockPanel>
     </Grid>
 </Window>
