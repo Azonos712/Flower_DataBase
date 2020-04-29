@@ -1,5 +1,6 @@
 ﻿using Npgsql;
 using System;
+using System.Text;
 using System.Windows;
 
 namespace FlowerClient
@@ -41,12 +42,12 @@ namespace FlowerClient
 
             Mediator.instance.Login = txt_login.Text.Trim();
             Mediator.instance.SQL = "select show_role('" + Mediator.instance.Login + "');";
-            Mediator.instance.Role = (string)Mediator.instance.ConvertQueryToValue();
+            Mediator.instance.Role = Mediator.instance.ConvertQueryToValue().ToString();
         }
 
         void RoleAlert()
         {
-            string temp_str = String.Empty;
+            string temp_str;
             switch (Mediator.instance.Role)
             {
                 case "Flower_Admin":
@@ -54,6 +55,9 @@ namespace FlowerClient
                     break;
                 case "Flower_Employee":
                     temp_str = "Сотрудник";
+                    break;
+                case "Flower_SuperAdmin":
+                    temp_str = "Супер администратор";
                     break;
                 default:
                     temp_str = "Не определён";

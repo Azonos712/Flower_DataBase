@@ -21,11 +21,20 @@ namespace FlowerClient
         public MainWindow()
         {
             InitializeComponent();
+
+            if (Mediator.instance.Role == "Flower_Employee")
+                admin_menuitem.Visibility = Visibility.Collapsed;
         }
 
         private void MenuItem_Click(object sender, RoutedEventArgs e)
         {
             new AdminWindow().ShowDialog();
+        }
+
+        private void MenuItem_Click_1(object sender, RoutedEventArgs e)
+        {
+            new Login().Show();
+            this.Close();
         }
     }
 }
