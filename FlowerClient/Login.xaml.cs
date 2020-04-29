@@ -27,7 +27,7 @@ namespace FlowerClient
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            TryConnection();
+            //TryConnection();
             new MainWindow().Show();
             this.Close();
         }
