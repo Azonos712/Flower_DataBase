@@ -29,6 +29,14 @@ namespace FlowerClient
             return dt.Rows[0].ItemArray[0];
         }
 
+        public DataTable ConvertQueryToTable()
+        {
+            DataTable dt = new DataTable();
+            NpgsqlDataAdapter da = new NpgsqlDataAdapter(SQL, Connection);
+            da.Fill(dt);
+            return dt;
+        }
+
         public void Execute()
         {
             instance.Command = new NpgsqlCommand(instance.SQL, instance.Connection);

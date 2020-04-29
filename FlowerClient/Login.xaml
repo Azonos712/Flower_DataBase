@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FlowerClient"
         mc:Ignorable="d"
-        Title="Login" Height="212" Width="229" TextElement.FontSize="14">
+        Title="Login" Height="212" Width="229" TextElement.FontSize="14" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
     <Grid>
         <Button Content="Вход" HorizontalAlignment="Left" Margin="10,129,0,0" VerticalAlignment="Top" Width="191" Click="Button_Click"/>
         <TextBox x:Name="txt_adress" HorizontalAlignment="Left" Height="30" Margin="10,10,0,0" TextWrapping="Wrap" Text="localhost" VerticalAlignment="Top" Width="190"/>
