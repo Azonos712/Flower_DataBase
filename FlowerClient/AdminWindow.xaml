@@ -5,17 +5,26 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FlowerClient"
         mc:Ignorable="d"
-        Title="AdminWindow" Height="350" Width="600" TextElement.FontSize="14" WindowStartupLocation="CenterScreen">
+        Title="Администрирование" Height="350" Width="550" TextElement.FontSize="14" WindowStartupLocation="CenterScreen">
     <Grid>
         <DockPanel>
-            <DataGrid x:Name="users_table" IsReadOnly="True" ItemsSource="{Binding}" AutoGenerateColumns="True" Margin="10" DockPanel.Dock="Left" Width="350"></DataGrid>
+            <DataGrid BorderThickness="1" x:Name="users_table" IsReadOnly="True" ItemsSource="{Binding}" AutoGenerateColumns="True" Margin="10" DockPanel.Dock="Left" Width="250"></DataGrid>
             <StackPanel DockPanel.Dock="Left" VerticalAlignment="Center">
                 <ComboBox x:Name="cbx_roles" SelectionChanged="cbx_roles_SelectionChanged" Margin="10">
                     <ComboBoxItem Content="Пользователи"></ComboBoxItem>
                     <ComboBoxItem Content="Администраторы"></ComboBoxItem>
                 </ComboBox>
-                <Button Content="Добавить" VerticalAlignment="Center" Margin="10"></Button>
-                <Button Content="Удалить" VerticalAlignment="Center" Margin="10"></Button>
+                <GroupBox Header="Работа с пользователями" Margin="10">
+                    <StackPanel>
+                        <Button Content="Добавить" VerticalAlignment="Center" Margin="10"></Button>
+                        <Button Content="Удалить" VerticalAlignment="Center" Margin="10"></Button>
+                    </StackPanel>
+                </GroupBox>
+
+                <Button x:Name="btn_pic_path" Content="Путь к фотографиям" VerticalAlignment="Center" Margin="10"></Button>
+
+
+
             </StackPanel>
         </DockPanel>
     </Grid>

@@ -30,6 +30,7 @@ namespace FlowerClient
                 if (Mediator.instance.Role == "Flower_Admin")
                 {
                     cbx_roles.Visibility = Visibility.Collapsed;
+                    btn_pic_path.Visibility = Visibility.Collapsed;
                 }
             }
             catch (Exception ex)
