@@ -19,8 +19,11 @@ namespace FlowerClient
 {
     public partial class MainWindow : Window
     {
+        private List<MaterialDesignThemes.Wpf.Card> cards = new List<MaterialDesignThemes.Wpf.Card>(6);
         private List<Card> gallery = new List<Card>(6);
-
+        private DataTable results;
+        private int currentPage;
+        private int pagesCount;
         public MainWindow()
         {
             InitializeComponent();
@@ -33,8 +36,19 @@ namespace FlowerClient
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            
+            cards.Add(card1);
+            cards.Add(card2);
+            cards.Add(card3);
+            cards.Add(card4);
+            cards.Add(card5);
+            cards.Add(card6);
+
             Mediator.instance.SQL = "select * from plants_all_view";
-            DataTable results = Mediator.instance.ExecuteQuery();
+            results = Mediator.instance.ExecuteQuery();
+
+            pagesCount = (int)Math.Ceiling((decimal)results.Rows.Count / 6);
+            currentPage = 1;
 
             if(results.Rows.Count <= 6)
             {
@@ -42,84 +56,28 @@ namespace FlowerClient
                 {
                     gallery.Add(new Card(row));
                     gallery.Last().captionP = "Lorem ipsum dolor sit amet, consectetur adipiscing elit";
-                    gallery.Last().imageP = @"..\img\1.jpg";
+                    gallery.Last().imageP = @"..\img\" + (results.Rows.IndexOf(row) + 1).ToString() + ".jpg";
+                }
+            }
+            else
+            {
+                for(int i = 0; i < 6; i++)
+                {
+                    gallery.Add(new Card(results.Rows[i]));
+                    gallery.Last().captionP = "Lorem ipsum dolor sit amet, consectetur adipiscing elit";
+                    gallery.Last().imageP = @"..\img\" + (i + 1).ToString() + ".jpg";
+                }
+            }
+            
+            for(int i = 0; i < gallery.Count; i++)
+            {
+                if(gallery[i] != null)
+                {
+                    cards[i].DataContext = gallery[i];
+                    cards[i].Visibility = Visibility.Visible;
                 }
             }
 
-            //Card c = new Card(results.Rows[0]);
-            //c.captionP = "Lorem ipsum dolor sit amet, consectetur adipiscing elit";
-            ///*c.nameP = "Flower1";*/
-
-            //c.imageP = @"..\img\1.jpg";
-
-            //gallery.Add(c);
-
-            //Card c2 = new Card(results.Rows[1]);
-            //c2.captionP = "Lorem ipsum dolor sit amet, consectetur adipiscing elit";
-            ////c2.nameP = "Flower2";
-            //c2.imageP = @"..\img\2.jpg";
-            //gallery.Add(c2);
-
-            //Card c3 = new Card(results.Rows[2]);
-            //c3.captionP = "Lorem ipsum dolor sit amet, consectetur adipiscing elit";
-            ////c3.nameP = "Flower3";
-            //c3.imageP = @"..\img\3.jpg";
-            //gallery.Add(c3);
-
-            //Card c4 = new Card();
-            //c4.captionP = "Lorem ipsum dolor sit amet, consectetur adipiscing elit";
-            //c4.nameP = "Flower4";
-            //c4.imageP = @"..\img\4.jpg";
-            //gallery.Add(c4);
-
-            //Card c5 = new Card();
-            //c5.captionP = "Lorem ipsum dolor sit amet, consectetur adipiscing elit";
-            //c5.nameP = "Flower5";
-            //c5.imageP = @"..\img\5.jpg";
-            //gallery.Add(c5);
-
-            //Card c6 = new Card();
-            ///*c6.captionP = "Lorem ipsum dolor sit amet, consectetur adipiscing elit";
-            //c6.nameP = "Flower6";
-            //c6.imageP = @"..\img\6.jpg";*/
-            //gallery.Add(c6);
-            
-            
-            if(gallery[0] != null)
-            {
-                card1.DataContext = gallery[0];
-                card1.Visibility = Visibility.Visible;
-            }
-            
-            if (gallery[1] != null)
-            {
-                card2.DataContext = gallery[1];
-                card2.Visibility = Visibility.Visible;
-            }
-            
-            if (gallery[2] != null)
-            {
-                card3.DataContext = gallery[2];
-                card3.Visibility = Visibility.Visible;
-            }
-            
-            /*if (gallery[3] != null)
-            {
-                card4.DataContext = gallery[3];
-                card4.Visibility = Visibility.Visible;
-            }
-            
-            if (gallery[4] != null)
-            {
-                card5.DataContext = gallery[4];
-                card5.Visibility = Visibility.Visible;
-            }
-            
-            if (gallery[5] != null)
-            {
-                card6.DataContext = gallery[5];
-                card6.Visibility = Visibility.Visible;
-            }*/
         }
 
         public void cardActivate(object sender)
@@ -166,6 +124,65 @@ namespace FlowerClient
             DetailedDesc d = new DetailedDesc();
             d.DataContext = tempst.DataContext;
             d.Show();
+        }
+
+        private void nextPage_Click(object sender, RoutedEventArgs e)
+        {
+            if (currentPage < pagesCount)
+            {
+                loadPage(true);
+            }
+        }
+
+        private void prevPage_Click(object sender, RoutedEventArgs e)
+        {
+            if (currentPage != 1)
+            {
+                loadPage(false);
+            }
+        }
+
+        private void loadPage(bool direction)
+        {
+            if (direction)
+            {
+                gallery.Clear();
+                for (int i = currentPage*6; i < 11; i++)
+                {
+                    gallery.Add(new Card(results.Rows[i]));
+                    gallery.Last().captionP = "Lorem ipsum dolor sit amet, consectetur adipiscing elit";
+                    gallery.Last().imageP = @"..\img\1.jpg";
+                }
+                for (int i = 0; i < gallery.Count; i++)
+                {
+                    if (gallery[i] != null)
+                    {
+                        cards[i].DataContext = gallery[i];
+                        cards[i].Visibility = Visibility.Visible;
+                    }
+                }
+                currentPage++;
+            }
+            else
+            {
+                currentPage--;
+                gallery.Clear();
+                for (int i = currentPage * 6; i < 6; i++)
+                {
+                    gallery.Add(new Card(results.Rows[i]));
+                    gallery.Last().captionP = "Lorem ipsum dolor sit amet, consectetur adipiscing elit";
+                    gallery.Last().imageP = @"..\img\1.jpg";
+                }
+                for (int i = 0; i < gallery.Count; i++)
+                {
+                    if (gallery[i] != null)
+                    {
+                        cards[i].DataContext = gallery[i];
+                        cards[i].Visibility = Visibility.Visible;
+                    }
+                }
+                
+            }
         }
     }
 }
