@@ -1,17 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace FlowerClient
 {
@@ -39,18 +29,14 @@ namespace FlowerClient
             }
         }
 
-        private DataView ShowUsersByRole(string role)
-        {
-            Mediator.instance.SQL = "select * from show_users_by_role('" + role + "')";
-            var temp = Mediator.instance.ConvertQueryToTable().DefaultView;
-            return temp;
-        }
-
         private void cbx_roles_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            ComboBox comboBox = (ComboBox)sender;
-            ComboBoxItem selectedItem = (ComboBoxItem)comboBox.SelectedItem;
+            UpdateUserTable();
+        }
 
+        void UpdateUserTable()
+        {
+            ComboBoxItem selectedItem = (ComboBoxItem)cbx_roles.SelectedItem;
             if (selectedItem.Content.ToString() == "Пользователи")
             {
                 users_table.DataContext = ShowUsersByRole("Flower_Employee");
@@ -59,6 +45,31 @@ namespace FlowerClient
             {
                 users_table.DataContext = ShowUsersByRole("Flower_Admin");
             }
+        }
+
+        private DataView ShowUsersByRole(string role)
+        {
+            Mediator.instance.SQL = "select * from show_users_by_role('" + role + "')";
+            var temp = Mediator.instance.ConvertQueryToTable().DefaultView;
+            return temp;
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            if(new AddUser().ShowDialog() == true)
+            {
+                UpdateUserTable();
+            }
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            DeleteUser();
+        }
+
+        void DeleteUser()
+        {
+
         }
     }
 }

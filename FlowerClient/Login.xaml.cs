@@ -16,7 +16,7 @@ namespace FlowerClient
         {
             try
             {
-                if (String.IsNullOrWhiteSpace(txt_login.Text) || String.IsNullOrWhiteSpace(txt_password.Password) || String.IsNullOrWhiteSpace(txt_adress.Text))
+                if (string.IsNullOrWhiteSpace(txt_login.Text) || string.IsNullOrWhiteSpace(txt_password.Password) || string.IsNullOrWhiteSpace(txt_adress.Text))
                 {
                     throw new Exception("Вы заполнили не все поля!");
                 }
@@ -43,16 +43,20 @@ namespace FlowerClient
         {
             try
             {
-                string connectionString = "Server=" + txt_adress.Text.Trim() + ";Port=5432;User Id=" + txt_login.Text.Trim()
+                string connectionString = "Server=" + txt_adress.Text.Trim() + ";Port=5432;User Id=" + txt_login.Text.Trim().ToLower()
             + ";Password=" + txt_password.Password.Trim() + ";Database=flower;";
 
                 Mediator.instance.Connection = new NpgsqlConnection(connectionString);
                 //npgsql throws nullreferenceexception
                 Mediator.instance.Connection.Open();
 
-                Mediator.instance.Login = txt_login.Text.Trim();
+                Mediator.instance.Login = txt_login.Text.Trim().ToLower();
+
                 Mediator.instance.SQL = "select show_role('" + Mediator.instance.Login + "');";
                 Mediator.instance.Role = Mediator.instance.ConvertQueryToValue().ToString();
+                //Переключаемся на групповую роль с правами
+                Mediator.instance.SQL = "set role \"" + Mediator.instance.Role + "\";";
+                Mediator.instance.Execute();
             }
             catch (Exception ex)
             {

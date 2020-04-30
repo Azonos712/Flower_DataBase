@@ -16,8 +16,8 @@
                 </ComboBox>
                 <GroupBox Header="Работа с пользователями" Margin="10">
                     <StackPanel>
-                        <Button Content="Добавить" VerticalAlignment="Center" Margin="10"></Button>
-                        <Button Content="Удалить" VerticalAlignment="Center" Margin="10"></Button>
+                        <Button Content="Добавить" VerticalAlignment="Center" Margin="10" Click="Button_Click"></Button>
+                        <Button Content="Удалить" VerticalAlignment="Center" Margin="10" Click="Button_Click_1"></Button>
                     </StackPanel>
                 </GroupBox>
 
