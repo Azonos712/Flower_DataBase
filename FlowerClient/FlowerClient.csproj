@@ -131,6 +131,7 @@
     <Compile Include="DlgBox.xaml.cs">
       <DependentUpon>DlgBox.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Card.cs" />
     <Compile Include="Login.xaml.cs">
       <DependentUpon>Login.xaml</DependentUpon>
     </Compile>

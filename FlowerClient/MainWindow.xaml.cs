@@ -47,5 +47,16 @@ namespace FlowerClient
             new Login().Show();
             this.Close();
         }
+        
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            Card c = new Card();
+            c.captionP = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, " +
+                "sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.";
+            c.nameP = "Flower";
+            c.imageP = @"C:\\Users\\kiril\\Desktop\\1.jpg";
+
+            card1.DataContext = c;
+        }
     }
 }
