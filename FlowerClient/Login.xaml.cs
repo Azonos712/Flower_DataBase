@@ -28,21 +28,36 @@ namespace FlowerClient
             }
             catch (Exception ex)
             {
-                new MsgBox(ex.Message, "Ошибка").ShowDialog();
+                if (ex.Message.Contains("28P01"))
+                {
+                    new MsgBox("Неправильный логин или пароль!", "Ошибка").ShowDialog();
+                }
+                else
+                {
+                    new MsgBox(ex.Message, "Ошибка").ShowDialog();
+                }
             }
         }
 
         void TryConnection()
         {
-            string connectionString = "Server=" + txt_adress.Text.Trim() + ";Port=5432;User Id=" + txt_login.Text.Trim()
+            try
+            {
+                string connectionString = "Server=" + txt_adress.Text.Trim() + ";Port=5432;User Id=" + txt_login.Text.Trim()
             + ";Password=" + txt_password.Password.Trim() + ";Database=flower;";
 
-            Mediator.instance.Connection = new NpgsqlConnection(connectionString);
-            Mediator.instance.Connection.Open();
+                Mediator.instance.Connection = new NpgsqlConnection(connectionString);
+                //npgsql throws nullreferenceexception
+                Mediator.instance.Connection.Open();
 
-            Mediator.instance.Login = txt_login.Text.Trim();
-            Mediator.instance.SQL = "select show_role('" + Mediator.instance.Login + "');";
-            Mediator.instance.Role = Mediator.instance.ConvertQueryToValue().ToString();
+                Mediator.instance.Login = txt_login.Text.Trim();
+                Mediator.instance.SQL = "select show_role('" + Mediator.instance.Login + "');";
+                Mediator.instance.Role = Mediator.instance.ConvertQueryToValue().ToString();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         void RoleAlert()
