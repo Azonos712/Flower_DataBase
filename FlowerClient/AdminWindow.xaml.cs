@@ -5,9 +5,6 @@ using System.Windows.Controls;
 
 namespace FlowerClient
 {
-    /// <summary>
-    /// Логика взаимодействия для AdminWindow.xaml
-    /// </summary>
     public partial class AdminWindow : Window
     {
         public AdminWindow()
@@ -29,9 +26,11 @@ namespace FlowerClient
             }
         }
 
-        private void cbx_roles_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private DataView ShowUsersByRole(string role)
         {
-            UpdateUserTable();
+            Mediator.instance.SQL = "select * from show_users_by_role('" + role + "')";
+            var temp = Mediator.instance.ConvertQueryToTable().DefaultView;
+            return temp;
         }
 
         void UpdateUserTable()
@@ -54,11 +53,9 @@ namespace FlowerClient
             }
         }
 
-        private DataView ShowUsersByRole(string role)
+        private void Cbx_roles_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            Mediator.instance.SQL = "select * from show_users_by_role('" + role + "')";
-            var temp = Mediator.instance.ConvertQueryToTable().DefaultView;
-            return temp;
+            UpdateUserTable();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -68,12 +65,7 @@ namespace FlowerClient
                 UpdateUserTable();
             }
         }
-
-        private void Button_Click_1(object sender, RoutedEventArgs e)
-        {
-            DeleteUser();
-        }
-
+        #region DELETE USER
         void DeleteUser()
         {
             try
@@ -95,6 +87,16 @@ namespace FlowerClient
             {
                 new MsgBox(ex.Message, "Ошибка").ShowDialog();
             }
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            DeleteUser();
+        }
+        #endregion
+        private void Btn_pic_path_Click(object sender, RoutedEventArgs e)
+        {
+            new PathWindow().ShowDialog();
         }
     }
 }

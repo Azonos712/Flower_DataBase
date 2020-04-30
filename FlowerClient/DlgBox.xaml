@@ -9,7 +9,7 @@
     <Grid>
         <DockPanel>
             <TextBlock DockPanel.Dock="Top" Margin="10" x:Name="txt_info" IsEnabled="False" Text="Content" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center" TextAlignment="Center" Grid.Row="0" MaxWidth="250"/>
-            <StackPanel Orientation="Horizontal" DockPanel.Dock="Bottom">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" DockPanel.Dock="Bottom">
                 <Button x:Name="btn_lft" Margin="10" Content="ОК" Width="100" Click="btn_lft_Click"/>
                 <Button x:Name="btn_rght" Margin="10" Content="ОК" Width="100" Click="btn_rght_Click"/>
             </StackPanel>

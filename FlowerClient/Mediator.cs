@@ -1,10 +1,5 @@
 ﻿using Npgsql;
-using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FlowerClient
 {
@@ -17,6 +12,7 @@ namespace FlowerClient
         public string SQL { get; set; }
         public string Login { get; set; }
         public string Role { get; set; }
+        public string Path { get; set; }
 
         public object ConvertQueryToValue()
         {

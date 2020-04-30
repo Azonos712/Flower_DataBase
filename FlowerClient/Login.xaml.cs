@@ -57,6 +57,9 @@ namespace FlowerClient
                 //Переключаемся на групповую роль с правами
                 Mediator.instance.SQL = "set role \"" + Mediator.instance.Role + "\";";
                 Mediator.instance.Execute();
+
+                Mediator.instance.SQL = ("select * from picture_path_view;");
+                Mediator.instance.Path = Mediator.instance.ConvertQueryToValue().ToString();
             }
             catch (Exception ex)
             {
