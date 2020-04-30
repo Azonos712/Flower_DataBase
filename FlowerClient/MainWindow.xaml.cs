@@ -100,5 +100,42 @@ namespace FlowerClient
                 card6.Visibility = Visibility.Visible;
             }
         }
+
+        public void cardActivate(object sender)
+        {
+            MaterialDesignThemes.Wpf.Card temp = sender as MaterialDesignThemes.Wpf.Card;
+            metadata.DataContext = (Card)temp.DataContext;
+            metadata.Visibility = Visibility.Visible;
+        }
+
+        private void card1_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            cardActivate(sender);
+        }
+
+        private void card6_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            cardActivate(sender);
+        }
+
+        private void card5_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            cardActivate(sender);
+        }
+
+        private void card4_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            cardActivate(sender);
+        }
+
+        private void card3_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            cardActivate(sender);
+        }
+
+        private void card2_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            cardActivate(sender);
+        }
     }
 }
