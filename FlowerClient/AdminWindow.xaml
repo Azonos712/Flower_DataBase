@@ -9,7 +9,7 @@
     <Grid>
         <DockPanel>
             <DataGrid x:Name="users_table" IsReadOnly="True" ItemsSource="{Binding}" AutoGenerateColumns="True" Margin="10" DockPanel.Dock="Left" Width="500"></DataGrid>
-            <StackPanel DockPanel.Dock="Left" Height="200">
+            <StackPanel DockPanel.Dock="Left" VerticalAlignment="Center">
                 <ComboBox x:Name="cbx_roles" SelectionChanged="cbx_roles_SelectionChanged" Margin="10">
                     <ComboBoxItem Content="Пользователи"></ComboBoxItem>
                     <ComboBoxItem Content="Администраторы"></ComboBoxItem>
