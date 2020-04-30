@@ -27,7 +27,7 @@ namespace FlowerClient
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            //TryConnection();
+            TryConnection();
             new MainWindow().Show();
             this.Close();
         }
@@ -38,10 +38,10 @@ namespace FlowerClient
             {
                 string connectionString = "Server=" + txt_adress.Text + ";Port=5432;User Id=" + txt_login.Text
                 + ";Password=" + txt_password.Password + ";Database=flower;";
-                Mediator.instance.SQL = "select * from test";
+                //Mediator.instance.SQL = "select * from test";
                 Mediator.instance.Connection = new NpgsqlConnection(connectionString);
                 Mediator.instance.Connection.Open();
-                Mediator.instance.Execute();
+                //Mediator.instance.Execute();
                 //Mediator.instance.Connection.Close();
             }
             catch (Exception ex)

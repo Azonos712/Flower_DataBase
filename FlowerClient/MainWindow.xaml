@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:FlowerClient"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-        Title="MainWindow" Height="700" Width="1200" TextElement.FontSize="14" Loaded="Window_Loaded">
+        Title="MainWindow" Height="700" Width="1300" TextElement.FontSize="14" Loaded="Window_Loaded">
     <Grid RenderTransformOrigin="0.561,0.367">
         <Grid.ColumnDefinitions>
             <ColumnDefinition />
@@ -24,7 +24,7 @@
             </Menu>
         </DockPanel>
 
-        <WrapPanel Margin="12,68.2,293.6,10.4" Grid.Row="1" RenderTransformOrigin="0.492,0.487" Grid.Column="0">
+        <WrapPanel Margin="0,68.2,399.6,10.4" Grid.Row="1" RenderTransformOrigin="0.492,0.487" Grid.Column="0">
             <Canvas x:Name="panel1" Width="250" Height="227" Margin="25,15,0,0" Background="White">
                 <materialDesign:Card RenderTransformOrigin="0.5 0.5" Visibility="Hidden" Width="250" Grid.Row="1" Height="227" HorizontalAlignment="Left" VerticalAlignment="Top" x:Name="card1" MouseLeftButtonDown="card1_MouseLeftButtonDown">
                     <materialDesign:Card.RenderTransform>
@@ -296,17 +296,18 @@
             </Canvas>
         </WrapPanel>
         
-        <StackPanel x:Name="metadata" Visibility ="Hidden" Margin="905,68.2,9.6,10.4" Grid.Row="1">
+        <StackPanel x:Name="metadata" Visibility="Hidden" Margin="925,68.2,9.6,10.4" Grid.Row="1">
             <Label Content="Данные об изображении:" FontSize="22"></Label>
             <Label Content="Название вида:" FontSize="22" Margin="0, 10, 0, 0"></Label>
-            <TextBlock Text="{Binding nameP}" Margin="10,5,5,0" FontSize="26" TextWrapping="Wrap" Height="66"></TextBlock>
+            <TextBlock Text="{Binding nameP}" Margin="5,5,5,0" FontSize="24" TextWrapping="Wrap" Height="66"></TextBlock>
             <Label Content="Автор:" FontSize="22" Margin="0, 10, 0, 0"></Label>
-            <TextBlock Text="ssasa" Margin="10,5,5,0" FontSize="26" TextWrapping="Wrap" Height="66"></TextBlock>
+            <TextBlock Text="{Binding authorP}" Margin="5,5,5,0" FontSize="24" TextWrapping="Wrap" Height="66"></TextBlock>
             <Label Content="Экспозиция:" FontSize="22" Margin="0, 10, 0, 0"></Label>
-            <TextBlock Text="ssasa" Margin="10,5,5,0" FontSize="26" TextWrapping="Wrap" Height="66"></TextBlock>
-
+            <TextBlock Text="{Binding expositionP}" Margin="5,5,5,0" FontSize="24" TextWrapping="Wrap" Height="66"></TextBlock>
             <Label Content="Категория:" FontSize="22" Margin="0, 10, 0, 0"></Label>
-            <TextBlock Text="ssassssssssssssssssssa" Margin="10,5,5.2,0" FontSize="26" TextWrapping="Wrap" Height="66"></TextBlock>
+            <TextBlock Text="{Binding categoryP}" Margin="5,5,5.2,0" FontSize="24" TextWrapping="Wrap" Height="66"></TextBlock>
+            <Button Width="150" Margin="104, 10, 104, 10" Content="Подробнее" Click="Button_Click">
+            </Button>
         </StackPanel>
 
     </Grid>
