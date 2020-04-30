@@ -35,37 +35,37 @@ namespace FlowerClient
             Card c = new Card();
             c.captionP = "Lorem ipsum dolor sit amet, consectetur adipiscing elit";
             c.nameP = "Flower1";
-            c.imageP = @"C:\\Users\\kiril\\Desktop\\1.jpg";
+            c.imageP = @"..\img\1.jpg";
             gallery.Add(c);
 
             Card c2 = new Card();
             c2.captionP = "Lorem ipsum dolor sit amet, consectetur adipiscing elit";
             c2.nameP = "Flower2";
-            c2.imageP = @"C:\\Users\\kiril\\Desktop\\2.jpg";
+            c2.imageP = @"..\img\2.jpg";
             gallery.Add(c2);
 
             Card c3 = new Card();
             c3.captionP = "Lorem ipsum dolor sit amet, consectetur adipiscing elit";
             c3.nameP = "Flower3";
-            c3.imageP = @"C:\\Users\\kiril\\Desktop\\3.jpg";
+            c3.imageP = @"..\img\3.jpg";
             gallery.Add(c3);
 
             Card c4 = new Card();
             c4.captionP = "Lorem ipsum dolor sit amet, consectetur adipiscing elit";
             c4.nameP = "Flower4";
-            c4.imageP = @"C:\\Users\\kiril\\Desktop\\4.jpg";
+            c4.imageP = @"..\img\4.jpg";
             gallery.Add(c4);
 
             Card c5 = new Card();
             c5.captionP = "Lorem ipsum dolor sit amet, consectetur adipiscing elit";
             c5.nameP = "Flower5";
-            c5.imageP = @"C:\\Users\\kiril\\Desktop\\5.jpg";
+            c5.imageP = @"..\img\5.jpg";
             gallery.Add(c5);
 
             Card c6 = new Card();
-            c6.captionP = "Lorem ipsum dolor sit amet, consectetur adipiscing elit";
+            /*c6.captionP = "Lorem ipsum dolor sit amet, consectetur adipiscing elit";
             c6.nameP = "Flower6";
-            c6.imageP = @"C:\\Users\\kiril\\Desktop\\6.jpg";
+            c6.imageP = @"..\img\6.jpg";*/
             gallery.Add(c6);
             
 

@@ -25,7 +25,7 @@
         </DockPanel>
 
         <WrapPanel Margin="12,68.2,293.6,10.4" Grid.Row="1" RenderTransformOrigin="0.492,0.487" Grid.Column="0">
-            <Canvas x:Name="panel1" Width="250" Height="227" Margin="25,15,0,0" Background="AliceBlue">
+            <Canvas x:Name="panel1" Width="250" Height="227" Margin="25,15,0,0" Background="White">
                 <materialDesign:Card RenderTransformOrigin="0.5 0.5" Visibility="Hidden" Width="250" Grid.Row="1" Height="227" HorizontalAlignment="Left" VerticalAlignment="Top" x:Name="card1">
                     <materialDesign:Card.RenderTransform>
                         <ScaleTransform />
@@ -36,16 +36,16 @@
                                 <EventTrigger RoutedEvent="Mouse.MouseEnter">
                                     <BeginStoryboard>
                                         <Storyboard>
-                                            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)" To="1.2" Duration="00:00:00.5" />
-                                            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleY)" To="1.2" Duration="00:00:00.5" />
+                                            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)" To="1.2" Duration="00:00:00.3" />
+                                            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleY)" To="1.2" Duration="00:00:00.3" />
                                         </Storyboard>
                                     </BeginStoryboard>
                                 </EventTrigger>
                                 <EventTrigger RoutedEvent="Mouse.MouseLeave">
                                     <BeginStoryboard>
                                         <Storyboard>
-                                            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)" To="1.0" Duration="00:00:00.5" />
-                                            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleY)" To="1.0" Duration="00:00:00.5" />
+                                            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)" To="1.0" Duration="00:00:00.3" />
+                                            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleY)" To="1.0" Duration="00:00:00.3" />
                                         </Storyboard>
                                     </BeginStoryboard>
                                 </EventTrigger>
@@ -70,7 +70,7 @@
                 </materialDesign:Card>
             </Canvas>
 
-            <Canvas x:Name="panel2" Width="250" Height="227" Margin="50,15,0,0" Background="AliceBlue">
+            <Canvas x:Name="panel2" Width="250" Height="227" Margin="50,15,0,0" Background="White">
                 <materialDesign:Card RenderTransformOrigin="0.5 0.5" Visibility="Hidden" Width="250" Grid.Row="1" Height="227" HorizontalAlignment="Left" VerticalAlignment="Top" x:Name="card2">
                     <materialDesign:Card.RenderTransform>
                         <ScaleTransform />
@@ -81,16 +81,16 @@
                                 <EventTrigger RoutedEvent="Mouse.MouseEnter">
                                     <BeginStoryboard>
                                         <Storyboard>
-                                            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)" To="1.2" Duration="00:00:00.5" />
-                                            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleY)" To="1.2" Duration="00:00:00.5" />
+                                            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)" To="1.2" Duration="00:00:00.3" />
+                                            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleY)" To="1.2" Duration="00:00:00.3" />
                                         </Storyboard>
                                     </BeginStoryboard>
                                 </EventTrigger>
                                 <EventTrigger RoutedEvent="Mouse.MouseLeave">
                                     <BeginStoryboard>
                                         <Storyboard>
-                                            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)" To="1.0" Duration="00:00:00.5" />
-                                            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleY)" To="1.0" Duration="00:00:00.5" />
+                                            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)" To="1.0" Duration="00:00:00.3" />
+                                            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleY)" To="1.0" Duration="00:00:00.3" />
                                         </Storyboard>
                                     </BeginStoryboard>
                                 </EventTrigger>
@@ -115,7 +115,7 @@
                 </materialDesign:Card>
             </Canvas>
 
-            <Canvas x:Name="panel3" Width="250" Height="227" Margin="50,15,0,0" Background="AliceBlue" Panel.ZIndex="100">
+            <Canvas x:Name="panel3" Width="250" Height="227" Margin="50,15,0,0" Background="White" Panel.ZIndex="100">
                 <materialDesign:Card RenderTransformOrigin="0.5 0.5" Visibility="Hidden" Width="250" Grid.Row="1" Height="227" HorizontalAlignment="Left" VerticalAlignment="Top" x:Name="card3">
                     <materialDesign:Card.RenderTransform>
                         <ScaleTransform />
@@ -126,16 +126,16 @@
                                 <EventTrigger RoutedEvent="Mouse.MouseEnter">
                                     <BeginStoryboard>
                                         <Storyboard>
-                                            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)" To="1.2" Duration="00:00:00.5" />
-                                            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleY)" To="1.2" Duration="00:00:00.5" />
+                                            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)" To="1.2" Duration="00:00:00.3" />
+                                            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleY)" To="1.2" Duration="00:00:00.3" />
                                         </Storyboard>
                                     </BeginStoryboard>
                                 </EventTrigger>
                                 <EventTrigger RoutedEvent="Mouse.MouseLeave">
                                     <BeginStoryboard>
                                         <Storyboard>
-                                            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)" To="1.0" Duration="00:00:00.5" />
-                                            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleY)" To="1.0" Duration="00:00:00.5" />
+                                            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)" To="1.0" Duration="00:00:00.3" />
+                                            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleY)" To="1.0" Duration="00:00:00.3" />
                                         </Storyboard>
                                     </BeginStoryboard>
                                 </EventTrigger>
@@ -160,7 +160,7 @@
                 </materialDesign:Card>
             </Canvas>
 
-            <Canvas x:Name="panel4" Width="250" Height="227" Margin="25,30,0,0" Background="AliceBlue">
+            <Canvas x:Name="panel4" Width="250" Height="227" Margin="25,30,0,0" Background="White">
                 <materialDesign:Card RenderTransformOrigin="0.5 0.5" Visibility="Hidden" Width="250" Height="227" HorizontalAlignment="Left" VerticalAlignment="Top" x:Name="card4">
                     <materialDesign:Card.RenderTransform>
                         <ScaleTransform />
@@ -171,16 +171,16 @@
                                 <EventTrigger RoutedEvent="Mouse.MouseEnter">
                                     <BeginStoryboard>
                                         <Storyboard>
-                                            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)" To="1.2" Duration="00:00:00.5" />
-                                            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleY)" To="1.2" Duration="00:00:00.5" />
+                                            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)" To="1.2" Duration="00:00:00.3" />
+                                            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleY)" To="1.2" Duration="00:00:00.3" />
                                         </Storyboard>
                                     </BeginStoryboard>
                                 </EventTrigger>
                                 <EventTrigger RoutedEvent="Mouse.MouseLeave">
                                     <BeginStoryboard>
                                         <Storyboard>
-                                            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)" To="1.0" Duration="00:00:00.5" />
-                                            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleY)" To="1.0" Duration="00:00:00.5" />
+                                            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)" To="1.0" Duration="00:00:00.3" />
+                                            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleY)" To="1.0" Duration="00:00:00.3" />
                                         </Storyboard>
                                     </BeginStoryboard>
                                 </EventTrigger>
@@ -205,7 +205,7 @@
                 </materialDesign:Card>
             </Canvas>
 
-            <Canvas x:Name="panel5" Width="250" Height="227" Margin="50,30,0,0" Background="AliceBlue">
+            <Canvas x:Name="panel5" Width="250" Height="227" Margin="50,30,0,0" Background="White">
                 <materialDesign:Card RenderTransformOrigin="0.5 0.5" Visibility="Hidden" Width="250" Height="227" HorizontalAlignment="Left" VerticalAlignment="Top" x:Name="card5">
                     <materialDesign:Card.RenderTransform>
                         <ScaleTransform />
@@ -216,16 +216,16 @@
                                 <EventTrigger RoutedEvent="Mouse.MouseEnter">
                                     <BeginStoryboard>
                                         <Storyboard>
-                                            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)" To="1.2" Duration="00:00:00.5" />
-                                            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleY)" To="1.2" Duration="00:00:00.5" />
+                                            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)" To="1.2" Duration="00:00:00.3" />
+                                            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleY)" To="1.2" Duration="00:00:00.3" />
                                         </Storyboard>
                                     </BeginStoryboard>
                                 </EventTrigger>
                                 <EventTrigger RoutedEvent="Mouse.MouseLeave">
                                     <BeginStoryboard>
                                         <Storyboard>
-                                            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)" To="1.0" Duration="00:00:00.5" />
-                                            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleY)" To="1.0" Duration="00:00:00.5" />
+                                            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)" To="1.0" Duration="00:00:00.3" />
+                                            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleY)" To="1.0" Duration="00:00:00.3" />
                                         </Storyboard>
                                     </BeginStoryboard>
                                 </EventTrigger>
@@ -250,7 +250,7 @@
                 </materialDesign:Card>
             </Canvas>
 
-            <Canvas x:Name="panel6" Width="250" Height="227" Margin="50,30,0,0" Background="AliceBlue">
+            <Canvas x:Name="panel6" Width="250" Height="227" Margin="50,30,0,0" Background="White">
                 <materialDesign:Card RenderTransformOrigin="0.5 0.5" Visibility="Hidden" Width="250" Height="227" HorizontalAlignment="Left" VerticalAlignment="Top" x:Name="card6">
                     <materialDesign:Card.RenderTransform>
                         <ScaleTransform x:Name="trans6"/>
@@ -261,16 +261,16 @@
                                 <EventTrigger RoutedEvent="Mouse.MouseEnter">
                                     <BeginStoryboard>
                                         <Storyboard>
-                                            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)" To="1.2" Duration="00:00:00.5" />
-                                            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleY)" To="1.2" Duration="00:00:00.5" />
+                                            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)" To="1.2" Duration="00:00:00.3" />
+                                            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleY)" To="1.2" Duration="00:00:00.3" />
                                         </Storyboard>
                                     </BeginStoryboard>
                                 </EventTrigger>
                                 <EventTrigger RoutedEvent="Mouse.MouseLeave">
                                     <BeginStoryboard>
                                         <Storyboard>
-                                            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)" To="1.0" Duration="00:00:00.5" />
-                                            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleY)" To="1.0" Duration="00:00:00.5" />
+                                            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)" To="1.0" Duration="00:00:00.3" />
+                                            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleY)" To="1.0" Duration="00:00:00.3" />
                                         </Storyboard>
                                     </BeginStoryboard>
                                 </EventTrigger>
