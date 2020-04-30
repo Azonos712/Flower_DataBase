@@ -36,14 +36,21 @@ namespace FlowerClient
 
         void UpdateUserTable()
         {
-            ComboBoxItem selectedItem = (ComboBoxItem)cbx_roles.SelectedItem;
-            if (selectedItem.Content.ToString() == "Пользователи")
+            try
             {
-                users_table.DataContext = ShowUsersByRole("Flower_Employee");
+                ComboBoxItem selectedItem = (ComboBoxItem)cbx_roles.SelectedItem;
+                if (selectedItem.Content.ToString() == "Пользователи")
+                {
+                    users_table.DataContext = ShowUsersByRole("Flower_Employee");
+                }
+                else
+                {
+                    users_table.DataContext = ShowUsersByRole("Flower_Admin");
+                }
             }
-            else
+            catch (Exception ex)
             {
-                users_table.DataContext = ShowUsersByRole("Flower_Admin");
+                new MsgBox(ex.Message, "Ошибка").ShowDialog();
             }
         }
 
@@ -56,7 +63,7 @@ namespace FlowerClient
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            if(new AddUser().ShowDialog() == true)
+            if (new AddUser().ShowDialog() == true)
             {
                 UpdateUserTable();
             }
@@ -69,7 +76,25 @@ namespace FlowerClient
 
         void DeleteUser()
         {
+            try
+            {
+                DataRowView temp = (DataRowView)users_table.SelectedItem;
+                if (temp == null)
+                    throw new Exception("Ничего не выбрано! Выберите из таблицы кого хотите удалить!");
 
+                if (new DlgBox("Вы точно хотите удалить этого пользователя?", "Удаление", "Да", "Нет").ShowDialog() == true)
+                {
+                    Mediator.instance.SQL = "select drop_user('" + temp.Row.ItemArray[0] + "')";
+                    Mediator.instance.Execute();
+
+                    new MsgBox("Удаление пользователя прошло успешно!", "Информация").ShowDialog();
+                    UpdateUserTable();
+                }
+            }
+            catch (Exception ex)
+            {
+                new MsgBox(ex.Message, "Ошибка").ShowDialog();
+            }
         }
     }
 }

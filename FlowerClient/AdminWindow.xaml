@@ -8,7 +8,7 @@
         Title="Администрирование" Height="350" Width="550" TextElement.FontSize="14" WindowStartupLocation="CenterScreen">
     <Grid>
         <DockPanel>
-            <DataGrid BorderThickness="1" x:Name="users_table" IsReadOnly="True" ItemsSource="{Binding}" AutoGenerateColumns="True" Margin="10" DockPanel.Dock="Left" Width="250"></DataGrid>
+            <DataGrid ColumnWidth="*" SelectionMode="Single" BorderThickness="1" x:Name="users_table" IsReadOnly="True" ItemsSource="{Binding}" AutoGenerateColumns="True" Margin="10" DockPanel.Dock="Left" Width="250"></DataGrid>
             <StackPanel DockPanel.Dock="Left" VerticalAlignment="Center">
                 <ComboBox x:Name="cbx_roles" SelectionChanged="cbx_roles_SelectionChanged" Margin="10">
                     <ComboBoxItem Content="Пользователи"></ComboBoxItem>

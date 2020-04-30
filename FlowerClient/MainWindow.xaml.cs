@@ -25,6 +25,17 @@ namespace FlowerClient
             if (Mediator.instance.Role == "Flower_Employee")
                 admin_menuitem.Visibility = Visibility.Collapsed;
         }
+        private void Window_Closed(object sender, EventArgs e)
+        {
+            try
+            {
+                Mediator.instance.Connection.Close();
+            }
+            catch (Exception ex)
+            {
+                new MsgBox(ex.Message, "Ошибка").ShowDialog();
+            }
+        }
 
         private void MenuItem_Click(object sender, RoutedEventArgs e)
         {

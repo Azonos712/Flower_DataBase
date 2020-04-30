@@ -50,6 +50,7 @@ namespace FlowerClient
 
                 AddNewUser();
 
+                new MsgBox("Новый пользователь создан!", "Информация").ShowDialog();
                 this.DialogResult = true;
                 this.Close();
             }
@@ -61,17 +62,10 @@ namespace FlowerClient
 
         void AddNewUser()
         {
-            //try
-            //{
             string tmp_role = radio_usver.IsChecked == true ? "Flower_Employee" : "Flower_Admin";
-            Mediator.instance.SQL = "select create_user('" + txt_login.Text.Trim().ToLower() + "','" + txt_password2.Password.Trim() + "','" + tmp_role + "');";
 
+            Mediator.instance.SQL = "select create_user('" + txt_login.Text.Trim().ToLower() + "','" + txt_password2.Password.Trim() + "','" + tmp_role + "');";
             Mediator.instance.Execute();
-            //}
-            //catch (Exception ex)
-            //{
-            //    throw ex;
-            //}
         }
     }
 }
