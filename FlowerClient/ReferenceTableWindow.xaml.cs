@@ -88,12 +88,30 @@ namespace FlowerClient
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            CallEditForm(true);
+            try
+            {
+                CallEditForm(true);
+            }
+            catch (Exception ex)
+            {
+                new MsgBox(ex.Message, "Ошибка").ShowDialog();
+            }
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            CallEditForm(false);
+            try
+            {
+                DataRowView temp = (DataRowView)reference_table.SelectedItem;
+                if (temp == null)
+                    throw new Exception("Ничего не выбрано! Выберите из таблицы что хотите изменить!");
+
+                CallEditForm(false, temp.Row.ItemArray[0].ToString());
+            }
+            catch (Exception ex)
+            {
+                new MsgBox(ex.Message, "Ошибка").ShowDialog();
+            }
         }
 
         private void Cbx_category_SelectionChanged(object sender, SelectionChangedEventArgs e)

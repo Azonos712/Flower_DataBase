@@ -8,18 +8,24 @@ namespace FlowerClient
     {
         bool addMode = true;
         string table;
-        string old_value;
+        string oldValue;
         public ReferenceEditWindow(bool mode, string t, string value = "")
         {
             InitializeComponent();
             addMode = mode;
             table = t;
-            txt_info.Text = old_value = value;
+            txt_info.Text = oldValue = value;
         }
 
         void AddNewReference()
         {
             Mediator.instance.SQL = "select add_reference_value('" + table + "','" + txt_info.Text.Trim() + "');";
+            Mediator.instance.Execute();
+        }
+
+        void UpdateOldReference()
+        {
+            Mediator.instance.SQL = "select update_reference_value('" + table + "','" + txt_info.Text.Trim() + "','" + oldValue + "');";
             Mediator.instance.Execute();
         }
 
@@ -40,7 +46,16 @@ namespace FlowerClient
                     }
                     else
                     {
-
+                        if (oldValue != txt_info.Text.Trim())
+                        {
+                            UpdateOldReference();
+                        }
+                        else
+                        {
+                            DialogResult = false;
+                            this.Close();
+                            return;
+                        }
                     }
 
                     DialogResult = true;

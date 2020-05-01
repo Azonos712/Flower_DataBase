@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FlowerClient"
         mc:Ignorable="d"
-        Title="ReferenceTableWindow" TextElement.FontSize="14" Height="450" Width="650" WindowStartupLocation="CenterScreen">
+        Title="Справочные таблицы" TextElement.FontSize="14" Height="450" Width="650" WindowStartupLocation="CenterScreen">
     <Grid>
         <DockPanel>
             <DataGrid ColumnWidth="*" SelectionMode="Single" BorderThickness="1" x:Name="reference_table" IsReadOnly="True" ItemsSource="{Binding}" AutoGenerateColumns="True" Margin="10" DockPanel.Dock="Left" Width="300"></DataGrid>
