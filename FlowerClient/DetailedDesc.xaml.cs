@@ -27,16 +27,52 @@ namespace FlowerClient
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            Card context = DataContext as Card;
             loadReference("author");
-            
+            author.SelectedIndex = author.Items.IndexOf(context.authorP);
+            loadReference("exposition");
+            exposition.SelectedIndex = exposition.Items.IndexOf(context.expositionP);
+            loadReference("life_form");
+            life_form.SelectedIndex = life_form.Items.IndexOf(context.lifeFormP);
+            loadReference("species_name");
+            species_name.SelectedIndex = species_name.Items.IndexOf(context.speciesNameP);
+            loadReference("group");
+            group.SelectedIndex = group.Items.IndexOf(context.groupP);
+            loadReference("econ_group");
+            econ_group.SelectedIndex = econ_group.Items.IndexOf(context.economicGroupP);
+            loadReference("people");
+            people.SelectedIndex = people.Items.IndexOf(context.peopleP);
+            loadReference("history");
+            history.SelectedIndex = history.Items.IndexOf(context.historyP);
+            loadReference("buildings");
+            buildings.SelectedIndex = buildings.Items.IndexOf(context.buildingsP);
+            loadReference("category");
+            category.SelectedIndex = category.Items.IndexOf(context.categoryP);
+
+            fillYears();
+
         }
 
+        private void fillYears()
+        {
+            List<int> years = new List<int>();
+            for(int i = 2017; i < 2031; i++)
+            {
+                years.Add(i);
+            }
+            year.ItemsSource = years;
+        }
         private void loadReference(string refName)
         {
             Mediator.instance.SQL = "select * from " + refName + "_view";
             DataTable results = Mediator.instance.ExecuteQuery();
-            //results.Rows.
-            //author.DataContext = results.Rows;
+            List<string> temp = new List<string>();
+            for (int i = 0; i < results.Rows.Count; i++)
+            {
+                temp.Add(results.Rows[i].ItemArray[0].ToString());
+            }
+            ComboBox c = FindName(refName) as ComboBox;
+            c.ItemsSource = temp;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
