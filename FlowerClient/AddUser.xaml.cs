@@ -35,7 +35,13 @@ namespace FlowerClient
                 new MsgBox(ex.Message, "Ошибка").ShowDialog();
             }
         }
+        void AddNewUser()
+        {
+            string tmp_role = radio_usver.IsChecked == true ? "Flower_Employee" : "Flower_Admin";
 
+            Mediator.instance.SQL = "select create_user('" + txt_login.Text.Trim().ToLower() + "','" + txt_password2.Password.Trim() + "','" + tmp_role + "');";
+            Mediator.instance.Execute();
+        }
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -44,6 +50,9 @@ namespace FlowerClient
                 {
                     throw new Exception("Вы заполнили не все поля!");
                 }
+
+                if (txt_password1.Password.Length <= 5 || txt_password2.Password.Length <= 5)
+                    throw new Exception("Минимальная длина пароля - 6 символов!");
 
                 if (txt_password1.Password != txt_password2.Password)
                     throw new Exception("Пароли не совпадают!");
@@ -60,12 +69,10 @@ namespace FlowerClient
             }
         }
 
-        void AddNewUser()
+        private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            string tmp_role = radio_usver.IsChecked == true ? "Flower_Employee" : "Flower_Admin";
-
-            Mediator.instance.SQL = "select create_user('" + txt_login.Text.Trim().ToLower() + "','" + txt_password2.Password.Trim() + "','" + tmp_role + "');";
-            Mediator.instance.Execute();
+            this.DialogResult = false;
+            this.Close();
         }
     }
 }
