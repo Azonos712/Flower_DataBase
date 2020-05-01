@@ -14,14 +14,41 @@ using System.Windows.Shapes;
 
 namespace FlowerClient
 {
-    /// <summary>
-    /// Логика взаимодействия для ReferenceTableWindow.xaml
-    /// </summary>
     public partial class ReferenceTableWindow : Window
     {
         public ReferenceTableWindow()
         {
             InitializeComponent();
+            cbx_category.SelectedIndex = 0;
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            new ReferenceEditWindow().ShowDialog();
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            new ReferenceEditWindow().ShowDialog();
+        }
+
+        private void Cbx_category_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        string StringToNameTable(string str)
+        {
+            string result = string.Empty;
+            switch (str)
+            {
+                case "Автор":
+                    result = "author";
+                    break;
+                default:
+                    break;
+            }
+            return result;
         }
     }
 }
