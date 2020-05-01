@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,6 +23,25 @@ namespace FlowerClient
         public DetailedDesc()
         {
             InitializeComponent();
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            loadReference("author");
+            
+        }
+
+        private void loadReference(string refName)
+        {
+            Mediator.instance.SQL = "select * from " + refName + "_view";
+            DataTable results = Mediator.instance.ExecuteQuery();
+            //results.Rows.
+            //author.DataContext = results.Rows;
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }

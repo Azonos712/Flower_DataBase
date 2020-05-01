@@ -92,41 +92,59 @@ namespace FlowerClient
 
         private void card1_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            cardActivate(sender);
+            DetailedDesc d = new DetailedDesc();
+            MaterialDesignThemes.Wpf.Card temp = sender as MaterialDesignThemes.Wpf.Card;
+            d.DataContext = temp.DataContext;
+            d.ShowDialog();
         }
 
         private void card6_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            cardActivate(sender);
+            DetailedDesc d = new DetailedDesc();
+            MaterialDesignThemes.Wpf.Card temp = sender as MaterialDesignThemes.Wpf.Card;
+            d.DataContext = temp.DataContext;
+            d.ShowDialog();
         }
 
         private void card5_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            cardActivate(sender);
+            DetailedDesc d = new DetailedDesc();
+            MaterialDesignThemes.Wpf.Card temp = sender as MaterialDesignThemes.Wpf.Card;
+            d.DataContext = temp.DataContext;
+            d.ShowDialog();
         }
 
         private void card4_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            cardActivate(sender);
+            DetailedDesc d = new DetailedDesc();
+            MaterialDesignThemes.Wpf.Card temp = sender as MaterialDesignThemes.Wpf.Card;
+            d.DataContext = temp.DataContext;
+            d.ShowDialog();
         }
 
         private void card3_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            cardActivate(sender);
+            DetailedDesc d = new DetailedDesc();
+            MaterialDesignThemes.Wpf.Card temp = sender as MaterialDesignThemes.Wpf.Card;
+            d.DataContext = temp.DataContext;
+            d.ShowDialog();
         }
 
         private void card2_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            cardActivate(sender);
+            DetailedDesc d = new DetailedDesc();
+            MaterialDesignThemes.Wpf.Card temp = sender as MaterialDesignThemes.Wpf.Card;
+            d.DataContext = temp.DataContext;
+            d.ShowDialog();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            Button temp = sender as Button;
+            /*Button temp = sender as Button;
             StackPanel tempst = temp.Parent as StackPanel;
             DetailedDesc d = new DetailedDesc();
             d.DataContext = tempst.DataContext;
-            d.Show();
+            d.Show();*/
         }
 
         private void nextPage_Click(object sender, RoutedEventArgs e)

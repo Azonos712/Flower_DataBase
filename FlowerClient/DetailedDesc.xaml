@@ -5,8 +5,43 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FlowerClient"
         mc:Ignorable="d"
-        Title="DetailedDesc" Height="450" Width="800">
+        Title="{Binding nameP}" Height="520" Width="900" WindowStartupLocation="CenterScreen" Loaded="Window_Loaded">
     <Grid>
-        
+        <Image HorizontalAlignment="Left" Height="245" Margin="25,40,0,0" VerticalAlignment="Top" Width="230" Source="{Binding imageP}"/>
+        <Button Content="Обновить фото" HorizontalAlignment="Left" Margin="25,314,0,0" VerticalAlignment="Top" Width="230"/>
+
+        <Label Content="Автор" HorizontalAlignment="Left" Margin="363,28,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.806,0.621"/>
+        <ComboBox x:Name="author" Text="{Binding authorP}" HorizontalAlignment="Left" Margin="365,55,0,0" VerticalAlignment="Top" Width="166"/>
+
+        <Label Content="Label" HorizontalAlignment="Left" Margin="363,88,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.806,0.621"/>
+        <ComboBox HorizontalAlignment="Left" Margin="365,113,0,0" VerticalAlignment="Top" Width="166"/>
+
+        <Label Content="Label" HorizontalAlignment="Left" Margin="363,152,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.806,0.621"/>
+        <ComboBox HorizontalAlignment="Left" Margin="365,179,0,0" VerticalAlignment="Top" Width="166"/>
+
+        <Label Content="Label" HorizontalAlignment="Left" Margin="363,222,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.806,0.621"/>
+        <ComboBox HorizontalAlignment="Left" Margin="365,249,0,0" VerticalAlignment="Top" Width="166"/>
+
+        <Label Content="Label" HorizontalAlignment="Left" Margin="363,286,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.806,0.621"/>
+        <ComboBox HorizontalAlignment="Left" Margin="365,313,0,0" VerticalAlignment="Top" Width="166"/>
+
+        <Label Content="Label" HorizontalAlignment="Left" Margin="363,346,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.806,0.621"/>
+        <ComboBox HorizontalAlignment="Left" Margin="365,371,0,0" VerticalAlignment="Top" Width="166"/>
+        <Button Content="Сохранить" HorizontalAlignment="Left" Margin="616,443,0,0" VerticalAlignment="Top" Width="117"/>
+        <Button Content="Отмена" HorizontalAlignment="Left" Margin="755,443,0,0" VerticalAlignment="Top" Width="105" Click="Button_Click"/>
+        <Label Content="Label" HorizontalAlignment="Left" Margin="614,28,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.806,0.621"/>
+        <ComboBox HorizontalAlignment="Left" Margin="616,55,0,0" VerticalAlignment="Top" Width="166"/>
+        <Label Content="Label" HorizontalAlignment="Left" Margin="614,88,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.806,0.621"/>
+        <ComboBox HorizontalAlignment="Left" Margin="616,113,0,0" VerticalAlignment="Top" Width="166"/>
+        <Label Content="Label" HorizontalAlignment="Left" Margin="614,152,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.806,0.621"/>
+        <ComboBox HorizontalAlignment="Left" Margin="616,179,0,0" VerticalAlignment="Top" Width="166"/>
+        <Label Content="Label" HorizontalAlignment="Left" Margin="614,222,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.806,0.621"/>
+        <ComboBox HorizontalAlignment="Left" Margin="616,249,0,0" VerticalAlignment="Top" Width="166"/>
+        <Label Content="Label" HorizontalAlignment="Left" Margin="614,286,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.806,0.621"/>
+        <ComboBox HorizontalAlignment="Left" Margin="616,313,0,0" VerticalAlignment="Top" Width="166"/>
+        <Label Content="Label" HorizontalAlignment="Left" Margin="614,346,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.806,0.621"/>
+        <ComboBox HorizontalAlignment="Left" Margin="616,371,0,0" VerticalAlignment="Top" Width="166"/>
+
+
     </Grid>
 </Window>
