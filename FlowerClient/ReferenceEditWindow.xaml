@@ -11,8 +11,8 @@
         <DockPanel>
             <TextBox DockPanel.Dock="Top" Margin="10" x:Name="txt_info" materialDesign:HintAssist.Hint="" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center" MinWidth="300" MaxWidth="300"/>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" DockPanel.Dock="Bottom">
-                <Button x:Name="btn_ok" Margin="10" Content="ОК" Width="130"/>
-                <Button x:Name="btn_cancel" Margin="10" Content="Отмена" Width="130"/>
+                <Button x:Name="btn_ok" Margin="10" Content="ОК" Width="130" Click="btn_ok_Click"/>
+                <Button x:Name="btn_cancel" Margin="10" Content="Отмена" Width="130" Click="btn_cancel_Click"/>
             </StackPanel>
         </DockPanel>
     </Grid>

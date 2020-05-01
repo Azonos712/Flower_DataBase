@@ -13,16 +13,6 @@ namespace FlowerClient
             cbx_category.SelectedIndex = 0;
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            new ReferenceEditWindow().ShowDialog();
-        }
-
-        private void Button_Click_1(object sender, RoutedEventArgs e)
-        {
-            new ReferenceEditWindow().ShowDialog();
-        }
-
         string StringToNameTable(string str)
         {
             string result = string.Empty;
@@ -83,6 +73,27 @@ namespace FlowerClient
             {
                 new MsgBox(ex.Message, "Ошибка").ShowDialog();
             }
+        }
+
+        void CallEditForm(bool mode, string value = "")
+        {
+            ComboBoxItem selectedItem = (ComboBoxItem)cbx_category.SelectedItem;
+            string temp = StringToNameTable(selectedItem.Content.ToString());
+
+            if (new ReferenceEditWindow(mode, temp, value).ShowDialog() == true)
+            {
+                UpdateReferenceTable();
+            }
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            CallEditForm(true);
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            CallEditForm(false);
         }
 
         private void Cbx_category_SelectionChanged(object sender, SelectionChangedEventArgs e)
