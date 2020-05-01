@@ -52,7 +52,7 @@ namespace FlowerClient
             new Login().Show();
             this.Close();
         }
-        
+
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             cards.Add(card1);
@@ -212,6 +212,11 @@ namespace FlowerClient
                 }
                 
             }
+        }
+
+        private void MenuItem_Click_2(object sender, RoutedEventArgs e)
+        {
+            new ReferenceTableWindow().ShowDialog();
         }
     }
 }

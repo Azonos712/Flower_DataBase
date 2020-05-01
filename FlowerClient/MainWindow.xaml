@@ -20,12 +20,14 @@
             <Menu x:Name="main_menu" VerticalAlignment="Center">
                 <MenuItem x:Name="admin_menuitem" Header="Администрирование" Height="20">
                     <MenuItem Header="Таблица пользователей" Click="MenuItem_Click"></MenuItem>
+                    <MenuItem Header="Таблица справочников" Click="MenuItem_Click_2"></MenuItem>
                 </MenuItem>
                 <MenuItem x:Name="system_menuitem" Header="Система" Height="20">
                     <MenuItem Header="Выход из учетной записи" Click="MenuItem_Click_1"></MenuItem>
                 </MenuItem>
             </Menu>
         </DockPanel>
+
 
         <WrapPanel Margin="15,68.2,399.6,56.4" Grid.Row="1" RenderTransformOrigin="0.492,0.487" Grid.Column="0">
             <Canvas x:Name="panel1" Width="250" Height="227" Margin="25,15,0,0" Background="White">
