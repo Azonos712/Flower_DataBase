@@ -1,6 +1,7 @@
 ﻿using Npgsql;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,6 +19,10 @@ namespace FlowerClient
 {
     public partial class MainWindow : Window
     {
+        private List<MaterialDesignThemes.Wpf.Card> cards = new List<MaterialDesignThemes.Wpf.Card>(6);
+        private List<Card> gallery = new List<Card>(6);
+        private DataTable results;
+        private int currentPage;
         public MainWindow()
         {
             InitializeComponent();
@@ -50,13 +55,163 @@ namespace FlowerClient
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            Card c = new Card();
-            c.captionP = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, " +
-                "sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.";
-            c.nameP = "Flower";
-            c.imageP = @"C:\\Users\\kiril\\Desktop\\1.jpg";
+            cards.Add(card1);
+            cards.Add(card2);
+            cards.Add(card3);
+            cards.Add(card4);
+            cards.Add(card5);
+            cards.Add(card6);
 
-            card1.DataContext = c;
+            loadRecords(1);
+            currentPage = 1;
+
+            for(int i = 0; i < 6; i++)
+            {
+                gallery.Add(new Card(results.Rows[i]));
+                gallery.Last().captionP = "Lorem ipsum dolor sit amet, consectetur adipiscing elit";
+                gallery.Last().imageP = @"..\img\" + (i + 1).ToString() + ".jpg";
+            }
+            
+            for(int i = 0; i < gallery.Count; i++)
+            {
+                if(gallery[i] != null)
+                {
+                    cards[i].DataContext = gallery[i];
+                    cards[i].Visibility = Visibility.Visible;
+                }
+            }
+
+        }
+
+        public void cardActivate(object sender)
+        {
+            MaterialDesignThemes.Wpf.Card temp = sender as MaterialDesignThemes.Wpf.Card;
+            metadata.DataContext = (Card)temp.DataContext;
+            metadata.Visibility = Visibility.Visible;
+        }
+
+        private void card1_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            cardActivate(sender);
+        }
+
+        private void card6_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            cardActivate(sender);
+        }
+
+        private void card5_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            cardActivate(sender);
+        }
+
+        private void card4_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            cardActivate(sender);
+        }
+
+        private void card3_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            cardActivate(sender);
+        }
+
+        private void card2_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            cardActivate(sender);
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Button temp = sender as Button;
+            StackPanel tempst = temp.Parent as StackPanel;
+            DetailedDesc d = new DetailedDesc();
+            d.DataContext = tempst.DataContext;
+            d.Show();
+        }
+
+        private void nextPage_Click(object sender, RoutedEventArgs e)
+        {
+            loadPage(true);
+        }
+
+        private void prevPage_Click(object sender, RoutedEventArgs e)
+        {
+            if (currentPage != 1)
+            {
+                loadPage(false);
+            }
+        }
+
+        private void loadRecords(int currentPage)
+        {
+            if (results != null)
+            {
+                results.Clear();
+            }
+            Mediator.instance.SQL = "select * from plants_all_view limit 6 offset " + ((currentPage - 1) * 6).ToString();
+            results = Mediator.instance.ExecuteQuery();
+        }
+        private void loadPage(bool direction)
+        {
+            if (direction)
+            {
+                loadRecords(currentPage + 1);
+                if (results.Rows.Count > 0)
+                {
+                    currentPage++;
+                    gallery.Clear();
+                    foreach (MaterialDesignThemes.Wpf.Card c in cards)
+                    {
+                        c.DataContext = null;
+                        c.Visibility = Visibility.Hidden;
+                    }
+
+
+                    for (int i = 0; i < results.Rows.Count; i++)
+                    {
+                        gallery.Add(new Card(results.Rows[i]));
+                        gallery.Last().captionP = "Lorem ipsum dolor sit amet, consectetur adipiscing elit";
+                        gallery.Last().imageP = @"..\img\1.jpg";
+                    }
+
+                    for (int i = 0; i < gallery.Count; i++)
+                    {
+                        if (gallery[i] != null)
+                        {
+                            cards[i].DataContext = gallery[i];
+                            cards[i].Visibility = Visibility.Visible;
+                        }
+                    }
+                }
+            }
+            else
+            {
+                currentPage--;
+                gallery.Clear();
+                foreach (MaterialDesignThemes.Wpf.Card c in cards)
+                {
+                    c.DataContext = null;
+                    c.Visibility = Visibility.Hidden;
+                }
+                loadRecords(currentPage);
+
+                for (int i = 0; i < results.Rows.Count; i++)
+                {
+                    gallery.Add(new Card(results.Rows[i]));
+                    gallery.Last().captionP = "Lorem ipsum dolor sit amet, consectetur adipiscing elit";
+                    gallery.Last().imageP = @"..\img\1.jpg";
+                }
+
+                for (int i = 0; i < gallery.Count; i++)
+                {
+                    if (gallery[i] != null)
+                    {
+                        cards[i].DataContext = gallery[i];
+                        cards[i].Visibility = Visibility.Visible;
+                    }
+                }
+                
+            }
         }
 
         private void MenuItem_Click_2(object sender, RoutedEventArgs e)

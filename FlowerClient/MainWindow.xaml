@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:FlowerClient"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"    
-        Title="MainWindow" Height="700" Width="1200" TextElement.FontSize="14" Loaded="Window_Loaded" WindowStartupLocation="CenterScreen" Closed="Window_Closed">
+        Title="MainWindow" Height="720" Width="1300" TextElement.FontSize="14" Loaded="Window_Loaded" WindowStartupLocation="CenterScreen" Closed="Window_Closed">
     <Grid RenderTransformOrigin="0.561,0.367">
         <Grid.ColumnDefinitions>
             <ColumnDefinition />
@@ -28,119 +28,294 @@
             </Menu>
         </DockPanel>
 
-        <WrapPanel Margin="12,68.2,293.6,74.4" Grid.Row="1" RenderTransformOrigin="0.492,0.487" Grid.Column="0">
-            <materialDesign:Card Width="250" Margin="15,15,0,0" Grid.Row="1" Height="227" HorizontalAlignment="Left" VerticalAlignment="Top" x:Name="card1">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="0" />
-                        <RowDefinition Height="227.2" />
-                    </Grid.RowDefinitions>
 
-                    <StackPanel Grid.Row="1" HorizontalAlignment="Center" Orientation="Horizontal" Margin="2,13,2.6,0" Height="153" VerticalAlignment="Top" Width="245"/>
+        <WrapPanel Margin="15,68.2,399.6,56.4" Grid.Row="1" RenderTransformOrigin="0.492,0.487" Grid.Column="0">
+            <Canvas x:Name="panel1" Width="250" Height="227" Margin="25,15,0,0" Background="White">
+                <materialDesign:Card RenderTransformOrigin="0.5 0.5" Visibility="Hidden" Width="250" Grid.Row="1" Height="227" HorizontalAlignment="Left" VerticalAlignment="Top" x:Name="card1" MouseLeftButtonDown="card1_MouseLeftButtonDown">
+                    <materialDesign:Card.RenderTransform>
+                        <ScaleTransform />
+                    </materialDesign:Card.RenderTransform>
+                    <materialDesign:Card.Style>
+                        <Style TargetType="{x:Type materialDesign:Card}">
+                            <Style.Triggers>
+                                <EventTrigger RoutedEvent="Mouse.MouseEnter">
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)" To="1.2" Duration="00:00:00.3" />
+                                            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleY)" To="1.2" Duration="00:00:00.3" />
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger>
+                                <EventTrigger RoutedEvent="Mouse.MouseLeave">
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)" To="1.0" Duration="00:00:00.3" />
+                                            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleY)" To="1.0" Duration="00:00:00.3" />
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </materialDesign:Card.Style>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="0" />
+                            <RowDefinition Height="227.2" />
+                        </Grid.RowDefinitions>
 
-                    <StackPanel Margin="8,2,7.6,66.2" Grid.Row="1">
-                        <Image Source="{Binding imageP}" Margin="0,0,0,0" Height="153"/>
-                    </StackPanel>
-                    <TextBlock FontWeight="Bold" Margin="6,166,9.6,41.2" Grid.RowSpan="2" Text="{Binding nameP}"></TextBlock>
-                    <TextBlock TextWrapping="Wrap" VerticalAlignment="Center" Margin="6,185,9.6,4.2" Grid.RowSpan="2" Text="{Binding captionP}"></TextBlock>
+                        <StackPanel Grid.Row="1" HorizontalAlignment="Center" Orientation="Horizontal" Margin="2,13,2.6,0" Height="153" VerticalAlignment="Top" Width="245"/>
 
-                </Grid>
-            </materialDesign:Card>
+                        <StackPanel Margin="8,2,7.6,66.2" Grid.Row="1">
+                            <Image Source="{Binding imageP}" Margin="0,0,0,0" Height="153"/>
+                        </StackPanel>
+                        <TextBlock FontWeight="Bold" Margin="6,166,9.6,41.2" Grid.RowSpan="2" Text="{Binding nameP}"/>
+                        <TextBlock TextWrapping="Wrap" VerticalAlignment="Center" Margin="6,185,9.6,4.2" Grid.RowSpan="2" Text="{Binding captionP}"/>
 
-            <materialDesign:Card Width="250" Margin="50,15,0,0" Grid.Row="1" Height="227" HorizontalAlignment="Left" VerticalAlignment="Top" x:Name="card2">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="0" />
-                        <RowDefinition Height="227.2" />
-                    </Grid.RowDefinitions>
+                    </Grid>
+                </materialDesign:Card>
+            </Canvas>
 
-                    <StackPanel Grid.Row="1" HorizontalAlignment="Center" Orientation="Horizontal" Margin="2,13,2.6,0" Height="153" VerticalAlignment="Top" Width="245"/>
+            <Canvas x:Name="panel2" Width="250" Height="227" Margin="45,15,0,0" Background="White">
+                <materialDesign:Card RenderTransformOrigin="0.5 0.5" Visibility="Hidden" Width="250" Grid.Row="1" Height="227" HorizontalAlignment="Left" VerticalAlignment="Top" x:Name="card2" MouseLeftButtonDown="card2_MouseLeftButtonDown">
+                    <materialDesign:Card.RenderTransform>
+                        <ScaleTransform />
+                    </materialDesign:Card.RenderTransform>
+                    <materialDesign:Card.Style>
+                        <Style TargetType="{x:Type materialDesign:Card}">
+                            <Style.Triggers>
+                                <EventTrigger RoutedEvent="Mouse.MouseEnter">
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)" To="1.2" Duration="00:00:00.3" />
+                                            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleY)" To="1.2" Duration="00:00:00.3" />
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger>
+                                <EventTrigger RoutedEvent="Mouse.MouseLeave">
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)" To="1.0" Duration="00:00:00.3" />
+                                            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleY)" To="1.0" Duration="00:00:00.3" />
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </materialDesign:Card.Style>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="0" />
+                            <RowDefinition Height="227.2" />
+                        </Grid.RowDefinitions>
 
-                    <StackPanel Margin="8,2,7.6,66.2" Grid.Row="1">
-                        <Image Margin="0,0,0,0" Height="153"/>
-                    </StackPanel>
-                    <TextBlock FontWeight="Bold" Margin="6,166,9.6,41.2" Grid.RowSpan="2"><Run Text="Cycling"/></TextBlock>
-                    <TextBlock TextWrapping="Wrap" VerticalAlignment="Center" Margin="6,185,9.6,4.2" Grid.RowSpan="2"><Run Text="A great way to keep fit and forget about the constant grind of IT."/></TextBlock>
+                        <StackPanel Grid.Row="1" HorizontalAlignment="Center" Orientation="Horizontal" Margin="2,13,2.6,0" Height="153" VerticalAlignment="Top" Width="245"/>
 
-                </Grid>
-            </materialDesign:Card>
+                        <StackPanel Margin="8,2,7.6,66.2" Grid.Row="1">
+                            <Image Source="{Binding imageP}" Margin="0,0,0,0" Height="153"/>
+                        </StackPanel>
+                        <TextBlock FontWeight="Bold" Margin="6,166,9.6,41.2" Grid.RowSpan="2" Text="{Binding nameP}" />
+                        <TextBlock TextWrapping="Wrap" VerticalAlignment="Center" Margin="6,185,9.6,4.2" Grid.RowSpan="2" Text="{Binding captionP}"/>
 
-            <materialDesign:Card Width="250" Margin="50,15,0,0" Grid.Row="1" Height="227" HorizontalAlignment="Left" VerticalAlignment="Top" x:Name="card3">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="0" />
-                        <RowDefinition Height="227.2" />
-                    </Grid.RowDefinitions>
+                    </Grid>
+                </materialDesign:Card>
+            </Canvas>
 
-                    <StackPanel Grid.Row="1" HorizontalAlignment="Center" Orientation="Horizontal" Margin="2,13,2.6,0" Height="153" VerticalAlignment="Top" Width="245"/>
+            <Canvas x:Name="panel3" Width="250" Height="227" Margin="45,15,0,0" Background="White" Panel.ZIndex="100">
+                <materialDesign:Card RenderTransformOrigin="0.5 0.5" Visibility="Hidden" Width="250" Grid.Row="1" Height="227" HorizontalAlignment="Left" VerticalAlignment="Top" x:Name="card3" MouseLeftButtonDown="card3_MouseLeftButtonDown">
+                    <materialDesign:Card.RenderTransform>
+                        <ScaleTransform />
+                    </materialDesign:Card.RenderTransform>
+                    <materialDesign:Card.Style>
+                        <Style TargetType="{x:Type materialDesign:Card}">
+                            <Style.Triggers>
+                                <EventTrigger RoutedEvent="Mouse.MouseEnter">
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)" To="1.2" Duration="00:00:00.3" />
+                                            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleY)" To="1.2" Duration="00:00:00.3" />
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger>
+                                <EventTrigger RoutedEvent="Mouse.MouseLeave">
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)" To="1.0" Duration="00:00:00.3" />
+                                            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleY)" To="1.0" Duration="00:00:00.3" />
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </materialDesign:Card.Style>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="0" />
+                            <RowDefinition Height="227.2" />
+                        </Grid.RowDefinitions>
 
-                    <StackPanel Margin="8,2,7.6,66.2" Grid.Row="1">
-                        <Image Margin="0,0,0,0" Height="153"/>
-                    </StackPanel>
-                    <TextBlock FontWeight="Bold" Margin="6,166,9.6,41.2" Grid.RowSpan="2"><Run Text="Cycling"/></TextBlock>
-                    <TextBlock TextWrapping="Wrap" VerticalAlignment="Center" Margin="6,185,9.6,4.2" Grid.RowSpan="2"><Run Text="A great way to keep fit and forget about the constant grind of IT."/></TextBlock>
+                        <StackPanel Grid.Row="1" HorizontalAlignment="Center" Orientation="Horizontal" Margin="2,13,2.6,0" Height="153" VerticalAlignment="Top" Width="245"/>
 
-                </Grid>
-            </materialDesign:Card>
+                        <StackPanel Margin="8,2,7.6,66.2" Grid.Row="1">
+                            <Image Source="{Binding imageP}" Margin="0,0,0,0" Height="153"/>
+                        </StackPanel>
+                        <TextBlock FontWeight="Bold" Margin="6,166,9.6,41.2" Grid.RowSpan="2" Text="{Binding nameP}"/>
+                        <TextBlock TextWrapping="Wrap" VerticalAlignment="Center" Margin="6,185,9.6,4.2" Grid.RowSpan="2" Text="{Binding captionP}"/>
 
-            <materialDesign:Card Width="250" Margin="15,15,0,0" Height="227" HorizontalAlignment="Left" VerticalAlignment="Top" x:Name="card4">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="0" />
-                        <RowDefinition Height="227.2" />
-                    </Grid.RowDefinitions>
+                    </Grid>
+                </materialDesign:Card>
+            </Canvas>
 
-                    <StackPanel Grid.Row="1" HorizontalAlignment="Center" Orientation="Horizontal" Margin="2,13,2.6,0" Height="153" VerticalAlignment="Top" Width="245"/>
+            <Canvas x:Name="panel4" Width="250" Height="227" Margin="25,30,0,0" Background="White">
+                <materialDesign:Card RenderTransformOrigin="0.5 0.5" Visibility="Hidden" Width="250" Height="227" HorizontalAlignment="Left" VerticalAlignment="Top" x:Name="card4" MouseLeftButtonDown="card4_MouseLeftButtonDown">
+                    <materialDesign:Card.RenderTransform>
+                        <ScaleTransform />
+                    </materialDesign:Card.RenderTransform>
+                    <materialDesign:Card.Style>
+                        <Style TargetType="{x:Type materialDesign:Card}">
+                            <Style.Triggers>
+                                <EventTrigger RoutedEvent="Mouse.MouseEnter">
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)" To="1.2" Duration="00:00:00.3" />
+                                            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleY)" To="1.2" Duration="00:00:00.3" />
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger>
+                                <EventTrigger RoutedEvent="Mouse.MouseLeave">
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)" To="1.0" Duration="00:00:00.3" />
+                                            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleY)" To="1.0" Duration="00:00:00.3" />
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </materialDesign:Card.Style>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="0" />
+                            <RowDefinition Height="227.2" />
+                        </Grid.RowDefinitions>
 
-                    <StackPanel Margin="8,2,7.6,66.2" Grid.Row="1">
-                        <Image Margin="0,0,0,0" Height="153"/>
-                    </StackPanel>
-                    <TextBlock FontWeight="Bold" Margin="6,166,9.6,41.2" Grid.RowSpan="2"><Run Text="Cycling"/></TextBlock>
-                    <TextBlock TextWrapping="Wrap" VerticalAlignment="Center" Margin="6,185,9.6,4.2" Grid.RowSpan="2"><Run Text="A great way to keep fit and forget about the constant grind of IT."/></TextBlock>
+                        <StackPanel Grid.Row="1" HorizontalAlignment="Center" Orientation="Horizontal" Margin="2,13,2.6,0" Height="153" VerticalAlignment="Top" Width="245"/>
 
-                </Grid>
-            </materialDesign:Card>
+                        <StackPanel Margin="8,2,7.6,66.2" Grid.Row="1">
+                            <Image Source="{Binding imageP}" Margin="0,0,0,0" Height="153"/>
+                        </StackPanel>
+                        <TextBlock FontWeight="Bold" Margin="6,166,9.6,41.2" Grid.RowSpan="2" Text="{Binding nameP}"/>
+                        <TextBlock TextWrapping="Wrap" VerticalAlignment="Center" Margin="6,185,9.6,4.2" Grid.RowSpan="2" Text="{Binding captionP}"/>
 
-            <materialDesign:Card Width="250" Margin="50,15,0,0" Height="227" HorizontalAlignment="Left" VerticalAlignment="Top" x:Name="card5">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="0" />
-                        <RowDefinition Height="227.2" />
-                    </Grid.RowDefinitions>
+                    </Grid>
+                </materialDesign:Card>
+            </Canvas>
 
-                    <StackPanel Grid.Row="1" HorizontalAlignment="Center" Orientation="Horizontal" Margin="2,13,2.6,0" Height="153" VerticalAlignment="Top" Width="245"/>
+            <Canvas x:Name="panel5" Width="250" Height="227" Margin="45,30,0,0" Background="White">
+                <materialDesign:Card RenderTransformOrigin="0.5 0.5" Visibility="Hidden" Width="250" Height="227" HorizontalAlignment="Left" VerticalAlignment="Top" x:Name="card5" MouseLeftButtonDown="card5_MouseLeftButtonDown">
+                    <materialDesign:Card.RenderTransform>
+                        <ScaleTransform />
+                    </materialDesign:Card.RenderTransform>
+                    <materialDesign:Card.Style>
+                        <Style TargetType="{x:Type materialDesign:Card}">
+                            <Style.Triggers>
+                                <EventTrigger RoutedEvent="Mouse.MouseEnter">
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)" To="1.2" Duration="00:00:00.3" />
+                                            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleY)" To="1.2" Duration="00:00:00.3" />
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger>
+                                <EventTrigger RoutedEvent="Mouse.MouseLeave">
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)" To="1.0" Duration="00:00:00.3" />
+                                            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleY)" To="1.0" Duration="00:00:00.3" />
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </materialDesign:Card.Style>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="0" />
+                            <RowDefinition Height="227.2" />
+                        </Grid.RowDefinitions>
 
-                    <StackPanel Margin="8,2,7.6,66.2" Grid.Row="1">
-                        <Image Margin="0,0,0,0" Height="153"/>
-                    </StackPanel>
-                    <TextBlock FontWeight="Bold" Margin="6,166,9.6,41.2" Grid.RowSpan="2"><Run Text="Cycling"/></TextBlock>
-                    <TextBlock TextWrapping="Wrap" VerticalAlignment="Center" Margin="6,185,9.6,4.2" Grid.RowSpan="2"><Run Text="A great way to keep fit and forget about the constant grind of IT."/></TextBlock>
+                        <StackPanel Grid.Row="1" HorizontalAlignment="Center" Orientation="Horizontal" Margin="2,13,2.6,0" Height="153" VerticalAlignment="Top" Width="245"/>
 
-                </Grid>
-            </materialDesign:Card>
+                        <StackPanel Margin="8,2,7.6,66.2" Grid.Row="1">
+                            <Image Source="{Binding imageP}" Margin="0,0,0,0" Height="153"/>
+                        </StackPanel>
+                        <TextBlock FontWeight="Bold" Margin="6,166,9.6,41.2" Grid.RowSpan="2" Text="{Binding nameP}"/>
+                        <TextBlock TextWrapping="Wrap" VerticalAlignment="Center" Margin="6,185,9.6,4.2" Grid.RowSpan="2" Text="{Binding captionP}"/>
 
-            <materialDesign:Card Width="250" Margin="50,15,0,0" Height="227" HorizontalAlignment="Left" VerticalAlignment="Top" x:Name="card6">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="0" />
-                        <RowDefinition Height="227.2" />
-                    </Grid.RowDefinitions>
+                    </Grid>
+                </materialDesign:Card>
+            </Canvas>
 
-                    <StackPanel Grid.Row="1" HorizontalAlignment="Center" Orientation="Horizontal" Margin="2,13,2.6,0" Height="153" VerticalAlignment="Top" Width="245"/>
+            <Canvas x:Name="panel6" Width="250" Height="227" Margin="45,30,0,0" Background="White">
+                <materialDesign:Card RenderTransformOrigin="0.5 0.5" Visibility="Hidden" Width="250" Height="227" HorizontalAlignment="Left" VerticalAlignment="Top" x:Name="card6" MouseLeftButtonDown="card6_MouseLeftButtonDown">
+                    <materialDesign:Card.RenderTransform>
+                        <ScaleTransform x:Name="trans6"/>
+                    </materialDesign:Card.RenderTransform>
+                    <materialDesign:Card.Style>
+                        <Style TargetType="{x:Type materialDesign:Card}">
+                            <Style.Triggers>
+                                <EventTrigger RoutedEvent="Mouse.MouseEnter">
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)" To="1.2" Duration="00:00:00.3" />
+                                            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleY)" To="1.2" Duration="00:00:00.3" />
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger>
+                                <EventTrigger RoutedEvent="Mouse.MouseLeave">
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)" To="1.0" Duration="00:00:00.3" />
+                                            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleY)" To="1.0" Duration="00:00:00.3" />
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </materialDesign:Card.Style>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="0" />
+                            <RowDefinition Height="227.2" />
+                        </Grid.RowDefinitions>
 
-                    <StackPanel Margin="8,2,7.6,66.2" Grid.Row="1">
-                        <Image Margin="0,0,0,0" Height="153"/>
-                    </StackPanel>
-                    <TextBlock FontWeight="Bold" Margin="6,166,9.6,41.2" Grid.RowSpan="2"><Run Text="Cycling"/></TextBlock>
-                    <TextBlock TextWrapping="Wrap" VerticalAlignment="Center" Margin="6,185,9.6,4.2" Grid.RowSpan="2"><Run Text="A great way to keep fit and forget about the constant grind of IT."/></TextBlock>
+                        <StackPanel Grid.Row="1" HorizontalAlignment="Center" Orientation="Horizontal" Margin="2,13,2.6,0" Height="153" VerticalAlignment="Top" Width="245"/>
 
-                </Grid>
-            </materialDesign:Card>
+                        <StackPanel Margin="8,2,7.6,66.2" Grid.Row="1">
+                            <Image Source="{Binding imageP}" Margin="0,0,0,0" Height="153"/>
+                        </StackPanel>
+                        <TextBlock FontWeight="Bold" Margin="6,166,9.6,41.2" Grid.RowSpan="2" Text="{Binding nameP}"/>
+                        <TextBlock TextWrapping="Wrap" VerticalAlignment="Center" Margin="6,185,9.6,4.2" Grid.RowSpan="2" Text="{Binding captionP}"/>
 
-
+                    </Grid>
+                </materialDesign:Card>
+            </Canvas>
         </WrapPanel>
 
-
+        <StackPanel x:Name="metadata" Visibility="Hidden" Margin="925,68.2,9.6,10.4" Grid.Row="1">
+            <Label Content="Данные об изображении:" FontSize="22"></Label>
+            <Label Content="Название вида:" FontSize="22" Margin="0, 10, 0, 0"></Label>
+            <TextBlock Text="{Binding nameP}" Margin="5,5,5,0" FontSize="24" TextWrapping="Wrap" Height="66"></TextBlock>
+            <Label Content="Автор:" FontSize="22" Margin="0, 10, 0, 0"></Label>
+            <TextBlock Text="{Binding authorP}" Margin="5,5,5,0" FontSize="24" TextWrapping="Wrap" Height="66"></TextBlock>
+            <Label Content="Экспозиция:" FontSize="22" Margin="0, 10, 0, 0"></Label>
+            <TextBlock Text="{Binding expositionP}" Margin="5,5,5,0" FontSize="24" TextWrapping="Wrap" Height="66"></TextBlock>
+            <Label Content="Категория:" FontSize="22" Margin="0, 10, 0, 0"></Label>
+            <TextBlock Text="{Binding categoryP}" Margin="5,5,5.2,0" FontSize="24" TextWrapping="Wrap" Height="66"></TextBlock>
+            <Button Width="150" Margin="104, 10, 104, 10" Content="Подробнее" Click="Button_Click">
+            </Button>
+        </StackPanel>
+        <Button x:Name="nextPage" Content="&gt;" HorizontalAlignment="Left" Margin="854,623.2,0,10.4" Grid.Row="1" Width="40" Height="30" Click="nextPage_Click"/>
+        <Button x:Name="prevPage" Content="&lt;" HorizontalAlignment="Left" Margin="809,623.2,0,0" Grid.Row="1" VerticalAlignment="Top" Width="40" Click="prevPage_Click" Height="30"/>
 
     </Grid>
 </Window>

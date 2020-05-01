@@ -1,4 +1,11 @@
 ﻿using Npgsql;
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
 using System.Data;
 
 namespace FlowerClient
@@ -37,6 +44,25 @@ namespace FlowerClient
         {
             instance.Command = new NpgsqlCommand(instance.SQL, instance.Connection);
             instance.Command.ExecuteNonQuery();
+        }
+
+        public DataTable ExecuteQuery()
+        {
+            DataSet ds = new DataSet();
+            DataTable dt = new DataTable();
+            try
+            {
+                NpgsqlDataAdapter da = new NpgsqlDataAdapter(instance.SQL, instance.Connection);
+                ds.Reset();
+                da.Fill(ds);
+                dt = ds.Tables[0];
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            return dt;
         }
     }
 }
