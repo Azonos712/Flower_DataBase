@@ -129,7 +129,7 @@ namespace FlowerClient
 
             year = t[11].ToString();
             season = t[12].ToString();
-            image = t[13].ToString();
+            //image = t[13].ToString();
         }
     }
 }
