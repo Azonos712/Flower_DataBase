@@ -1,16 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Data;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace FlowerClient
 {
@@ -30,11 +21,6 @@ namespace FlowerClient
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             new ReferenceEditWindow().ShowDialog();
-        }
-
-        private void Cbx_category_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
         }
 
         string StringToNameTable(string str)
@@ -76,6 +62,32 @@ namespace FlowerClient
                     break;
             }
             return result;
+        }
+
+        private DataView ShowReference(string table)
+        {
+            Mediator.instance.SQL = "select * from get_view_by_name('" + table + "')";
+            var temp = Mediator.instance.ConvertQueryToTable().DefaultView;
+            return temp;
+        }
+
+        void UpdateReferenceTable()
+        {
+            try
+            {
+                ComboBoxItem selectedItem = (ComboBoxItem)cbx_category.SelectedItem;
+                string temp = StringToNameTable(selectedItem.Content.ToString());
+                reference_table.DataContext = ShowReference(temp + "_view");
+            }
+            catch (Exception ex)
+            {
+                new MsgBox(ex.Message, "Ошибка").ShowDialog();
+            }
+        }
+
+        private void Cbx_category_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            UpdateReferenceTable();
         }
     }
 }
