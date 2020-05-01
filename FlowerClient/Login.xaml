@@ -3,13 +3,14 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:FlowerClient"
         mc:Ignorable="d"
-        Title="Login" Height="212" Width="229" TextElement.FontSize="14">
+        Title="Login" Height="212" Width="229" TextElement.FontSize="14" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
     <Grid>
         <Button Content="Вход" HorizontalAlignment="Left" Margin="10,129,0,0" VerticalAlignment="Top" Width="191" Click="Button_Click"/>
-        <TextBox x:Name="txt_adress" HorizontalAlignment="Left" Height="30" Margin="10,10,0,0" TextWrapping="Wrap" Text="31.6.122.95" VerticalAlignment="Top" Width="190"/>
-        <TextBox x:Name="txt_login" HorizontalAlignment="Left" Height="30" Margin="10,45,0,0" TextWrapping="Wrap" Text="admin" VerticalAlignment="Top" Width="190"/>
-        <PasswordBox x:Name="txt_password" HorizontalAlignment="Left" Height="30" Margin="10,80,0,0" VerticalAlignment="Top" Width="190" Password="admin"/>
+        <TextBox materialDesign:HintAssist.Hint="Сервер" x:Name="txt_adress" HorizontalAlignment="Left" Height="30" Margin="10,10,0,0" TextWrapping="Wrap" Text="localhost" VerticalAlignment="Top" Width="190"/>
+        <TextBox materialDesign:HintAssist.Hint="Логин" x:Name="txt_login" HorizontalAlignment="Left" Height="30" Margin="10,45,0,0" TextWrapping="Wrap" Text="admin" VerticalAlignment="Top" Width="190"/>
+        <PasswordBox materialDesign:HintAssist.Hint="Пароль" x:Name="txt_password" HorizontalAlignment="Left" Height="30" Margin="10,80,0,0" VerticalAlignment="Top" Width="190"/>
     </Grid>
 </Window>

@@ -26,6 +26,20 @@ namespace FlowerClient
         public MainWindow()
         {
             InitializeComponent();
+
+            if (Mediator.instance.Role == "Flower_Employee")
+                admin_menuitem.Visibility = Visibility.Collapsed;
+        }
+        private void Window_Closed(object sender, EventArgs e)
+        {
+            try
+            {
+                Mediator.instance.Connection.Close();
+            }
+            catch (Exception ex)
+            {
+                new MsgBox(ex.Message, "Ошибка").ShowDialog();
+            }
         }
 
         private void MenuItem_Click(object sender, RoutedEventArgs e)
@@ -33,6 +47,12 @@ namespace FlowerClient
             new AdminWindow().ShowDialog();
         }
 
+        private void MenuItem_Click_1(object sender, RoutedEventArgs e)
+        {
+            new Login().Show();
+            this.Close();
+        }
+        
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             cards.Add(card1);
