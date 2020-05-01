@@ -9,7 +9,6 @@
     <Grid>
         <DockPanel>
             <DataGrid ColumnWidth="*" SelectionMode="Single" BorderThickness="1" x:Name="reference_table" IsReadOnly="True" ItemsSource="{Binding}" AutoGenerateColumns="True" Margin="10" DockPanel.Dock="Left" Width="300"></DataGrid>
-            
             <StackPanel DockPanel.Dock="Right" VerticalAlignment="Center">
                 <ComboBox x:Name="cbx_category" SelectionChanged="Cbx_category_SelectionChanged" Margin="10">
                     <ComboBoxItem Content="Автор"></ComboBoxItem>
@@ -18,6 +17,9 @@
                     <ComboBoxItem Content="Жизненная форма"></ComboBoxItem>
                     <ComboBoxItem Content="Группа"></ComboBoxItem>
                     <ComboBoxItem Content="Группа по хозяйственному назначению"></ComboBoxItem>
+                    <ComboBoxItem Content="Люди"></ComboBoxItem>
+                    <ComboBoxItem Content="История"></ComboBoxItem>
+                    <ComboBoxItem Content="Здания и сооружения"></ComboBoxItem>
                     <ComboBoxItem Content="Категория изображения"></ComboBoxItem>
                 </ComboBox>
                 <GroupBox Header="Работа со справочником" Margin="10">

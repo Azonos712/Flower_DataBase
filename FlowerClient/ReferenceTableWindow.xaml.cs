@@ -45,6 +45,33 @@ namespace FlowerClient
                 case "Автор":
                     result = "author";
                     break;
+                case "Экспозиция":
+                    result = "exposition";
+                    break;
+                case "Название вида":
+                    result = "species_name";
+                    break;
+                case "Жизненная форма":
+                    result = "life_form";
+                    break;
+                case "Группа":
+                    result = "group";
+                    break;
+                case "Группа по хозяйственному назначению":
+                    result = "econ_group";
+                    break;
+                case "Люди":
+                    result = "people";
+                    break;
+                case "История":
+                    result = "history";
+                    break;
+                case "Здания и сооружения":
+                    result = "buildings";
+                    break;
+                case "Категория изображения":
+                    result = "category";
+                    break;
                 default:
                     break;
             }
