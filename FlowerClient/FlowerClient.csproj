@@ -106,6 +106,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="DetailedDesc.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="DlgBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -132,6 +136,9 @@
       <DependentUpon>DlgBox.xaml</DependentUpon>
     </Compile>
     <Compile Include="Card.cs" />
+    <Compile Include="DetailedDesc.xaml.cs">
+      <DependentUpon>DetailedDesc.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Login.xaml.cs">
       <DependentUpon>Login.xaml</DependentUpon>
     </Compile>
@@ -183,6 +190,12 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="img\1.jpg" />
+    <Resource Include="img\2.jpg" />
+    <Resource Include="img\3.jpg" />
+    <Resource Include="img\4.jpg" />
+    <Resource Include="img\5.jpg" />
+    <Resource Include="img\6.jpg" />
     <Resource Include="close_up.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -45,7 +45,7 @@ namespace FlowerClient
             {
                 string connectionString = "Server=" + txt_adress.Text.Trim() + ";Port=5432;User Id=" + txt_login.Text.Trim().ToLower()
             + ";Password=" + txt_password.Password.Trim() + ";Database=flower;";
-
+            
                 Mediator.instance.Connection = new NpgsqlConnection(connectionString);
                 //npgsql throws nullreferenceexception
                 Mediator.instance.Connection.Open();
