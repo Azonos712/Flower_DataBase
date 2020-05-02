@@ -72,8 +72,6 @@ namespace FlowerClient
             {
                 new MsgBox(ex.Message, "Ошибка").ShowDialog();
             }
-
-
         }
 
         private void fillYearsSeasons()
@@ -96,14 +94,8 @@ namespace FlowerClient
         private void loadReference(string refName)
         {
             Mediator.instance.SQL = "select * from " + refName + "_view";
-            DataTable results = Mediator.instance.ExecuteQuery();
-            List<string> temp = new List<string>();
-            for (int i = 0; i < results.Rows.Count; i++)
-            {
-                temp.Add(results.Rows[i].ItemArray[0].ToString());
-            }
             ComboBox c = FindName(refName) as ComboBox;
-            c.ItemsSource = temp;
+            c.ItemsSource = Mediator.instance.ConvertQueryToComboBox();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -147,7 +139,7 @@ namespace FlowerClient
                 }
                 else
                 {
-                    Mediator.instance.SQL = "select create_plant('" + itemToString("author") + "','" +
+                    Mediator.instance.SQL = "select * from create_plant('" + itemToString("author") + "','" +
                         itemToString("exposition") + "','" + itemToString("species_name") + "','" +
                         itemToString("life_form") + "','" + itemToString("group") +
                         "','" + itemToString("econ_group") + "','" + itemToString("people") +

@@ -43,6 +43,19 @@ namespace FlowerClient
             return dt;
         }
 
+        public List<string> ConvertQueryToComboBox()
+        {
+            DataTable dt = new DataTable();
+            NpgsqlDataAdapter da = new NpgsqlDataAdapter(SQL, Connection);
+            da.Fill(dt);
+            List<string> temp = new List<string>();
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+                temp.Add(dt.Rows[i].ItemArray[0].ToString());
+            }
+            return temp;
+        }
+
         public void Execute()
         {
             instance.Command = new NpgsqlCommand(instance.SQL, instance.Connection);
