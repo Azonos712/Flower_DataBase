@@ -9,14 +9,17 @@
         Title="MainWindow" Height="720" Width="1300" TextElement.FontSize="14" Loaded="Window_Loaded" WindowStartupLocation="CenterScreen" Closed="Window_Closed">
     <Grid RenderTransformOrigin="0.561,0.367">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition />
+            <ColumnDefinition Width="70*"/>
+            <ColumnDefinition Width="30*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="25"/>
+            <RowDefinition Height="50"/>
             <RowDefinition />
+            <RowDefinition Height="70" />
         </Grid.RowDefinitions>
 
-        <DockPanel Grid.Column="0" Grid.Row="0">
+        <DockPanel Grid.ColumnSpan="2" Grid.Row="0">
             <Menu x:Name="main_menu" VerticalAlignment="Center">
                 <MenuItem x:Name="admin_menuitem" Header="Администрирование" Height="20">
                     <MenuItem Header="Таблица пользователей" Click="MenuItem_Click"></MenuItem>
@@ -24,10 +27,13 @@
                 <MenuItem x:Name="system_menuitem" Header="Система" Height="20">
                     <MenuItem Header="Выход из учетной записи" Click="MenuItem_Click_1"></MenuItem>
                 </MenuItem>
+                <MenuItem x:Name="foto_menuitem" Header="Фото" Height="20">
+                    <MenuItem Header="Добавить" Click="MenuItem_Click_2"></MenuItem>
+                </MenuItem>
             </Menu>
         </DockPanel>
 
-        <WrapPanel Margin="15,68.2,399.6,56.4" Grid.Row="1" RenderTransformOrigin="0.492,0.487" Grid.Column="0">
+        <WrapPanel Margin="10" Grid.Row="2" Grid.Column="0" RenderTransformOrigin="0.492,0.487">
             <Canvas x:Name="panel1" Width="250" Height="227" Margin="25,15,0,0" Background="White">
                 <materialDesign:Card RenderTransformOrigin="0.5 0.5" Visibility="Hidden" Width="250" Grid.Row="1" Height="227" HorizontalAlignment="Left" VerticalAlignment="Top" x:Name="card1" MouseLeftButtonDown="card_active_MouseLeftButtonDown">
                     <materialDesign:Card.RenderTransform>
@@ -300,8 +306,8 @@
             </Canvas>
         </WrapPanel>
 
-        <StackPanel x:Name="metadata" Visibility="Visible" Margin="925,71.2,8.6,12.4" Grid.Row="1" Width="360">
-            <Grid Height="580">
+        <StackPanel x:Name="metadata" Visibility="Visible" Margin="10" Grid.Row="2" Grid.Column="1">
+            <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition/>
                 </Grid.RowDefinitions>
@@ -328,7 +334,7 @@
                 <ComboBox x:Name="season" Width="150" Margin="20,330,10,135" Grid.Column="0" VerticalAlignment="Top"/>
                 <ComboBox x:Name="year" Width="150" Margin="15,330,15,0" Grid.Column="1" Height="30" VerticalAlignment="Top"/>
                 
-                <Button x:Name="search_btn" Width="150" Margin="107,538,103,0" Content="Поиск" Click="Search_btn_Click" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
+                <Button x:Name="search_btn" Width="150" Margin="107,438,103,0" Content="Поиск" Click="Search_btn_Click" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
 
             </Grid>
             <!--<Label Content="Данные об изображении:" FontSize="22"></Label>
@@ -342,8 +348,11 @@
             <TextBlock Text="{Binding categoryP}" Margin="5,5,5.2,0" FontSize="24" TextWrapping="Wrap" Height="66"></TextBlock>-->
 
         </StackPanel>
-        <Button x:Name="nextPage" Content="&gt;" HorizontalAlignment="Left" Margin="811,614.2,0,0" Grid.Row="1" VerticalAlignment="Top" Width="40" Height="30" Click="nextPage_Click"/>
-        <Button x:Name="prevPage" Content="&lt;" HorizontalAlignment="Left" Margin="725,614.2,0,0" Grid.Row="1" VerticalAlignment="Top" Width="40" Click="prevPage_Click" Height="30"/>
+        
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal" Grid.Row="3" Grid.Column="0">
+            <Button Margin="10 0 10 0" x:Name="prevPage" Content="&lt;" Click="prevPage_Click"/>
+            <Button Margin="10 0 10 0" x:Name="nextPage" Content="&gt;" Click="nextPage_Click"/>
+        </StackPanel>
 
     </Grid>
 </Window>
