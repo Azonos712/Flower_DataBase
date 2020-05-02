@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Drawing.Imaging;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,10 +9,13 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
+using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using ComboBox = System.Windows.Controls.ComboBox;
+using System.IO;
 
 namespace FlowerClient
 {
@@ -112,6 +116,7 @@ namespace FlowerClient
                     ",'" + itemToString("season") + "'," + temp.idP + ");";
 
                 Mediator.instance.Execute();
+
                 new MsgBox("Запись обновлена!", "Успешно!").ShowDialog();
                 DialogResult = true;
                 this.Close();
@@ -120,6 +125,61 @@ namespace FlowerClient
             {
                 new MsgBox(ex.Message, "Ошибка").ShowDialog();
             }
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            Card temp = (Card)this.DataContext;
+            if(temp != null)
+            {
+                updatePhoto();
+            }
+            else
+            {
+                insertPhoto();
+            }
+        }
+
+        private void updatePhoto()
+        {
+            photo.Source = null;
+            Card card = (Card)this.DataContext;
+            OpenFileDialog op = new OpenFileDialog();
+
+            op.Filter = "";
+
+            ImageCodecInfo[] codecs = ImageCodecInfo.GetImageEncoders();
+            string sep = string.Empty;
+
+            foreach (var c in codecs)
+            {
+                string codecName = c.CodecName.Substring(8).Replace("Codec", "Files").Trim();
+                op.Filter = String.Format("{0}{1}{2} ({3})|{3}", op.Filter, sep, codecName, c.FilenameExtension);
+                sep = "|";
+            }
+
+            op.Filter = String.Format("{0}{1}{2} ({3})|{3}", op.Filter, sep, "All Files", "*.*");
+
+            op.DefaultExt = ".png"; // Default file extension 
+
+            if (op.ShowDialog() == System.Windows.Forms.DialogResult.Cancel)
+                return;
+            string filename = op.FileName;
+            op.Dispose();
+            
+            /*if(File.Exists(Mediator.instance.Path + card.idP + ".jpg"))
+            {
+                photo.Source = null;
+                File.Delete(Mediator.instance.Path + card.idP + ".jpg");
+            }*/
+            //File.Replace(filename, Mediator.instance.Path + card.idP + ".jpg", @"C:\Users\kiril\Desktop\copy.jpg");
+            File.Copy(filename, Mediator.instance.Path + card.idP + ".jpg", true);
+            //photo.Source = Mediator.instance.Path + card.idP + ".jpg";
+        }
+
+        private void insertPhoto()
+        {
+
         }
     }
 }

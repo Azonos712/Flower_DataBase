@@ -80,6 +80,7 @@ namespace FlowerClient
             DetailedDesc d = new DetailedDesc();
             MaterialDesignThemes.Wpf.Card temp = sender as MaterialDesignThemes.Wpf.Card;
             d.DataContext = temp.DataContext;
+            photo6.Source = null;
             d.ShowDialog();
         }
 
