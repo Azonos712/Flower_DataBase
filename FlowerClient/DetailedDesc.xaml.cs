@@ -90,9 +90,33 @@ namespace FlowerClient
             this.Close();
         }
 
+        private string itemToString(string name)
+        {
+            ComboBox c = FindName(name) as ComboBox;
+            //ComboBoxItem item = (ComboBoxItem)c.SelectedItem;
+            return c.SelectedItem.ToString();
+        }
+
         private void save_Click(object sender, RoutedEventArgs e)
         {
+            try
+            {
+                Card temp = (Card)this.DataContext;
+                Mediator.instance.SQL = "select * from update_plant('" + itemToString("author") + "','" +
+                    itemToString("exposition") + "','" + itemToString("species_name") + "','" +
+                    itemToString("life_form") + "','" + itemToString("group") +
+                    "','" + itemToString("econ_group") + "','" + itemToString("people") +
+                    "','" + itemToString("history") + "','" + itemToString("buildings") +
+                    "','" + itemToString("category") + "'," + itemToString("year") +
+                    ",'" + itemToString("season") + "'," + temp.idP + ");";
 
+                Mediator.instance.Execute();
+                new MsgBox("Запись обновлена!", "Успешно!").ShowDialog();
+            }
+            catch(Exception ex)
+            {
+                new MsgBox(ex.Message, "Ошибка").ShowDialog();
+            }
         }
     }
 }
