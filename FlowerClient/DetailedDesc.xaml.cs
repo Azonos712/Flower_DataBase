@@ -160,7 +160,7 @@ namespace FlowerClient
                 using (FileStream fileStream = new FileStream(Mediator.instance.Path + fotoID + ".jpg", FileMode.Create))
                     jpegBitmapEncoder.Save(fileStream);
 
-                new MsgBox("Действие завершенно успешно!", "Информация").ShowDialog();
+                new MsgBox("Действие завершено успешно!", "Информация").ShowDialog();
                 DialogResult = true;
                 this.Close();
             }

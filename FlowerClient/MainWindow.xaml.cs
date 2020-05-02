@@ -62,10 +62,40 @@ namespace FlowerClient
             cards.Add(card5);
             cards.Add(card6);
 
+            loadReference("author");
+            loadReference("exposition");
+            loadReference("life_form");
+            loadReference("species_name");
+            loadReference("group");
+            loadReference("econ_group");
+            loadReference("people");
+            loadReference("history");
+            loadReference("buildings");
+            loadReference("category");
+            fillYearsSeasons();
+
             loadRecords(1);
             currentPage = 1;
 
             UpdateGallery();
+        }
+
+        private void fillYearsSeasons()
+        {
+            List<int> years = new List<int>();
+            List<string> seasons = new List<string>();
+
+            for (int i = 2017; i < 2031; i++)
+            {
+                years.Add(i);
+            }
+            seasons.Add("Весна");
+            seasons.Add("Лето");
+            seasons.Add("Осень");
+            seasons.Add("Зима");
+
+            season.ItemsSource = seasons;
+            year.ItemsSource = years;
         }
 
         public void cardActivate(object sender)
@@ -182,6 +212,13 @@ namespace FlowerClient
                 UpdateGallery();
             }
         }
-   
+
+        private void loadReference(string refName)
+        {
+            Mediator.instance.SQL = "select * from " + refName + "_view";
+            ComboBox c = FindName(refName) as ComboBox;
+            c.ItemsSource = Mediator.instance.ConvertQueryToComboBox();
+        }
+
     }
 }
