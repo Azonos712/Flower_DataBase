@@ -49,21 +49,27 @@ namespace FlowerClient
             loadReference("category");
             category.SelectedIndex = category.Items.IndexOf(context.categoryP);
 
-            fillYears();
+            fillYearsSeasons();
             year.SelectedIndex = year.Items.IndexOf(Convert.ToInt32(context.yearP));
-
-            //season.Items.
-            season.SelectedIndex = season.Items.IndexOf( new ComboBoxItem { Content = context.seasonP } );
+            season.SelectedIndex = season.Items.IndexOf(context.seasonP);
 
         }
 
-        private void fillYears()
+        private void fillYearsSeasons()
         {
             List<int> years = new List<int>();
-            for(int i = 2017; i < 2031; i++)
+            List<string> seasons = new List<string>();
+
+            for (int i = 2017; i < 2031; i++)
             {
                 years.Add(i);
             }
+            seasons.Add("Весна");
+            seasons.Add("Лето");
+            seasons.Add("Осень");
+            seasons.Add("Зима");
+
+            season.ItemsSource = seasons;
             year.ItemsSource = years;
         }
         private void loadReference(string refName)
