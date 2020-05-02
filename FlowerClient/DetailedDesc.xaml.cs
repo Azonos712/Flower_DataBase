@@ -50,6 +50,10 @@ namespace FlowerClient
             category.SelectedIndex = category.Items.IndexOf(context.categoryP);
 
             fillYears();
+            year.SelectedIndex = year.Items.IndexOf(Convert.ToInt32(context.yearP));
+
+            //season.Items.
+            season.SelectedIndex = season.Items.IndexOf( new ComboBoxItem { Content = context.seasonP } );
 
         }
 
@@ -78,6 +82,11 @@ namespace FlowerClient
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
+        }
+
+        private void save_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
