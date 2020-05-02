@@ -45,10 +45,6 @@
         
         <Label Content="Сезон" HorizontalAlignment="Left" Margin="614,286,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.806,0.621"/>
         <ComboBox x:Name="season" HorizontalAlignment="Left" Margin="616,313,0,0" VerticalAlignment="Top" Width="166">
-            <ComboBoxItem Content="Весна"></ComboBoxItem>
-            <ComboBoxItem Content="Лето"></ComboBoxItem>
-            <ComboBoxItem Content="Осень"></ComboBoxItem>
-            <ComboBoxItem Content="Зима"></ComboBoxItem>
         </ComboBox>
 
         <Label Content="Год" HorizontalAlignment="Left" Margin="614,346,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.806,0.621"/>

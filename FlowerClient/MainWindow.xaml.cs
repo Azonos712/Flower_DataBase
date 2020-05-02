@@ -151,6 +151,7 @@ namespace FlowerClient
                 c.DataContext = null;
                 c.Visibility = Visibility.Hidden;
             }
+
             loadRecords(currentPage);
 
             for (int i = 0; i < results.Rows.Count; i++)
