@@ -14,6 +14,8 @@
                 </Border>
                 
                 <Button x:Name="btn_foto" Content="Обновить фото" HorizontalAlignment="Center" Margin="10" VerticalAlignment="Top" MinWidth="200" Click="Button_Click_1"/>
+                <Button x:Name="btn_save_foto" Content="Скачать фото" HorizontalAlignment="Center" Margin="10" VerticalAlignment="Top" MinWidth="200" Click="btn_save_foto_Click"/>
+
             </StackPanel>
             <StackPanel DockPanel.Dock="Right">
                 <DockPanel>

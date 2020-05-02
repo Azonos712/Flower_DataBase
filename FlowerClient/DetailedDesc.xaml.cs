@@ -51,9 +51,13 @@ namespace FlowerClient
                 {
                     btn_foto.Content = "Добавить фото";
                     btn_save.Content = "Добавить";
+                    btn_save_foto.Visibility = Visibility.Collapsed;
                 }
                 else
                 {
+                    //Загружаем исходную картинку, что бы можно было скачать исходный размер
+                    photo.Source = Mediator.instance.NonBlockingLoad(Mediator.instance.Path + context.idP + ".jpg");
+
                     author.SelectedIndex = author.Items.IndexOf(context.authorP);
                     exposition.SelectedIndex = exposition.Items.IndexOf(context.expositionP);
                     life_form.SelectedIndex = life_form.Items.IndexOf(context.lifeFormP);
@@ -195,6 +199,45 @@ namespace FlowerClient
                 photo.Source = Mediator.instance.NonBlockingLoad(filename);
 
                 op.Dispose();
+            }
+            catch (Exception ex)
+            {
+                new MsgBox(ex.Message, "Ошибка").ShowDialog();
+            }
+        }
+
+        private void btn_save_foto_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                if (photo.Source != null)
+                {
+                    Microsoft.Win32.SaveFileDialog dlg = new Microsoft.Win32.SaveFileDialog();
+                    dlg.FileName = "newFlowerPhoto"; // Default file name
+                    dlg.DefaultExt = ".jpg"; // Default file extension
+                    dlg.Filter = "JPG Files (*.jpg)|*.jpg"; // Filter files by extension
+
+                    // Show save file dialog box
+                    Nullable<bool> result = dlg.ShowDialog();
+
+                    // Process save file dialog box results
+                    if (result == true)
+                    {
+                        // Save document
+                        string filename = dlg.FileName;
+
+                        JpegBitmapEncoder jpegBitmapEncoder = new JpegBitmapEncoder();
+                        jpegBitmapEncoder.Frames.Add(BitmapFrame.Create(photo.Source as BitmapSource));
+                        using (FileStream fileStream = new FileStream(filename, FileMode.Create))
+                            jpegBitmapEncoder.Save(fileStream);
+
+                        new MsgBox("Фото сохранено!", "Информация").ShowDialog();
+                    }
+                }
+                else
+                {
+                    throw new Exception("Нечего сохранять!");
+                }
             }
             catch (Exception ex)
             {
