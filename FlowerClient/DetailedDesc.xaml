@@ -10,7 +10,7 @@
         <DockPanel>
             <StackPanel DockPanel.Dock="Left">
                 <Border Height="300" Width="300" BorderThickness="1" BorderBrush="Black" Margin="10,50,10,10">
-                    <Image x:Name="photo"  Source="{Binding imageP}"/>
+                    <Image x:Name="photo"  Source="{Binding ImageS}"/>
                 </Border>
                 
                 <Button Content="Обновить фото" HorizontalAlignment="Center" Margin="10" VerticalAlignment="Top" MinWidth="200" Click="Button_Click_1"/>

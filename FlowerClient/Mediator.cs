@@ -7,6 +7,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Data;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.IO;
 
 namespace FlowerClient
 {
@@ -63,6 +66,21 @@ namespace FlowerClient
                 MessageBox.Show(ex.Message);
             }
             return dt;
+        }
+
+        public BitmapImage NonBlockingLoad(string path)
+        {
+            if (!(File.Exists(path)))
+                return null;
+
+            BitmapImage image = new BitmapImage();
+            image.BeginInit();
+            image.CacheOption = BitmapCacheOption.OnLoad;
+            image.CreateOptions = BitmapCreateOptions.IgnoreImageCache;
+            image.UriSource = new Uri(path);
+            image.EndInit();
+            image.Freeze();
+            return image;
         }
     }
 }

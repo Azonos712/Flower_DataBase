@@ -117,11 +117,17 @@ namespace FlowerClient
 
                 Mediator.instance.Execute();
 
+                //Сохранение нового фото
+                JpegBitmapEncoder jpegBitmapEncoder = new JpegBitmapEncoder();
+                jpegBitmapEncoder.Frames.Add(BitmapFrame.Create(photo.Source as BitmapSource));
+                using (FileStream fileStream = new FileStream(Mediator.instance.Path + temp.idP + ".jpg", FileMode.Create))
+                    jpegBitmapEncoder.Save(fileStream);
+
                 new MsgBox("Запись обновлена!", "Успешно!").ShowDialog();
                 DialogResult = true;
                 this.Close();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 new MsgBox(ex.Message, "Ошибка").ShowDialog();
             }
@@ -129,18 +135,10 @@ namespace FlowerClient
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            Card temp = (Card)this.DataContext;
-            if(temp != null)
-            {
-                updatePhoto();
-            }
-            else
-            {
-                insertPhoto();
-            }
+            LoadNewPhoto();
         }
 
-        private void updatePhoto()
+        private void LoadNewPhoto()
         {
             photo.Source = null;
             Card card = (Card)this.DataContext;
@@ -158,21 +156,10 @@ namespace FlowerClient
             if (op.ShowDialog() == System.Windows.Forms.DialogResult.Cancel)
                 return;
             string filename = op.FileName;
+
+            photo.Source = Mediator.instance.NonBlockingLoad(filename);
+
             op.Dispose();
-            
-            /*if(File.Exists(Mediator.instance.Path + card.idP + ".jpg"))
-            {
-                photo.Source = null;
-                File.Delete(Mediator.instance.Path + card.idP + ".jpg");
-            }*/
-            //File.Replace(filename, Mediator.instance.Path + card.idP + ".jpg", @"C:\Users\kiril\Desktop\copy.jpg");
-            File.Copy(filename, Mediator.instance.Path + card.idP + ".jpg", true);
-            //photo.Source = Mediator.instance.Path + card.idP + ".jpg";
-        }
-
-        private void insertPhoto()
-        {
-
         }
     }
 }

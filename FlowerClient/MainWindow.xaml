@@ -70,7 +70,7 @@
                         <StackPanel Grid.Row="1" HorizontalAlignment="Center" Orientation="Horizontal" Margin="2,13,2.6,0" Height="153" VerticalAlignment="Top" Width="245"/>
 
                         <StackPanel Margin="8,2,7.6,66.2" Grid.Row="1">
-                            <Image Source="{Binding imageP}" Margin="0,0,0,0" Height="153"/>
+                            <Image Source="{Binding ImageS}" Margin="0,0,0,0" Height="153"/>
                         </StackPanel>
                         <TextBlock FontWeight="Bold" Margin="6,166,9.6,41.2" Grid.RowSpan="2" Text="{Binding nameP}"/>
                         <TextBlock TextWrapping="Wrap" VerticalAlignment="Center" Margin="6,185,9.6,4.2" Grid.RowSpan="2" Text="{Binding captionP}"/>
@@ -115,7 +115,7 @@
                         <StackPanel Grid.Row="1" HorizontalAlignment="Center" Orientation="Horizontal" Margin="2,13,2.6,0" Height="153" VerticalAlignment="Top" Width="245"/>
 
                         <StackPanel Margin="8,2,7.6,66.2" Grid.Row="1">
-                            <Image Source="{Binding imageP}" Margin="0,0,0,0" Height="153"/>
+                            <Image Source="{Binding ImageS}" Margin="0,0,0,0" Height="153"/>
                         </StackPanel>
                         <TextBlock FontWeight="Bold" Margin="6,166,9.6,41.2" Grid.RowSpan="2" Text="{Binding nameP}" />
                         <TextBlock TextWrapping="Wrap" VerticalAlignment="Center" Margin="6,185,9.6,4.2" Grid.RowSpan="2" Text="{Binding captionP}"/>
@@ -160,7 +160,7 @@
                         <StackPanel Grid.Row="1" HorizontalAlignment="Center" Orientation="Horizontal" Margin="2,13,2.6,0" Height="153" VerticalAlignment="Top" Width="245"/>
 
                         <StackPanel Margin="8,2,7.6,66.2" Grid.Row="1">
-                            <Image Source="{Binding imageP}" Margin="0,0,0,0" Height="153"/>
+                            <Image Source="{Binding ImageS}" Margin="0,0,0,0" Height="153"/>
                         </StackPanel>
                         <TextBlock FontWeight="Bold" Margin="6,166,9.6,41.2" Grid.RowSpan="2" Text="{Binding nameP}"/>
                         <TextBlock TextWrapping="Wrap" VerticalAlignment="Center" Margin="6,185,9.6,4.2" Grid.RowSpan="2" Text="{Binding captionP}"/>
@@ -205,7 +205,7 @@
                         <StackPanel Grid.Row="1" HorizontalAlignment="Center" Orientation="Horizontal" Margin="2,13,2.6,0" Height="153" VerticalAlignment="Top" Width="245"/>
 
                         <StackPanel Margin="8,2,7.6,66.2" Grid.Row="1">
-                            <Image Source="{Binding imageP}" Margin="0,0,0,0" Height="153"/>
+                            <Image Source="{Binding ImageS}" Margin="0,0,0,0" Height="153"/>
                         </StackPanel>
                         <TextBlock FontWeight="Bold" Margin="6,166,9.6,41.2" Grid.RowSpan="2" Text="{Binding nameP}"/>
                         <TextBlock TextWrapping="Wrap" VerticalAlignment="Center" Margin="6,185,9.6,4.2" Grid.RowSpan="2" Text="{Binding captionP}"/>
@@ -252,7 +252,7 @@
                         <StackPanel Grid.Row="1" HorizontalAlignment="Center" Orientation="Horizontal" Margin="2,13,2.6,0" Height="153" VerticalAlignment="Top" Width="245"/>
 
                         <StackPanel Margin="8,2,7.6,66.2" Grid.Row="1">
-                            <Image Source="{Binding imageP}" Margin="0,0,0,0" Height="153"/>
+                            <Image Source="{Binding ImageS}" Margin="0,0,0,0" Height="153"/>
                         </StackPanel>
                         <TextBlock FontWeight="Bold" Margin="6,166,9.6,41.2" Grid.RowSpan="2" Text="{Binding nameP}"/>
                         <TextBlock TextWrapping="Wrap" VerticalAlignment="Center" Margin="6,185,9.6,4.2" Grid.RowSpan="2" Text="{Binding captionP}"/>
@@ -297,7 +297,7 @@
                         <StackPanel Grid.Row="1" HorizontalAlignment="Center" Orientation="Horizontal" Margin="2,13,2.6,0" Height="153" VerticalAlignment="Top" Width="245"/>
 
                         <StackPanel Margin="8,2,7.6,66.2" Grid.Row="1">
-                            <Image x:Name="photo6" Source="{Binding imageP}" Margin="0,0,0,0" Height="153"/>
+                            <Image x:Name="photo6" Source="{Binding ImageS}" Margin="0,0,0,0" Height="153"/>
                         </StackPanel>
                         <TextBlock FontWeight="Bold" Margin="6,166,9.6,41.2" Grid.RowSpan="2" Text="{Binding nameP}"/>
                         <TextBlock TextWrapping="Wrap" VerticalAlignment="Center" Margin="6,185,9.6,4.2" Grid.RowSpan="2" Text="{Binding captionP}"/>

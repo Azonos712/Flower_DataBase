@@ -151,6 +151,7 @@ namespace FlowerClient
                 c.DataContext = null;
                 c.Visibility = Visibility.Hidden;
             }
+            GC.Collect();
         }
 
         void UpdateGallery()
@@ -159,7 +160,7 @@ namespace FlowerClient
             {
                 gallery.Add(new Card(results.Rows[i]));
                 gallery.Last().captionP = gallery.Last().groupP + " - " + gallery.Last().economicGroupP;
-                gallery.Last().imageP = Mediator.instance.Path + gallery.Last().idP + ".jpg";
+                gallery.Last().ImageS = Mediator.instance.NonBlockingLoad(Mediator.instance.Path + gallery.Last().idP + ".jpg");
             }
 
             for (int i = 0; i < gallery.Count; i++)
