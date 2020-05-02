@@ -175,7 +175,12 @@ namespace FlowerClient
 
         private void MenuItem_Click_2(object sender, RoutedEventArgs e)
         {
-
+            if (new DetailedDesc().ShowDialog() == true)
+            {
+                loadRecords(currentPage);
+                ClearGallery();
+                UpdateGallery();
+            }
         }
    
     }

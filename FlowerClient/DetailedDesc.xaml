@@ -13,7 +13,7 @@
                     <Image x:Name="photo"  Source="{Binding ImageS}"/>
                 </Border>
                 
-                <Button Content="Обновить фото" HorizontalAlignment="Center" Margin="10" VerticalAlignment="Top" MinWidth="200" Click="Button_Click_1"/>
+                <Button x:Name="btn_foto" Content="Обновить фото" HorizontalAlignment="Center" Margin="10" VerticalAlignment="Top" MinWidth="200" Click="Button_Click_1"/>
             </StackPanel>
             <StackPanel DockPanel.Dock="Right">
                 <DockPanel>
@@ -64,7 +64,7 @@
                     </StackPanel>
 
                     <StackPanel Orientation="Horizontal" DockPanel.Dock="Bottom" HorizontalAlignment="Center">
-                        <Button x:Name="save" Content="Сохранить" Margin="20" Width="120" Click="save_Click"/>
+                        <Button x:Name="btn_save" Content="Сохранить" Margin="20" Width="120" Click="save_Click"/>
                         <Button Content="Отмена" Margin="20" Width="120" Click="Button_Click"/>
                     </StackPanel>
                 </DockPanel>

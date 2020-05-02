@@ -31,31 +31,48 @@ namespace FlowerClient
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            Card context = DataContext as Card;
-            loadReference("author");
-            author.SelectedIndex = author.Items.IndexOf(context.authorP);
-            loadReference("exposition");
-            exposition.SelectedIndex = exposition.Items.IndexOf(context.expositionP);
-            loadReference("life_form");
-            life_form.SelectedIndex = life_form.Items.IndexOf(context.lifeFormP);
-            loadReference("species_name");
-            species_name.SelectedIndex = species_name.Items.IndexOf(context.speciesNameP);
-            loadReference("group");
-            group.SelectedIndex = group.Items.IndexOf(context.groupP);
-            loadReference("econ_group");
-            econ_group.SelectedIndex = econ_group.Items.IndexOf(context.economicGroupP);
-            loadReference("people");
-            people.SelectedIndex = people.Items.IndexOf(context.peopleP);
-            loadReference("history");
-            history.SelectedIndex = history.Items.IndexOf(context.historyP);
-            loadReference("buildings");
-            buildings.SelectedIndex = buildings.Items.IndexOf(context.buildingsP);
-            loadReference("category");
-            category.SelectedIndex = category.Items.IndexOf(context.categoryP);
+            try
+            {
+                Card context = DataContext as Card;
 
-            fillYearsSeasons();
-            year.SelectedIndex = year.Items.IndexOf(Convert.ToInt32(context.yearP));
-            season.SelectedIndex = season.Items.IndexOf(context.seasonP);
+                loadReference("author");
+                loadReference("exposition");
+                loadReference("life_form");
+                loadReference("species_name");
+                loadReference("group");
+                loadReference("econ_group");
+                loadReference("people");
+                loadReference("history");
+                loadReference("buildings");
+                loadReference("category");
+                fillYearsSeasons();
+
+                if (context == null)
+                {
+                    btn_foto.Content = "Добавить фото";
+                    btn_save.Content = "Добавить";
+                }
+                else
+                {
+                    author.SelectedIndex = author.Items.IndexOf(context.authorP);
+                    exposition.SelectedIndex = exposition.Items.IndexOf(context.expositionP);
+                    life_form.SelectedIndex = life_form.Items.IndexOf(context.lifeFormP);
+                    species_name.SelectedIndex = species_name.Items.IndexOf(context.speciesNameP);
+                    group.SelectedIndex = group.Items.IndexOf(context.groupP);
+                    econ_group.SelectedIndex = econ_group.Items.IndexOf(context.economicGroupP);
+                    people.SelectedIndex = people.Items.IndexOf(context.peopleP);
+                    history.SelectedIndex = history.Items.IndexOf(context.historyP);
+                    buildings.SelectedIndex = buildings.Items.IndexOf(context.buildingsP);
+                    category.SelectedIndex = category.Items.IndexOf(context.categoryP);
+                    year.SelectedIndex = year.Items.IndexOf(Convert.ToInt32(context.yearP));
+                    season.SelectedIndex = season.Items.IndexOf(context.seasonP);
+                }
+            }
+            catch (Exception ex)
+            {
+                new MsgBox(ex.Message, "Ошибка").ShowDialog();
+            }
+
 
         }
 
@@ -99,6 +116,10 @@ namespace FlowerClient
         {
             ComboBox c = FindName(name) as ComboBox;
             //ComboBoxItem item = (ComboBoxItem)c.SelectedItem;
+            if (c.SelectedItem == null)
+                throw new Exception("Выберите все поля!");
+
+            
             return c.SelectedItem.ToString();
         }
 
@@ -107,23 +128,43 @@ namespace FlowerClient
             try
             {
                 Card temp = (Card)this.DataContext;
-                Mediator.instance.SQL = "select * from update_plant('" + itemToString("author") + "','" +
-                    itemToString("exposition") + "','" + itemToString("species_name") + "','" +
-                    itemToString("life_form") + "','" + itemToString("group") +
-                    "','" + itemToString("econ_group") + "','" + itemToString("people") +
-                    "','" + itemToString("history") + "','" + itemToString("buildings") +
-                    "','" + itemToString("category") + "'," + itemToString("year") +
-                    ",'" + itemToString("season") + "'," + temp.idP + ");";
 
-                Mediator.instance.Execute();
+                int fotoID = -1;
 
-                //Сохранение нового фото
+                if (temp != null)
+                {
+                    Mediator.instance.SQL = "select * from update_plant('" + itemToString("author") + "','" +
+                        itemToString("exposition") + "','" + itemToString("species_name") + "','" +
+                        itemToString("life_form") + "','" + itemToString("group") +
+                        "','" + itemToString("econ_group") + "','" + itemToString("people") +
+                        "','" + itemToString("history") + "','" + itemToString("buildings") +
+                        "','" + itemToString("category") + "'," + itemToString("year") +
+                        ",'" + itemToString("season") + "'," + temp.idP + ");";
+
+                    Mediator.instance.Execute();
+
+                    fotoID = temp.idP;
+                }
+                else
+                {
+                    Mediator.instance.SQL = "select create_plant('" + itemToString("author") + "','" +
+                        itemToString("exposition") + "','" + itemToString("species_name") + "','" +
+                        itemToString("life_form") + "','" + itemToString("group") +
+                        "','" + itemToString("econ_group") + "','" + itemToString("people") +
+                        "','" + itemToString("history") + "','" + itemToString("buildings") +
+                        "','" + itemToString("category") + "'," + itemToString("year") +
+                        ",'" + itemToString("season") + "');";
+
+                    fotoID = Convert.ToInt32(Mediator.instance.ConvertQueryToValue());
+                }
+
+                //Сохранение или замена старого фото на новое фото
                 JpegBitmapEncoder jpegBitmapEncoder = new JpegBitmapEncoder();
                 jpegBitmapEncoder.Frames.Add(BitmapFrame.Create(photo.Source as BitmapSource));
-                using (FileStream fileStream = new FileStream(Mediator.instance.Path + temp.idP + ".jpg", FileMode.Create))
+                using (FileStream fileStream = new FileStream(Mediator.instance.Path + fotoID + ".jpg", FileMode.Create))
                     jpegBitmapEncoder.Save(fileStream);
 
-                new MsgBox("Запись обновлена!", "Успешно!").ShowDialog();
+                new MsgBox("Действие завершенно успешно!", "Информация").ShowDialog();
                 DialogResult = true;
                 this.Close();
             }
@@ -140,26 +181,33 @@ namespace FlowerClient
 
         private void LoadNewPhoto()
         {
-            photo.Source = null;
-            Card card = (Card)this.DataContext;
-            OpenFileDialog op = new OpenFileDialog();
+            try
+            {
+                photo.Source = null;
+                Card card = (Card)this.DataContext;
+                OpenFileDialog op = new OpenFileDialog();
 
-            op.Filter = "";
+                op.Filter = "";
 
-            ImageCodecInfo[] codecs = ImageCodecInfo.GetImageEncoders();
-            op.Filter = string.Format("{0}| All image files ({1})|{1}|All files|*",
-                string.Join("|", codecs.Select(codec =>
-                string.Format("{0} ({1})|{1}", codec.CodecName, codec.FilenameExtension)).ToArray()),
-                string.Join(";", codecs.Select(codec => codec.FilenameExtension).ToArray()));
-            op.FilterIndex = 6;
+                ImageCodecInfo[] codecs = ImageCodecInfo.GetImageEncoders();
+                op.Filter = string.Format("{0}| All image files ({1})|{1}|All files|*",
+                    string.Join("|", codecs.Select(codec =>
+                    string.Format("{0} ({1})|{1}", codec.CodecName, codec.FilenameExtension)).ToArray()),
+                    string.Join(";", codecs.Select(codec => codec.FilenameExtension).ToArray()));
+                op.FilterIndex = 6;
 
-            if (op.ShowDialog() == System.Windows.Forms.DialogResult.Cancel)
-                return;
-            string filename = op.FileName;
+                if (op.ShowDialog() == System.Windows.Forms.DialogResult.Cancel)
+                    return;
+                string filename = op.FileName;
 
-            photo.Source = Mediator.instance.NonBlockingLoad(filename);
+                photo.Source = Mediator.instance.NonBlockingLoad(filename);
 
-            op.Dispose();
+                op.Dispose();
+            }
+            catch (Exception ex)
+            {
+                new MsgBox(ex.Message, "Ошибка").ShowDialog();
+            }
         }
     }
 }
