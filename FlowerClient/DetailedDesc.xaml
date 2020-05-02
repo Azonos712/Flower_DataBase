@@ -5,51 +5,70 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FlowerClient"
         mc:Ignorable="d"
-        Title="{Binding nameP}" Height="520" Width="900" WindowStartupLocation="CenterScreen" Loaded="Window_Loaded">
+        Title="{Binding nameP}" Height="550" Width="750" WindowStartupLocation="CenterScreen" Loaded="Window_Loaded">
     <Grid>
-        <Image HorizontalAlignment="Left" Height="245" Margin="25,40,0,0" VerticalAlignment="Top" Width="230" Source="{Binding imageP}"/>
-        <Button Content="Обновить фото" HorizontalAlignment="Left" Margin="25,314,0,0" VerticalAlignment="Top" Width="230"/>
+        <DockPanel>
+            <StackPanel DockPanel.Dock="Left">
+                <Border Height="300" Width="300" BorderThickness="1" BorderBrush="Black" Margin="10,50,10,10">
+                    <Image Source="{Binding imageP}"/>
+                </Border>
+                
+                <Button Content="Обновить фото" HorizontalAlignment="Center" Margin="10" VerticalAlignment="Top" MinWidth="200"/>
+            </StackPanel>
+            <StackPanel DockPanel.Dock="Right">
+                <DockPanel>
+                    <StackPanel Orientation="Horizontal" DockPanel.Dock="Top" HorizontalAlignment="Center">
+                        <StackPanel>
 
-        <Label Content="Автор" HorizontalAlignment="Left" Margin="363,28,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.806,0.621"/>
-        <ComboBox x:Name="author" Text="{Binding authorP}" HorizontalAlignment="Left" Margin="365,55,0,0" VerticalAlignment="Top" Width="166"/>
+                            <Label Content="Автор" HorizontalAlignment="Left" Margin="20,20,0,0"/>
+                            <ComboBox x:Name="author" HorizontalAlignment="Left" Text="{Binding authorP}" Margin="20,0,0,0" Width="170"/>
 
-        <Label Content="Сооружения" HorizontalAlignment="Left" Margin="363,88,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.806,0.621"/>
-        <ComboBox x:Name="buildings" HorizontalAlignment="Left" Margin="365,113,0,0" VerticalAlignment="Top" Width="166"/>
+                            <Label Content="Сооружения" HorizontalAlignment="Left" Margin="20,20,0,0" />
+                            <ComboBox x:Name="buildings" HorizontalAlignment="Left" Margin="20,0,0,0" Width="170"/>
 
-        <Label Content="Люди" HorizontalAlignment="Left" Margin="363,152,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.806,0.621"/>
-        <ComboBox x:Name="people" HorizontalAlignment="Left" Margin="365,179,0,0" VerticalAlignment="Top" Width="166"/>
+                            <Label Content="Люди" HorizontalAlignment="Left" Margin="20,20,0,0"/>
+                            <ComboBox x:Name="people" HorizontalAlignment="Left" Margin="20,0,0,0" Width="170"/>
 
-        <Label Content="История" HorizontalAlignment="Left" Margin="363,222,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.806,0.621"/>
-        <ComboBox x:Name="history" HorizontalAlignment="Left" Margin="365,249,0,0" VerticalAlignment="Top" Width="166"/>
+                            <Label Content="История" HorizontalAlignment="Left" Margin="20,20,0,0" />
+                            <ComboBox x:Name="history" HorizontalAlignment="Left" Margin="20,0,0,0" Width="170"/>
 
-        <Label Content="Категория" HorizontalAlignment="Left" Margin="363,286,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.806,0.621"/>
-        <ComboBox x:Name="category" HorizontalAlignment="Left" Margin="365,313,0,0" VerticalAlignment="Top" Width="166"/>
+                            <Label Content="Категория" HorizontalAlignment="Left" Margin="20,20,0,0" />
+                            <ComboBox x:Name="category" HorizontalAlignment="Left" Margin="20,0,0,0" Width="170"/>
 
-        <Label Content="Жизненная форма" HorizontalAlignment="Left" Margin="363,346,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.806,0.621"/>
-        <ComboBox x:Name="life_form" HorizontalAlignment="Left" Margin="365,371,0,0" VerticalAlignment="Top" Width="166"/>
-        
-        <Button x:Name="save" Content="Сохранить" HorizontalAlignment="Left" Margin="616,443,0,0" VerticalAlignment="Top" Width="117" Click="save_Click"/>
-        <Button Content="Отмена" HorizontalAlignment="Left" Margin="755,443,0,0" VerticalAlignment="Top" Width="105" Click="Button_Click"/>
-        
-        <Label Content="Экспозиция" HorizontalAlignment="Left" Margin="614,28,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.806,0.621"/>
-        <ComboBox x:Name="exposition" HorizontalAlignment="Left" Margin="616,55,0,0" VerticalAlignment="Top" Width="166"/>
-        
-        <Label Content="Название вида" HorizontalAlignment="Left" Margin="614,88,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.806,0.621"/>
-        <ComboBox x:Name="species_name" HorizontalAlignment="Left" Margin="616,113,0,0" VerticalAlignment="Top" Width="166"/>
-        
-        <Label Content="Группа" HorizontalAlignment="Left" Margin="614,152,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.806,0.621"/>
-        <ComboBox x:Name="group" HorizontalAlignment="Left" Margin="616,179,0,0" VerticalAlignment="Top" Width="166"/>
-        
-        <Label Content="Группа по хоз. назначению" HorizontalAlignment="Left" Margin="614,222,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.806,0.621"/>
-        <ComboBox x:Name="econ_group" HorizontalAlignment="Left" Margin="616,249,0,0" VerticalAlignment="Top" Width="166"/>
-        
-        <Label Content="Сезон" HorizontalAlignment="Left" Margin="614,286,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.806,0.621"/>
-        <ComboBox x:Name="season" HorizontalAlignment="Left" Margin="616,313,0,0" VerticalAlignment="Top" Width="166">
-        </ComboBox>
+                            <Label Content="Жизненная форма" HorizontalAlignment="Left" Margin="20,20,0,0" />
+                            <ComboBox x:Name="life_form" HorizontalAlignment="Left" Margin="20,0,0,0" Width="170"/>
 
-        <Label Content="Год" HorizontalAlignment="Left" Margin="614,346,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.806,0.621"/>
-        <ComboBox x:Name="year" HorizontalAlignment="Left" Margin="616,371,0,0" VerticalAlignment="Top" Width="166"/>
+                        </StackPanel>
+                        <StackPanel>
+
+                            <Label Content="Экспозиция" HorizontalAlignment="Left" Margin="20,20,0,0" />
+                            <ComboBox x:Name="exposition" HorizontalAlignment="Left" Margin="20,0,0,0" Width="170"/>
+
+                            <Label Content="Название вида" HorizontalAlignment="Left" Margin="20,20,0,0" />
+                            <ComboBox x:Name="species_name" HorizontalAlignment="Left" Margin="20,0,0,0" Width="170"/>
+
+                            <Label Content="Группа" HorizontalAlignment="Left" Margin="20,20,0,0" />
+                            <ComboBox x:Name="group" HorizontalAlignment="Left" Margin="20,0,0,0" Width="170"/>
+
+                            <Label Content="Группа по хоз. назначению" HorizontalAlignment="Left" Margin="20,20,0,0" />
+                            <ComboBox x:Name="econ_group" HorizontalAlignment="Left" Margin="20,0,0,0" Width="170"/>
+
+                            <Label Content="Сезон" HorizontalAlignment="Left" Margin="20,20,0,0" />
+                            <ComboBox x:Name="season" HorizontalAlignment="Left" Margin="20,0,0,0" Width="170"/>
 
 
+                            <Label Content="Год" HorizontalAlignment="Left" Margin="20,20,0,0" />
+                            <ComboBox x:Name="year" HorizontalAlignment="Left" Margin="20,0,0,0" Width="170"/>
+
+                        </StackPanel>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" DockPanel.Dock="Bottom" HorizontalAlignment="Center">
+                        <Button x:Name="save" Content="Сохранить" Margin="20" Width="120" Click="save_Click"/>
+                        <Button Content="Отмена" Margin="20" Width="120" Click="Button_Click"/>
+                    </StackPanel>
+                </DockPanel>
+            </StackPanel>
+        </DockPanel>
     </Grid>
 </Window>

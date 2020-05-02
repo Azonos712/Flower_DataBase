@@ -87,6 +87,7 @@ namespace FlowerClient
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            DialogResult = false;
             this.Close();
         }
 
@@ -112,6 +113,8 @@ namespace FlowerClient
 
                 Mediator.instance.Execute();
                 new MsgBox("Запись обновлена!", "Успешно!").ShowDialog();
+                DialogResult = true;
+                this.Close();
             }
             catch(Exception ex)
             {
