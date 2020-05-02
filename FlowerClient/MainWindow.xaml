@@ -255,8 +255,8 @@
                 </materialDesign:Card>
             </Canvas>
 
-            <Canvas x:Name="panel6" Visibility="Hidden" Width="250" Height="227" Margin="45,30,0,0" Background="White">
-                <materialDesign:Card RenderTransformOrigin="0.5 0.5" Visibility="Visible" Width="250" Height="227" HorizontalAlignment="Left" VerticalAlignment="Top" x:Name="card6" MouseLeftButtonDown="card_active_MouseLeftButtonDown">
+            <Canvas x:Name="panel6" Width="250" Height="227" Margin="45,30,0,0" Background="White">
+                <materialDesign:Card RenderTransformOrigin="0.5 0.5" Visibility="Hidden" Width="250" Height="227" HorizontalAlignment="Left" VerticalAlignment="Top" x:Name="card6" MouseLeftButtonDown="card_active_MouseLeftButtonDown">
                     <materialDesign:Card.RenderTransform>
                         <ScaleTransform x:Name="trans6"/>
                     </materialDesign:Card.RenderTransform>
