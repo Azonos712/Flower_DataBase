@@ -99,10 +99,7 @@ namespace FlowerClient
 
         private void prevPage_Click(object sender, RoutedEventArgs e)
         {
-            if (currentPage != 1)
-            {
-                loadPage(false);
-            }
+            loadPage(false);
         }
 
         private void loadRecords(int currentPage)
@@ -120,14 +117,20 @@ namespace FlowerClient
             if (direction)
             {
                 loadRecords(currentPage + 1);
+
                 if (results.Rows.Count > 0)
-                {
                     currentPage++;
-                }
+                else
+                    return;
             }
             else
             {
-                currentPage--;
+                if (currentPage != 1)
+                    currentPage--;
+                else
+                    return;
+
+                loadRecords(currentPage);
             }
 
             gallery.Clear();
@@ -136,7 +139,6 @@ namespace FlowerClient
                 c.DataContext = null;
                 c.Visibility = Visibility.Hidden;
             }
-            loadRecords(currentPage);
 
             UpdateGallery();
         }
