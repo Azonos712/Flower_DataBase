@@ -52,7 +52,7 @@ namespace FlowerClient
             new Login().Show();
             this.Close();
         }
-        
+
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             cards.Add(card1);
@@ -65,22 +65,7 @@ namespace FlowerClient
             loadRecords(1);
             currentPage = 1;
 
-            for(int i = 0; i < 6; i++)
-            {
-                gallery.Add(new Card(results.Rows[i]));
-                gallery.Last().captionP = gallery.Last().groupP + " - " + gallery.Last().economicGroupP;
-                gallery.Last().imageP = Mediator.instance.Path + gallery.Last().idP + ".jpg";
-            }
-            
-            for(int i = 0; i < gallery.Count; i++)
-            {
-                if(gallery[i] != null)
-                {
-                    cards[i].DataContext = gallery[i];
-                    cards[i].Visibility = Visibility.Visible;
-                }
-            }
-
+            UpdateGallery();
         }
 
         public void cardActivate(object sender)
@@ -153,11 +138,16 @@ namespace FlowerClient
             }
             loadRecords(currentPage);
 
+            UpdateGallery();
+        }
+
+        void UpdateGallery()
+        {
             for (int i = 0; i < results.Rows.Count; i++)
             {
                 gallery.Add(new Card(results.Rows[i]));
-                gallery.Last().captionP = "Lorem ipsum dolor sit amet, consectetur adipiscing elit";
-                gallery.Last().imageP = @"..\img\1.jpg";
+                gallery.Last().captionP = gallery.Last().groupP + " - " + gallery.Last().economicGroupP;
+                gallery.Last().imageP = Mediator.instance.Path + gallery.Last().idP + ".jpg";
             }
 
             for (int i = 0; i < gallery.Count; i++)
