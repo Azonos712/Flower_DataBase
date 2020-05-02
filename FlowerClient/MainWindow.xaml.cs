@@ -129,6 +129,7 @@ namespace FlowerClient
             Mediator.instance.SQL = "select * from plants_all_view limit 6 offset " + ((currentPage - 1) * 6).ToString();
             results = Mediator.instance.ExecuteQuery();
         }
+
         private void loadPage(bool direction)
         {
             if (direction)
@@ -137,58 +138,35 @@ namespace FlowerClient
                 if (results.Rows.Count > 0)
                 {
                     currentPage++;
-                    gallery.Clear();
-                    foreach (MaterialDesignThemes.Wpf.Card c in cards)
-                    {
-                        c.DataContext = null;
-                        c.Visibility = Visibility.Hidden;
-                    }
-
-
-                    for (int i = 0; i < results.Rows.Count; i++)
-                    {
-                        gallery.Add(new Card(results.Rows[i]));
-                        gallery.Last().captionP = "Lorem ipsum dolor sit amet, consectetur adipiscing elit";
-                        gallery.Last().imageP = @"..\img\1.jpg";
-                    }
-
-                    for (int i = 0; i < gallery.Count; i++)
-                    {
-                        if (gallery[i] != null)
-                        {
-                            cards[i].DataContext = gallery[i];
-                            cards[i].Visibility = Visibility.Visible;
-                        }
-                    }
                 }
             }
             else
             {
                 currentPage--;
-                gallery.Clear();
-                foreach (MaterialDesignThemes.Wpf.Card c in cards)
-                {
-                    c.DataContext = null;
-                    c.Visibility = Visibility.Hidden;
-                }
-                loadRecords(currentPage);
+            }
 
-                for (int i = 0; i < results.Rows.Count; i++)
-                {
-                    gallery.Add(new Card(results.Rows[i]));
-                    gallery.Last().captionP = "Lorem ipsum dolor sit amet, consectetur adipiscing elit";
-                    gallery.Last().imageP = @"..\img\1.jpg";
-                }
+            gallery.Clear();
+            foreach (MaterialDesignThemes.Wpf.Card c in cards)
+            {
+                c.DataContext = null;
+                c.Visibility = Visibility.Hidden;
+            }
+            loadRecords(currentPage);
 
-                for (int i = 0; i < gallery.Count; i++)
+            for (int i = 0; i < results.Rows.Count; i++)
+            {
+                gallery.Add(new Card(results.Rows[i]));
+                gallery.Last().captionP = "Lorem ipsum dolor sit amet, consectetur adipiscing elit";
+                gallery.Last().imageP = @"..\img\1.jpg";
+            }
+
+            for (int i = 0; i < gallery.Count; i++)
+            {
+                if (gallery[i] != null)
                 {
-                    if (gallery[i] != null)
-                    {
-                        cards[i].DataContext = gallery[i];
-                        cards[i].Visibility = Visibility.Visible;
-                    }
+                    cards[i].DataContext = gallery[i];
+                    cards[i].Visibility = Visibility.Visible;
                 }
-                
             }
         }
     }

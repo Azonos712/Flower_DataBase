@@ -28,7 +28,7 @@
         <Label Content="Жизненная форма" HorizontalAlignment="Left" Margin="363,346,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.806,0.621"/>
         <ComboBox x:Name="life_form" HorizontalAlignment="Left" Margin="365,371,0,0" VerticalAlignment="Top" Width="166"/>
         
-        <Button Content="Сохранить" HorizontalAlignment="Left" Margin="616,443,0,0" VerticalAlignment="Top" Width="117"/>
+        <Button x:Name="save" Content="Сохранить" HorizontalAlignment="Left" Margin="616,443,0,0" VerticalAlignment="Top" Width="117" Click="save_Click"/>
         <Button Content="Отмена" HorizontalAlignment="Left" Margin="755,443,0,0" VerticalAlignment="Top" Width="105" Click="Button_Click"/>
         
         <Label Content="Экспозиция" HorizontalAlignment="Left" Margin="614,28,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.806,0.621"/>
