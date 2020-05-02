@@ -149,18 +149,11 @@ namespace FlowerClient
             op.Filter = "";
 
             ImageCodecInfo[] codecs = ImageCodecInfo.GetImageEncoders();
-            string sep = string.Empty;
-
-            foreach (var c in codecs)
-            {
-                string codecName = c.CodecName.Substring(8).Replace("Codec", "Files").Trim();
-                op.Filter = String.Format("{0}{1}{2} ({3})|{3}", op.Filter, sep, codecName, c.FilenameExtension);
-                sep = "|";
-            }
-
-            op.Filter = String.Format("{0}{1}{2} ({3})|{3}", op.Filter, sep, "All Files", "*.*");
-
-            op.DefaultExt = ".png"; // Default file extension 
+            op.Filter = string.Format("{0}| All image files ({1})|{1}|All files|*",
+                string.Join("|", codecs.Select(codec =>
+                string.Format("{0} ({1})|{1}", codec.CodecName, codec.FilenameExtension)).ToArray()),
+                string.Join(";", codecs.Select(codec => codec.FilenameExtension).ToArray()));
+            op.FilterIndex = 6;
 
             if (op.ShowDialog() == System.Windows.Forms.DialogResult.Cancel)
                 return;
