@@ -80,7 +80,13 @@ namespace FlowerClient
             DetailedDesc d = new DetailedDesc();
             MaterialDesignThemes.Wpf.Card temp = sender as MaterialDesignThemes.Wpf.Card;
             d.DataContext = temp.DataContext;
-            d.ShowDialog();
+
+            if (d.ShowDialog() == true)
+            {
+                loadRecords(currentPage);
+                ClearGallery();
+                UpdateGallery();
+            }
         }
 
         private void Search_btn_Click(object sender, RoutedEventArgs e)
@@ -133,14 +139,18 @@ namespace FlowerClient
                 loadRecords(currentPage);
             }
 
+            ClearGallery();
+            UpdateGallery();
+        }
+
+        void ClearGallery()
+        {
             gallery.Clear();
             foreach (MaterialDesignThemes.Wpf.Card c in cards)
             {
                 c.DataContext = null;
                 c.Visibility = Visibility.Hidden;
             }
-
-            UpdateGallery();
         }
 
         void UpdateGallery()
@@ -166,5 +176,6 @@ namespace FlowerClient
         {
 
         }
+   
     }
 }
