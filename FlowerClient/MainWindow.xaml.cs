@@ -68,8 +68,8 @@ namespace FlowerClient
             for(int i = 0; i < 6; i++)
             {
                 gallery.Add(new Card(results.Rows[i]));
-                gallery.Last().captionP = "Lorem ipsum dolor sit amet, consectetur adipiscing elit";
-                gallery.Last().imageP = @"..\img\" + (i + 1).ToString() + ".jpg";
+                gallery.Last().captionP = gallery.Last().groupP + " - " + gallery.Last().economicGroupP;
+                gallery.Last().imageP = Mediator.instance.Path + gallery.Last().idP + ".jpg";
             }
             
             for(int i = 0; i < gallery.Count; i++)
