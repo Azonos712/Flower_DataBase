@@ -90,7 +90,7 @@ namespace FlowerClient
             metadata.Visibility = Visibility.Visible;
         }
 
-        private void card1_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        private void card_active_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             DetailedDesc d = new DetailedDesc();
             MaterialDesignThemes.Wpf.Card temp = sender as MaterialDesignThemes.Wpf.Card;
@@ -98,47 +98,7 @@ namespace FlowerClient
             d.ShowDialog();
         }
 
-        private void card6_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            DetailedDesc d = new DetailedDesc();
-            MaterialDesignThemes.Wpf.Card temp = sender as MaterialDesignThemes.Wpf.Card;
-            d.DataContext = temp.DataContext;
-            d.ShowDialog();
-        }
-
-        private void card5_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            DetailedDesc d = new DetailedDesc();
-            MaterialDesignThemes.Wpf.Card temp = sender as MaterialDesignThemes.Wpf.Card;
-            d.DataContext = temp.DataContext;
-            d.ShowDialog();
-        }
-
-        private void card4_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            DetailedDesc d = new DetailedDesc();
-            MaterialDesignThemes.Wpf.Card temp = sender as MaterialDesignThemes.Wpf.Card;
-            d.DataContext = temp.DataContext;
-            d.ShowDialog();
-        }
-
-        private void card3_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            DetailedDesc d = new DetailedDesc();
-            MaterialDesignThemes.Wpf.Card temp = sender as MaterialDesignThemes.Wpf.Card;
-            d.DataContext = temp.DataContext;
-            d.ShowDialog();
-        }
-
-        private void card2_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            DetailedDesc d = new DetailedDesc();
-            MaterialDesignThemes.Wpf.Card temp = sender as MaterialDesignThemes.Wpf.Card;
-            d.DataContext = temp.DataContext;
-            d.ShowDialog();
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void Search_btn_Click(object sender, RoutedEventArgs e)
         {
             /*Button temp = sender as Button;
             StackPanel tempst = temp.Parent as StackPanel;

@@ -29,7 +29,7 @@
 
         <WrapPanel Margin="15,68.2,399.6,56.4" Grid.Row="1" RenderTransformOrigin="0.492,0.487" Grid.Column="0">
             <Canvas x:Name="panel1" Width="250" Height="227" Margin="25,15,0,0" Background="White">
-                <materialDesign:Card RenderTransformOrigin="0.5 0.5" Visibility="Hidden" Width="250" Grid.Row="1" Height="227" HorizontalAlignment="Left" VerticalAlignment="Top" x:Name="card1" MouseLeftButtonDown="card1_MouseLeftButtonDown">
+                <materialDesign:Card RenderTransformOrigin="0.5 0.5" Visibility="Hidden" Width="250" Grid.Row="1" Height="227" HorizontalAlignment="Left" VerticalAlignment="Top" x:Name="card1" MouseLeftButtonDown="card_active_MouseLeftButtonDown">
                     <materialDesign:Card.RenderTransform>
                         <ScaleTransform />
                     </materialDesign:Card.RenderTransform>
@@ -74,7 +74,7 @@
             </Canvas>
 
             <Canvas x:Name="panel2" Width="250" Height="227" Margin="45,15,0,0" Background="White">
-                <materialDesign:Card RenderTransformOrigin="0.5 0.5" Visibility="Hidden" Width="250" Grid.Row="1" Height="227" HorizontalAlignment="Left" VerticalAlignment="Top" x:Name="card2" MouseLeftButtonDown="card2_MouseLeftButtonDown">
+                <materialDesign:Card RenderTransformOrigin="0.5 0.5" Visibility="Hidden" Width="250" Grid.Row="1" Height="227" HorizontalAlignment="Left" VerticalAlignment="Top" x:Name="card2" MouseLeftButtonDown="card_active_MouseLeftButtonDown">
                     <materialDesign:Card.RenderTransform>
                         <ScaleTransform />
                     </materialDesign:Card.RenderTransform>
@@ -119,7 +119,7 @@
             </Canvas>
 
             <Canvas x:Name="panel3" Width="250" Height="227" Margin="45,15,0,0" Background="White" Panel.ZIndex="100">
-                <materialDesign:Card RenderTransformOrigin="0.5 0.5" Visibility="Hidden" Width="250" Grid.Row="1" Height="227" HorizontalAlignment="Left" VerticalAlignment="Top" x:Name="card3" MouseLeftButtonDown="card3_MouseLeftButtonDown">
+                <materialDesign:Card RenderTransformOrigin="0.5 0.5" Visibility="Hidden" Width="250" Grid.Row="1" Height="227" HorizontalAlignment="Left" VerticalAlignment="Top" x:Name="card3" MouseLeftButtonDown="card_active_MouseLeftButtonDown">
                     <materialDesign:Card.RenderTransform>
                         <ScaleTransform />
                     </materialDesign:Card.RenderTransform>
@@ -164,7 +164,7 @@
             </Canvas>
 
             <Canvas x:Name="panel4" Width="250" Height="227" Margin="25,30,0,0" Background="White">
-                <materialDesign:Card RenderTransformOrigin="0.5 0.5" Visibility="Hidden" Width="250" Height="227" HorizontalAlignment="Left" VerticalAlignment="Top" x:Name="card4" MouseLeftButtonDown="card4_MouseLeftButtonDown">
+                <materialDesign:Card RenderTransformOrigin="0.5 0.5" Visibility="Hidden" Width="250" Height="227" HorizontalAlignment="Left" VerticalAlignment="Top" x:Name="card4" MouseLeftButtonDown="card_active_MouseLeftButtonDown">
                     <materialDesign:Card.RenderTransform>
                         <ScaleTransform />
                     </materialDesign:Card.RenderTransform>
@@ -211,7 +211,7 @@
             </Canvas>
 
             <Canvas x:Name="panel5" Width="250" Height="227" Margin="45,30,0,0" Background="White">
-                <materialDesign:Card RenderTransformOrigin="0.5 0.5" Visibility="Hidden" Width="250" Height="227" HorizontalAlignment="Left" VerticalAlignment="Top" x:Name="card5" MouseLeftButtonDown="card5_MouseLeftButtonDown">
+                <materialDesign:Card RenderTransformOrigin="0.5 0.5" Visibility="Hidden" Width="250" Height="227" HorizontalAlignment="Left" VerticalAlignment="Top" x:Name="card5" MouseLeftButtonDown="card_active_MouseLeftButtonDown">
                     <materialDesign:Card.RenderTransform>
                         <ScaleTransform />
                     </materialDesign:Card.RenderTransform>
@@ -256,7 +256,7 @@
             </Canvas>
 
             <Canvas x:Name="panel6" Visibility="Hidden" Width="250" Height="227" Margin="45,30,0,0" Background="White">
-                <materialDesign:Card RenderTransformOrigin="0.5 0.5" Visibility="Visible" Width="250" Height="227" HorizontalAlignment="Left" VerticalAlignment="Top" x:Name="card6" MouseLeftButtonDown="card6_MouseLeftButtonDown">
+                <materialDesign:Card RenderTransformOrigin="0.5 0.5" Visibility="Visible" Width="250" Height="227" HorizontalAlignment="Left" VerticalAlignment="Top" x:Name="card6" MouseLeftButtonDown="card_active_MouseLeftButtonDown">
                     <materialDesign:Card.RenderTransform>
                         <ScaleTransform x:Name="trans6"/>
                     </materialDesign:Card.RenderTransform>
@@ -328,7 +328,7 @@
                 <ComboBox x:Name="season" Width="150" Margin="20,330,10,135" Grid.Column="0" VerticalAlignment="Top"/>
                 <ComboBox x:Name="year" Width="150" Margin="15,330,15,0" Grid.Column="1" Height="30" VerticalAlignment="Top"/>
                 
-                <Button Width="150" Margin="107,538,103,0" Content="Поиск" Click="Button_Click" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
+                <Button x:Name="search_btn" Width="150" Margin="107,538,103,0" Content="Поиск" Click="Search_btn_Click" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
 
             </Grid>
             <!--<Label Content="Данные об изображении:" FontSize="22"></Label>
