@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
+using System.Windows.Media;
 
 namespace FlowerClient
 {
@@ -99,12 +100,8 @@ namespace FlowerClient
             get { return year; }
             set { year = value; }
         }
-        private string image;
-        public string imageP
-        {
-            get { return image; }
-            set { image = value; }
-        }
+
+        public ImageSource ImageS { get; set; }
 
         public Card()
         {
@@ -129,7 +126,6 @@ namespace FlowerClient
 
             year = t[11].ToString();
             season = t[12].ToString();
-            //image = t[13].ToString();
         }
     }
 }

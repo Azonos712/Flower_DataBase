@@ -62,25 +62,40 @@ namespace FlowerClient
             cards.Add(card5);
             cards.Add(card6);
 
+            loadReference("author");
+            loadReference("exposition");
+            loadReference("life_form");
+            loadReference("species_name");
+            loadReference("group");
+            loadReference("econ_group");
+            loadReference("people");
+            loadReference("history");
+            loadReference("buildings");
+            loadReference("category");
+            fillYearsSeasons();
+
             loadRecords(1);
             currentPage = 1;
 
-            for(int i = 0; i < 6; i++)
-            {
-                gallery.Add(new Card(results.Rows[i]));
-                gallery.Last().captionP = "Lorem ipsum dolor sit amet, consectetur adipiscing elit";
-                gallery.Last().imageP = @"..\img\" + (i + 1).ToString() + ".jpg";
-            }
-            
-            for(int i = 0; i < gallery.Count; i++)
-            {
-                if(gallery[i] != null)
-                {
-                    cards[i].DataContext = gallery[i];
-                    cards[i].Visibility = Visibility.Visible;
-                }
-            }
+            UpdateGallery();
+        }
 
+        private void fillYearsSeasons()
+        {
+            List<int> years = new List<int>();
+            List<string> seasons = new List<string>();
+
+            for (int i = 2017; i < 2031; i++)
+            {
+                years.Add(i);
+            }
+            seasons.Add("Весна");
+            seasons.Add("Лето");
+            seasons.Add("Осень");
+            seasons.Add("Зима");
+
+            season.ItemsSource = seasons;
+            year.ItemsSource = years;
         }
 
         public void cardActivate(object sender)
@@ -90,43 +105,27 @@ namespace FlowerClient
             metadata.Visibility = Visibility.Visible;
         }
 
-        private void card1_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        private void card_active_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            cardActivate(sender);
+            DetailedDesc d = new DetailedDesc();
+            MaterialDesignThemes.Wpf.Card temp = sender as MaterialDesignThemes.Wpf.Card;
+            d.DataContext = temp.DataContext;
+
+            if (d.ShowDialog() == true)
+            {
+                loadRecords(currentPage);
+                ClearGallery();
+                UpdateGallery();
+            }
         }
 
-        private void card6_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        private void Search_btn_Click(object sender, RoutedEventArgs e)
         {
-            cardActivate(sender);
-        }
-
-        private void card5_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            cardActivate(sender);
-        }
-
-        private void card4_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            cardActivate(sender);
-        }
-
-        private void card3_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            cardActivate(sender);
-        }
-
-        private void card2_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            cardActivate(sender);
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            Button temp = sender as Button;
+            /*Button temp = sender as Button;
             StackPanel tempst = temp.Parent as StackPanel;
             DetailedDesc d = new DetailedDesc();
             d.DataContext = tempst.DataContext;
-            d.Show();
+            d.Show();*/
         }
 
         private void nextPage_Click(object sender, RoutedEventArgs e)
@@ -136,10 +135,7 @@ namespace FlowerClient
 
         private void prevPage_Click(object sender, RoutedEventArgs e)
         {
-            if (currentPage != 1)
-            {
-                loadPage(false);
-            }
+            loadPage(false);
         }
 
         private void loadRecords(int currentPage)
@@ -149,74 +145,80 @@ namespace FlowerClient
                 results.Clear();
             }
             Mediator.instance.SQL = "select * from plants_all_view limit 6 offset " + ((currentPage - 1) * 6).ToString();
-            results = Mediator.instance.ExecuteQuery();
+            results = Mediator.instance.ConvertQueryToTable();
         }
+
         private void loadPage(bool direction)
         {
             if (direction)
             {
                 loadRecords(currentPage + 1);
+
                 if (results.Rows.Count > 0)
-                {
                     currentPage++;
-                    gallery.Clear();
-                    foreach (MaterialDesignThemes.Wpf.Card c in cards)
-                    {
-                        c.DataContext = null;
-                        c.Visibility = Visibility.Hidden;
-                    }
-
-
-                    for (int i = 0; i < results.Rows.Count; i++)
-                    {
-                        gallery.Add(new Card(results.Rows[i]));
-                        gallery.Last().captionP = "Lorem ipsum dolor sit amet, consectetur adipiscing elit";
-                        gallery.Last().imageP = @"..\img\1.jpg";
-                    }
-
-                    for (int i = 0; i < gallery.Count; i++)
-                    {
-                        if (gallery[i] != null)
-                        {
-                            cards[i].DataContext = gallery[i];
-                            cards[i].Visibility = Visibility.Visible;
-                        }
-                    }
-                }
+                else
+                    return;
             }
             else
             {
-                currentPage--;
-                gallery.Clear();
-                foreach (MaterialDesignThemes.Wpf.Card c in cards)
-                {
-                    c.DataContext = null;
-                    c.Visibility = Visibility.Hidden;
-                }
+                if (currentPage != 1)
+                    currentPage--;
+                else
+                    return;
+
                 loadRecords(currentPage);
+            }
 
-                for (int i = 0; i < results.Rows.Count; i++)
-                {
-                    gallery.Add(new Card(results.Rows[i]));
-                    gallery.Last().captionP = "Lorem ipsum dolor sit amet, consectetur adipiscing elit";
-                    gallery.Last().imageP = @"..\img\1.jpg";
-                }
+            ClearGallery();
+            UpdateGallery();
+        }
 
-                for (int i = 0; i < gallery.Count; i++)
+        void ClearGallery()
+        {
+            gallery.Clear();
+            foreach (MaterialDesignThemes.Wpf.Card c in cards)
+            {
+                c.DataContext = null;
+                c.Visibility = Visibility.Hidden;
+            }
+            GC.Collect();
+        }
+
+        void UpdateGallery()
+        {
+            for (int i = 0; i < results.Rows.Count; i++)
+            {
+                gallery.Add(new Card(results.Rows[i]));
+                gallery.Last().captionP = gallery.Last().groupP + " - " + gallery.Last().economicGroupP;
+                gallery.Last().ImageS = Mediator.instance.NonBlockingLoad(Mediator.instance.Path + gallery.Last().idP + ".jpg");
+            }
+
+            for (int i = 0; i < gallery.Count; i++)
+            {
+                if (gallery[i] != null)
                 {
-                    if (gallery[i] != null)
-                    {
-                        cards[i].DataContext = gallery[i];
-                        cards[i].Visibility = Visibility.Visible;
-                    }
+                    cards[i].DataContext = gallery[i];
+                    cards[i].Visibility = Visibility.Visible;
                 }
-                
             }
         }
 
         private void MenuItem_Click_2(object sender, RoutedEventArgs e)
         {
-            new ReferenceTableWindow().ShowDialog();
+            if (new DetailedDesc().ShowDialog() == true)
+            {
+                loadRecords(currentPage);
+                ClearGallery();
+                UpdateGallery();
+            }
         }
+
+        private void loadReference(string refName)
+        {
+            Mediator.instance.SQL = "select * from " + refName + "_view";
+            ComboBox c = FindName(refName) as ComboBox;
+            c.ItemsSource = Mediator.instance.ConvertQueryToComboBox();
+        }
+
     }
 }

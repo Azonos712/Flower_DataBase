@@ -9,8 +9,8 @@
         Title="Login" Height="212" Width="229" TextElement.FontSize="14" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
     <Grid>
         <Button Content="Вход" HorizontalAlignment="Left" Margin="10,129,0,0" VerticalAlignment="Top" Width="191" Click="Button_Click"/>
-        <TextBox materialDesign:HintAssist.Hint="Сервер" x:Name="txt_adress" HorizontalAlignment="Left" Height="30" Margin="10,10,0,0" TextWrapping="Wrap" Text="localhost" VerticalAlignment="Top" Width="190"/>
+        <TextBox materialDesign:HintAssist.Hint="Сервер" x:Name="txt_adress" HorizontalAlignment="Left" Height="30" Margin="10,10,0,0" TextWrapping="Wrap" Text="31.6.98.114" VerticalAlignment="Top" Width="190"/>
         <TextBox materialDesign:HintAssist.Hint="Логин" x:Name="txt_login" HorizontalAlignment="Left" Height="30" Margin="10,45,0,0" TextWrapping="Wrap" Text="admin" VerticalAlignment="Top" Width="190"/>
-        <PasswordBox materialDesign:HintAssist.Hint="Пароль" x:Name="txt_password" HorizontalAlignment="Left" Height="30" Margin="10,80,0,0" VerticalAlignment="Top" Width="190"/>
+        <PasswordBox materialDesign:HintAssist.Hint="Пароль" x:Name="txt_password" HorizontalAlignment="Left" Height="30" Margin="10,80,0,0" VerticalAlignment="Top" Width="190" Password="admin"/>
     </Grid>
 </Window>

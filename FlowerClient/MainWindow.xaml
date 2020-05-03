@@ -6,17 +6,20 @@
         xmlns:local="clr-namespace:FlowerClient"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"    
-        Title="MainWindow" Height="720" Width="1300" TextElement.FontSize="14" Loaded="Window_Loaded" WindowStartupLocation="CenterScreen" Closed="Window_Closed">
-    <Grid RenderTransformOrigin="0.561,0.367">
+        Title="MainWindow" Height="720" Width="1360" TextElement.FontSize="14" ResizeMode="NoResize" Loaded="Window_Loaded" WindowStartupLocation="CenterScreen" Closed="Window_Closed">
+    <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition />
+            <ColumnDefinition Width="520*"/>
+            <ColumnDefinition Width="270*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="25"/>
+            <RowDefinition Height="50"/>
             <RowDefinition />
+            <RowDefinition Height="70" />
         </Grid.RowDefinitions>
 
-        <DockPanel Grid.Column="0" Grid.Row="0">
+        <DockPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3">
             <Menu x:Name="main_menu" VerticalAlignment="Center">
                 <MenuItem x:Name="admin_menuitem" Header="Администрирование" Height="20">
                     <MenuItem Header="Таблица пользователей" Click="MenuItem_Click"></MenuItem>
@@ -25,13 +28,15 @@
                 <MenuItem x:Name="system_menuitem" Header="Система" Height="20">
                     <MenuItem Header="Выход из учетной записи" Click="MenuItem_Click_1"></MenuItem>
                 </MenuItem>
+                <MenuItem x:Name="foto_menuitem" Header="Фото" Height="20">
+                    <MenuItem Header="Добавить" Click="MenuItem_Click_2"></MenuItem>
+                </MenuItem>
             </Menu>
         </DockPanel>
 
-
-        <WrapPanel Margin="15,68.2,399.6,56.4" Grid.Row="1" RenderTransformOrigin="0.492,0.487" Grid.Column="0">
+        <WrapPanel Margin="10 0 0 0" Grid.Row="2" Grid.Column="0">
             <Canvas x:Name="panel1" Width="250" Height="227" Margin="25,15,0,0" Background="White">
-                <materialDesign:Card RenderTransformOrigin="0.5 0.5" Visibility="Hidden" Width="250" Grid.Row="1" Height="227" HorizontalAlignment="Left" VerticalAlignment="Top" x:Name="card1" MouseLeftButtonDown="card1_MouseLeftButtonDown">
+                <materialDesign:Card RenderTransformOrigin="0.5 0.5" Visibility="Hidden" Width="250" Grid.Row="1" Height="227" HorizontalAlignment="Left" VerticalAlignment="Top" x:Name="card1" MouseLeftButtonDown="card_active_MouseLeftButtonDown">
                     <materialDesign:Card.RenderTransform>
                         <ScaleTransform />
                     </materialDesign:Card.RenderTransform>
@@ -66,7 +71,7 @@
                         <StackPanel Grid.Row="1" HorizontalAlignment="Center" Orientation="Horizontal" Margin="2,13,2.6,0" Height="153" VerticalAlignment="Top" Width="245"/>
 
                         <StackPanel Margin="8,2,7.6,66.2" Grid.Row="1">
-                            <Image Source="{Binding imageP}" Margin="0,0,0,0" Height="153"/>
+                            <Image Source="{Binding ImageS}" Margin="0,0,0,0" Height="153"/>
                         </StackPanel>
                         <TextBlock FontWeight="Bold" Margin="6,166,9.6,41.2" Grid.RowSpan="2" Text="{Binding nameP}"/>
                         <TextBlock TextWrapping="Wrap" VerticalAlignment="Center" Margin="6,185,9.6,4.2" Grid.RowSpan="2" Text="{Binding captionP}"/>
@@ -76,7 +81,7 @@
             </Canvas>
 
             <Canvas x:Name="panel2" Width="250" Height="227" Margin="45,15,0,0" Background="White">
-                <materialDesign:Card RenderTransformOrigin="0.5 0.5" Visibility="Hidden" Width="250" Grid.Row="1" Height="227" HorizontalAlignment="Left" VerticalAlignment="Top" x:Name="card2" MouseLeftButtonDown="card2_MouseLeftButtonDown">
+                <materialDesign:Card RenderTransformOrigin="0.5 0.5" Visibility="Hidden" Width="250" Grid.Row="1" Height="227" HorizontalAlignment="Left" VerticalAlignment="Top" x:Name="card2" MouseLeftButtonDown="card_active_MouseLeftButtonDown">
                     <materialDesign:Card.RenderTransform>
                         <ScaleTransform />
                     </materialDesign:Card.RenderTransform>
@@ -111,7 +116,7 @@
                         <StackPanel Grid.Row="1" HorizontalAlignment="Center" Orientation="Horizontal" Margin="2,13,2.6,0" Height="153" VerticalAlignment="Top" Width="245"/>
 
                         <StackPanel Margin="8,2,7.6,66.2" Grid.Row="1">
-                            <Image Source="{Binding imageP}" Margin="0,0,0,0" Height="153"/>
+                            <Image Source="{Binding ImageS}" Margin="0,0,0,0" Height="153"/>
                         </StackPanel>
                         <TextBlock FontWeight="Bold" Margin="6,166,9.6,41.2" Grid.RowSpan="2" Text="{Binding nameP}" />
                         <TextBlock TextWrapping="Wrap" VerticalAlignment="Center" Margin="6,185,9.6,4.2" Grid.RowSpan="2" Text="{Binding captionP}"/>
@@ -121,7 +126,7 @@
             </Canvas>
 
             <Canvas x:Name="panel3" Width="250" Height="227" Margin="45,15,0,0" Background="White" Panel.ZIndex="100">
-                <materialDesign:Card RenderTransformOrigin="0.5 0.5" Visibility="Hidden" Width="250" Grid.Row="1" Height="227" HorizontalAlignment="Left" VerticalAlignment="Top" x:Name="card3" MouseLeftButtonDown="card3_MouseLeftButtonDown">
+                <materialDesign:Card RenderTransformOrigin="0.5 0.5" Visibility="Hidden" Width="250" Grid.Row="1" Height="227" HorizontalAlignment="Left" VerticalAlignment="Top" x:Name="card3" MouseLeftButtonDown="card_active_MouseLeftButtonDown">
                     <materialDesign:Card.RenderTransform>
                         <ScaleTransform />
                     </materialDesign:Card.RenderTransform>
@@ -156,7 +161,7 @@
                         <StackPanel Grid.Row="1" HorizontalAlignment="Center" Orientation="Horizontal" Margin="2,13,2.6,0" Height="153" VerticalAlignment="Top" Width="245"/>
 
                         <StackPanel Margin="8,2,7.6,66.2" Grid.Row="1">
-                            <Image Source="{Binding imageP}" Margin="0,0,0,0" Height="153"/>
+                            <Image Source="{Binding ImageS}" Margin="0,0,0,0" Height="153"/>
                         </StackPanel>
                         <TextBlock FontWeight="Bold" Margin="6,166,9.6,41.2" Grid.RowSpan="2" Text="{Binding nameP}"/>
                         <TextBlock TextWrapping="Wrap" VerticalAlignment="Center" Margin="6,185,9.6,4.2" Grid.RowSpan="2" Text="{Binding captionP}"/>
@@ -166,7 +171,7 @@
             </Canvas>
 
             <Canvas x:Name="panel4" Width="250" Height="227" Margin="25,30,0,0" Background="White">
-                <materialDesign:Card RenderTransformOrigin="0.5 0.5" Visibility="Hidden" Width="250" Height="227" HorizontalAlignment="Left" VerticalAlignment="Top" x:Name="card4" MouseLeftButtonDown="card4_MouseLeftButtonDown">
+                <materialDesign:Card RenderTransformOrigin="0.5 0.5" Visibility="Hidden" Width="250" Height="227" HorizontalAlignment="Left" VerticalAlignment="Top" x:Name="card4" MouseLeftButtonDown="card_active_MouseLeftButtonDown">
                     <materialDesign:Card.RenderTransform>
                         <ScaleTransform />
                     </materialDesign:Card.RenderTransform>
@@ -201,17 +206,19 @@
                         <StackPanel Grid.Row="1" HorizontalAlignment="Center" Orientation="Horizontal" Margin="2,13,2.6,0" Height="153" VerticalAlignment="Top" Width="245"/>
 
                         <StackPanel Margin="8,2,7.6,66.2" Grid.Row="1">
-                            <Image Source="{Binding imageP}" Margin="0,0,0,0" Height="153"/>
+                            <Image Source="{Binding ImageS}" Margin="0,0,0,0" Height="153"/>
                         </StackPanel>
                         <TextBlock FontWeight="Bold" Margin="6,166,9.6,41.2" Grid.RowSpan="2" Text="{Binding nameP}"/>
                         <TextBlock TextWrapping="Wrap" VerticalAlignment="Center" Margin="6,185,9.6,4.2" Grid.RowSpan="2" Text="{Binding captionP}"/>
+                        <!--<Button Width="100" Height="20" Content="Подробнее" Margin="10,197,139.6,10.2" Grid.RowSpan="2" FontSize="10"></Button>
+                        <Button Width="100" Height="20" Content="Изменить" Margin="140,197,9.6,10.2" Grid.RowSpan="2" FontSize="10"></Button>-->
 
                     </Grid>
                 </materialDesign:Card>
             </Canvas>
 
             <Canvas x:Name="panel5" Width="250" Height="227" Margin="45,30,0,0" Background="White">
-                <materialDesign:Card RenderTransformOrigin="0.5 0.5" Visibility="Hidden" Width="250" Height="227" HorizontalAlignment="Left" VerticalAlignment="Top" x:Name="card5" MouseLeftButtonDown="card5_MouseLeftButtonDown">
+                <materialDesign:Card RenderTransformOrigin="0.5 0.5" Visibility="Hidden" Width="250" Height="227" HorizontalAlignment="Left" VerticalAlignment="Top" x:Name="card5" MouseLeftButtonDown="card_active_MouseLeftButtonDown">
                     <materialDesign:Card.RenderTransform>
                         <ScaleTransform />
                     </materialDesign:Card.RenderTransform>
@@ -246,7 +253,7 @@
                         <StackPanel Grid.Row="1" HorizontalAlignment="Center" Orientation="Horizontal" Margin="2,13,2.6,0" Height="153" VerticalAlignment="Top" Width="245"/>
 
                         <StackPanel Margin="8,2,7.6,66.2" Grid.Row="1">
-                            <Image Source="{Binding imageP}" Margin="0,0,0,0" Height="153"/>
+                            <Image Source="{Binding ImageS}" Margin="0,0,0,0" Height="153"/>
                         </StackPanel>
                         <TextBlock FontWeight="Bold" Margin="6,166,9.6,41.2" Grid.RowSpan="2" Text="{Binding nameP}"/>
                         <TextBlock TextWrapping="Wrap" VerticalAlignment="Center" Margin="6,185,9.6,4.2" Grid.RowSpan="2" Text="{Binding captionP}"/>
@@ -256,7 +263,7 @@
             </Canvas>
 
             <Canvas x:Name="panel6" Width="250" Height="227" Margin="45,30,0,0" Background="White">
-                <materialDesign:Card RenderTransformOrigin="0.5 0.5" Visibility="Hidden" Width="250" Height="227" HorizontalAlignment="Left" VerticalAlignment="Top" x:Name="card6" MouseLeftButtonDown="card6_MouseLeftButtonDown">
+                <materialDesign:Card RenderTransformOrigin="0.5 0.5" Visibility="Hidden" Width="250" Height="227" HorizontalAlignment="Left" VerticalAlignment="Top" x:Name="card6" MouseLeftButtonDown="card_active_MouseLeftButtonDown">
                     <materialDesign:Card.RenderTransform>
                         <ScaleTransform x:Name="trans6"/>
                     </materialDesign:Card.RenderTransform>
@@ -291,18 +298,60 @@
                         <StackPanel Grid.Row="1" HorizontalAlignment="Center" Orientation="Horizontal" Margin="2,13,2.6,0" Height="153" VerticalAlignment="Top" Width="245"/>
 
                         <StackPanel Margin="8,2,7.6,66.2" Grid.Row="1">
-                            <Image Source="{Binding imageP}" Margin="0,0,0,0" Height="153"/>
+                            <Image x:Name="photo6" Source="{Binding ImageS}" Margin="0,0,0,0" Height="153"/>
                         </StackPanel>
                         <TextBlock FontWeight="Bold" Margin="6,166,9.6,41.2" Grid.RowSpan="2" Text="{Binding nameP}"/>
                         <TextBlock TextWrapping="Wrap" VerticalAlignment="Center" Margin="6,185,9.6,4.2" Grid.RowSpan="2" Text="{Binding captionP}"/>
-
                     </Grid>
                 </materialDesign:Card>
             </Canvas>
         </WrapPanel>
 
-        <StackPanel x:Name="metadata" Visibility="Hidden" Margin="925,68.2,9.6,10.4" Grid.Row="1">
-            <Label Content="Данные об изображении:" FontSize="22"></Label>
+        <StackPanel x:Name="metadata" Visibility="Visible" Margin="0 0 10 0" Grid.Row="2" Grid.Column="1">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Grid.Row="0" Grid.Column="0">
+                    <Label FontWeight="DemiBold" Content="Автор" HorizontalAlignment="Left" Margin="25,10,0,0" VerticalAlignment="Top"/>
+                    <ComboBox x:Name="author" Margin="25,0,0,0" VerticalAlignment="Top" Width="200" HorizontalAlignment="Left"/>
+                    <Label FontWeight="DemiBold" Content="Название вида" HorizontalAlignment="Left" Margin="25,20,0,0" VerticalAlignment="Top"/>
+                    <ComboBox x:Name="species_name" Margin="25,0,0,0" VerticalAlignment="Top" Width="200" HorizontalAlignment="Left"/>
+                    <Label FontWeight="DemiBold" Content="Люди" HorizontalAlignment="Left" Margin="25,20,0,0" VerticalAlignment="Top"/>
+                    <ComboBox x:Name="people" Margin="25,0,0,0" VerticalAlignment="Top" Width="200" HorizontalAlignment="Left"/>
+                    <Label FontWeight="DemiBold" Content="Здания и сооружения" HorizontalAlignment="Left" Margin="25,20,0,0" VerticalAlignment="Top"/>
+                    <ComboBox x:Name="buildings" Margin="25,0,0,0" VerticalAlignment="Top" Width="200" HorizontalAlignment="Left"/>
+                    <Label FontWeight="DemiBold" Content="Группа" HorizontalAlignment="Left" Margin="25,20,0,0" VerticalAlignment="Top"/>
+                    <ComboBox x:Name="group" Margin="25,0,0,0" VerticalAlignment="Top" Width="200" HorizontalAlignment="Left"/>
+                    <Label FontWeight="DemiBold" Content="Сезон" HorizontalAlignment="Left" Margin="25,20,0,0" VerticalAlignment="Top"/>
+                    <ComboBox x:Name="season" Margin="25,0,0,0" VerticalAlignment="Top" Width="200" HorizontalAlignment="Left"/>
+
+                </StackPanel>
+                <StackPanel Grid.Row="0" Grid.Column="1" Margin="0 0 0 0">
+                    <Label FontWeight="DemiBold" Content="Экспозиция" HorizontalAlignment="Left" Margin="20,10,0,0" VerticalAlignment="Top"/>
+                    <ComboBox x:Name="exposition" Margin="20,0,0,0" VerticalAlignment="Top" Width="200" HorizontalAlignment="Left"/>
+                    <Label FontWeight="DemiBold" Content="Жизненная форма" HorizontalAlignment="Left" Margin="20,20,0,0" VerticalAlignment="Top"/>
+                    <ComboBox x:Name="life_form" Margin="20,0,0,0" VerticalAlignment="Top" Width="200" HorizontalAlignment="Left"/>
+                    <Label FontWeight="DemiBold" Content="История" HorizontalAlignment="Left" Margin="20,20,0,0" VerticalAlignment="Top"/>
+                    <ComboBox x:Name="history" Margin="20,0,0,0" VerticalAlignment="Top" Width="200" HorizontalAlignment="Left"/>
+                    <Label FontWeight="DemiBold" Content="Категория" HorizontalAlignment="Left" Margin="20,20,0,0" VerticalAlignment="Top"/>
+                    <ComboBox x:Name="category" Margin="20,0,0,0" VerticalAlignment="Top" Width="200" HorizontalAlignment="Left"/>
+                    <Label FontWeight="DemiBold" Content="Группа по хоз. назначению" HorizontalAlignment="Left" Margin="20,20,0,0" VerticalAlignment="Top"/>
+                    <ComboBox x:Name="econ_group" Margin="20,0,0,0" VerticalAlignment="Top" Width="200" HorizontalAlignment="Left"/>
+                    <Label FontWeight="DemiBold" Content="Год" Grid.Column="1" HorizontalAlignment="Left" Margin="20,20,0,0" VerticalAlignment="Top"/>
+                    <ComboBox x:Name="year" Margin="20,0,0,0" VerticalAlignment="Top" Width="200" HorizontalAlignment="Left"/>
+                </StackPanel>
+                <StackPanel Grid.Row="1" Grid.ColumnSpan="2" Margin="0 30 0 0">
+                    <Button x:Name="search_btn" Content="Поиск" Click="Search_btn_Click" VerticalAlignment="Center" HorizontalAlignment="Center" Width="250"/>
+                </StackPanel>
+            </Grid>
+            <!--<Label Content="Данные об изображении:" FontSize="22"></Label>
             <Label Content="Название вида:" FontSize="22" Margin="0, 10, 0, 0"></Label>
             <TextBlock Text="{Binding nameP}" Margin="5,5,5,0" FontSize="24" TextWrapping="Wrap" Height="66"></TextBlock>
             <Label Content="Автор:" FontSize="22" Margin="0, 10, 0, 0"></Label>
@@ -310,12 +359,12 @@
             <Label Content="Экспозиция:" FontSize="22" Margin="0, 10, 0, 0"></Label>
             <TextBlock Text="{Binding expositionP}" Margin="5,5,5,0" FontSize="24" TextWrapping="Wrap" Height="66"></TextBlock>
             <Label Content="Категория:" FontSize="22" Margin="0, 10, 0, 0"></Label>
-            <TextBlock Text="{Binding categoryP}" Margin="5,5,5.2,0" FontSize="24" TextWrapping="Wrap" Height="66"></TextBlock>
-            <Button Width="150" Margin="104, 10, 104, 10" Content="Подробнее" Click="Button_Click">
-            </Button>
+            <TextBlock Text="{Binding categoryP}" Margin="5,5,5.2,0" FontSize="24" TextWrapping="Wrap" Height="66"></TextBlock>-->
         </StackPanel>
-        <Button x:Name="nextPage" Content="&gt;" HorizontalAlignment="Left" Margin="854,623.2,0,10.4" Grid.Row="1" Width="40" Height="30" Click="nextPage_Click"/>
-        <Button x:Name="prevPage" Content="&lt;" HorizontalAlignment="Left" Margin="809,623.2,0,0" Grid.Row="1" VerticalAlignment="Top" Width="40" Click="prevPage_Click" Height="30"/>
 
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal" Grid.Row="3" Grid.Column="0">
+            <Button Margin="10 0 10 0" x:Name="prevPage" Content="&lt;" Click="prevPage_Click"/>
+            <Button Margin="10 0 10 0" x:Name="nextPage" Content="&gt;" Click="nextPage_Click"/>
+        </StackPanel>
     </Grid>
 </Window>
