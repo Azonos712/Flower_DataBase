@@ -14,9 +14,9 @@
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="25"/>
-            <RowDefinition Height="50"/>
+            <RowDefinition Height="80"/>
             <RowDefinition />
-            <RowDefinition Height="70" />
+            <RowDefinition Height="60" />
         </Grid.RowDefinitions>
 
         <DockPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3">
@@ -33,6 +33,24 @@
                 </MenuItem>
             </Menu>
         </DockPanel>
+
+        <ScrollViewer BorderBrush="Black" BorderThickness="1" Grid.Row="1" Grid.Column ="0" VerticalScrollBarVisibility="Hidden" HorizontalScrollBarVisibility="Visible" Margin="35 0 10 0">
+            <ItemsControl x:Name="tagPanel" VerticalAlignment="Center" Height="30">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <materialDesign:Chip VerticalAlignment="Center" Height="25" Content="{Binding}" IsDeletable="True" Margin="1" DeleteClick="Chip_DeleteClick"></materialDesign:Chip>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+            </ItemsControl>
+
+        </ScrollViewer>
+
+        <Button Grid.Column="1" Grid.Row="1" x:Name="search_btn" Content="Поиск" Click="Search_btn_Click" VerticalAlignment="Center" HorizontalAlignment="Center" Width="250"/>
 
         <WrapPanel Margin="10 0 0 0" Grid.Row="2" Grid.Column="0">
             <Canvas x:Name="panel1" Width="250" Height="227" Margin="25,15,0,0" Background="White">
@@ -307,48 +325,101 @@
             </Canvas>
         </WrapPanel>
 
-        <StackPanel x:Name="metadata" Visibility="Visible" Margin="0 0 10 0" Grid.Row="2" Grid.Column="1">
+        <StackPanel x:Name="metadata" Visibility="Visible" Margin="0 0 10 0" Grid.Row="2" Grid.Column="1" Grid.RowSpan="2">
             <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
 
-                <StackPanel Grid.Row="0" Grid.Column="0">
-                    <Label FontWeight="DemiBold" Content="Автор" HorizontalAlignment="Left" Margin="25,10,0,0" VerticalAlignment="Top"/>
-                    <ComboBox x:Name="author" Margin="25,0,0,0" VerticalAlignment="Top" Width="200" HorizontalAlignment="Left"/>
+                <StackPanel Grid.Column="0">
+                    <Label FontWeight="DemiBold" Content="Автор" HorizontalAlignment="Left" Margin="25,20,0,0" VerticalAlignment="Top"/>
+                    <StackPanel Orientation="Horizontal" Margin="25,0,0,0" VerticalAlignment="Top" HorizontalAlignment="Left">
+                        <ComboBox x:Name="author" Width="155"/>
+                        <Button Height="25" Width="25" Margin="15 5 5 5" Style="{StaticResource MaterialDesignFloatingActionButton}" Click="Button_Click">
+                            <materialDesign:PackIcon Kind="Add" Height="20" Width="20" />
+                        </Button>
+                    </StackPanel>
                     <Label FontWeight="DemiBold" Content="Название вида" HorizontalAlignment="Left" Margin="25,20,0,0" VerticalAlignment="Top"/>
-                    <ComboBox x:Name="species_name" Margin="25,0,0,0" VerticalAlignment="Top" Width="200" HorizontalAlignment="Left"/>
+                    <StackPanel Orientation="Horizontal" Margin="25,0,0,0" VerticalAlignment="Top" HorizontalAlignment="Left">
+                        <ComboBox x:Name="species_name" Width="155"/>
+                        <Button Height="25" Width="25" Margin="15 5 5 5" Style="{StaticResource MaterialDesignFloatingActionButton}" Click="Button_Click">
+                            <materialDesign:PackIcon Kind="Add" Height="20" Width="20" />
+                        </Button>
+                    </StackPanel>
                     <Label FontWeight="DemiBold" Content="Люди" HorizontalAlignment="Left" Margin="25,20,0,0" VerticalAlignment="Top"/>
-                    <ComboBox x:Name="people" Margin="25,0,0,0" VerticalAlignment="Top" Width="200" HorizontalAlignment="Left"/>
-                    <Label FontWeight="DemiBold" Content="Здания и сооружения" HorizontalAlignment="Left" Margin="25,20,0,0" VerticalAlignment="Top"/>
-                    <ComboBox x:Name="buildings" Margin="25,0,0,0" VerticalAlignment="Top" Width="200" HorizontalAlignment="Left"/>
-                    <Label FontWeight="DemiBold" Content="Группа" HorizontalAlignment="Left" Margin="25,20,0,0" VerticalAlignment="Top"/>
-                    <ComboBox x:Name="group" Margin="25,0,0,0" VerticalAlignment="Top" Width="200" HorizontalAlignment="Left"/>
-                    <Label FontWeight="DemiBold" Content="Сезон" HorizontalAlignment="Left" Margin="25,20,0,0" VerticalAlignment="Top"/>
-                    <ComboBox x:Name="season" Margin="25,0,0,0" VerticalAlignment="Top" Width="200" HorizontalAlignment="Left"/>
 
+                    <StackPanel Orientation="Horizontal" Margin="25,0,0,0" VerticalAlignment="Top" HorizontalAlignment="Left">
+                        <ComboBox x:Name="people" Width="155" />
+                        <Button Height="25" Width="25" Margin="15 5 5 5" Style="{StaticResource MaterialDesignFloatingActionButton}" Click="Button_Click">
+                            <materialDesign:PackIcon Kind="Add" Height="20" Width="20" />
+                        </Button>
+                    </StackPanel>
+                    <Label FontWeight="DemiBold" Content="Здания и сооружения" HorizontalAlignment="Left" Margin="25,20,0,0" VerticalAlignment="Top"/>
+                    <StackPanel Orientation="Horizontal" Margin="25,0,0,0" VerticalAlignment="Top" HorizontalAlignment="Left">
+                        <ComboBox x:Name="buildings" Width="155"/>
+                        <Button Height="25" Width="25" Margin="15 5 5 5" Style="{StaticResource MaterialDesignFloatingActionButton}" Click="Button_Click">
+                            <materialDesign:PackIcon Kind="Add" Height="20" Width="20" />
+                        </Button>
+                    </StackPanel>
+                    <Label FontWeight="DemiBold" Content="Группа" HorizontalAlignment="Left" Margin="25,20,0,0" VerticalAlignment="Top"/>
+                    <StackPanel Orientation="Horizontal" Margin="25,0,0,0" VerticalAlignment="Top" HorizontalAlignment="Left">
+                        <ComboBox x:Name="group" Width="155" />
+                        <Button Height="25" Width="25" Margin="15 5 5 5" Style="{StaticResource MaterialDesignFloatingActionButton}" Click="Button_Click">
+                            <materialDesign:PackIcon Kind="Add" Height="20" Width="20" />
+                        </Button>
+                    </StackPanel>
+                    <Label FontWeight="DemiBold" Content="Сезон" HorizontalAlignment="Left" Margin="25,20,0,0" VerticalAlignment="Top"/>
+                    <StackPanel Orientation="Horizontal" Margin="25,0,0,0" VerticalAlignment="Top" HorizontalAlignment="Left">
+                        <ComboBox x:Name="season" Width="155"/>
+                        <Button Height="25" Width="25" Margin="15 5 5 5" Style="{StaticResource MaterialDesignFloatingActionButton}" Click="Button_Click">
+                            <materialDesign:PackIcon Kind="Add" Height="20" Width="20" />
+                        </Button>
+                    </StackPanel>
                 </StackPanel>
-                <StackPanel Grid.Row="0" Grid.Column="1" Margin="0 0 0 0">
-                    <Label FontWeight="DemiBold" Content="Экспозиция" HorizontalAlignment="Left" Margin="20,10,0,0" VerticalAlignment="Top"/>
-                    <ComboBox x:Name="exposition" Margin="20,0,0,0" VerticalAlignment="Top" Width="200" HorizontalAlignment="Left"/>
+                <StackPanel Grid.Column="1" Margin="0 0 0 0">
+                    <Label FontWeight="DemiBold" Content="Экспозиция" HorizontalAlignment="Left" Margin="20,20,0,0" VerticalAlignment="Top"/>
+                    <StackPanel Orientation="Horizontal" Margin="25,0,0,0" VerticalAlignment="Top" HorizontalAlignment="Left">
+                        <ComboBox x:Name="exposition" Width="155" />
+                        <Button Height="25" Width="25" Margin="15 5 5 5" Style="{StaticResource MaterialDesignFloatingActionButton}" Click="Button_Click">
+                            <materialDesign:PackIcon Kind="Add" Height="20" Width="20" />
+                        </Button>
+                    </StackPanel>
                     <Label FontWeight="DemiBold" Content="Жизненная форма" HorizontalAlignment="Left" Margin="20,20,0,0" VerticalAlignment="Top"/>
-                    <ComboBox x:Name="life_form" Margin="20,0,0,0" VerticalAlignment="Top" Width="200" HorizontalAlignment="Left"/>
+                    <StackPanel Orientation="Horizontal" Margin="25,0,0,0" VerticalAlignment="Top" HorizontalAlignment="Left">
+                        <ComboBox x:Name="life_form" Width="155"/>
+                        <Button Height="25" Width="25" Margin="15 5 5 5" Style="{StaticResource MaterialDesignFloatingActionButton}" Click="Button_Click">
+                            <materialDesign:PackIcon Kind="Add" Height="20" Width="20" />
+                        </Button>
+                    </StackPanel>
                     <Label FontWeight="DemiBold" Content="История" HorizontalAlignment="Left" Margin="20,20,0,0" VerticalAlignment="Top"/>
-                    <ComboBox x:Name="history" Margin="20,0,0,0" VerticalAlignment="Top" Width="200" HorizontalAlignment="Left"/>
+                    <StackPanel Orientation="Horizontal" Margin="25,0,0,0" VerticalAlignment="Top" HorizontalAlignment="Left">
+                        <ComboBox x:Name="history"  Width="155"/>
+                        <Button Height="25" Width="25" Margin="15 5 5 5" Style="{StaticResource MaterialDesignFloatingActionButton}" Click="Button_Click">
+                            <materialDesign:PackIcon Kind="Add" Height="20" Width="20" />
+                        </Button>
+                    </StackPanel>
                     <Label FontWeight="DemiBold" Content="Категория" HorizontalAlignment="Left" Margin="20,20,0,0" VerticalAlignment="Top"/>
-                    <ComboBox x:Name="category" Margin="20,0,0,0" VerticalAlignment="Top" Width="200" HorizontalAlignment="Left"/>
+                    <StackPanel Orientation="Horizontal" Margin="25,0,0,0" VerticalAlignment="Top" HorizontalAlignment="Left">
+                        <ComboBox x:Name="category"  Width="155"/>
+                        <Button Height="25" Width="25" Margin="15 5 5 5" Style="{StaticResource MaterialDesignFloatingActionButton}" Click="Button_Click">
+                            <materialDesign:PackIcon Kind="Add" Height="20" Width="20" />
+                        </Button>
+                    </StackPanel>
                     <Label FontWeight="DemiBold" Content="Группа по хоз. назначению" HorizontalAlignment="Left" Margin="20,20,0,0" VerticalAlignment="Top"/>
-                    <ComboBox x:Name="econ_group" Margin="20,0,0,0" VerticalAlignment="Top" Width="200" HorizontalAlignment="Left"/>
+                    <StackPanel Orientation="Horizontal" Margin="25,0,0,0" VerticalAlignment="Top" HorizontalAlignment="Left">
+                        <ComboBox x:Name="econ_group"  Width="155"/>
+                        <Button Height="25" Width="25" Margin="15 5 5 5" Style="{StaticResource MaterialDesignFloatingActionButton}" Click="Button_Click">
+                            <materialDesign:PackIcon Kind="Add" Height="20" Width="20" />
+                        </Button>
+                    </StackPanel>
                     <Label FontWeight="DemiBold" Content="Год" Grid.Column="1" HorizontalAlignment="Left" Margin="20,20,0,0" VerticalAlignment="Top"/>
-                    <ComboBox x:Name="year" Margin="20,0,0,0" VerticalAlignment="Top" Width="200" HorizontalAlignment="Left"/>
-                </StackPanel>
-                <StackPanel Grid.Row="1" Grid.ColumnSpan="2" Margin="0 30 0 0">
-                    <Button x:Name="search_btn" Content="Поиск" Click="Search_btn_Click" VerticalAlignment="Center" HorizontalAlignment="Center" Width="250"/>
+                    <StackPanel Orientation="Horizontal" Margin="25,0,0,0" VerticalAlignment="Top" HorizontalAlignment="Left">
+                        <ComboBox x:Name="year"  Width="155"/>
+                        <Button Height="25" Width="25" Margin="15 5 5 5" Style="{StaticResource MaterialDesignFloatingActionButton}" Click="Button_Click">
+                            <materialDesign:PackIcon Kind="Add" Height="20" Width="20" />
+                        </Button>
+                    </StackPanel>
                 </StackPanel>
             </Grid>
             <!--<Label Content="Данные об изображении:" FontSize="22"></Label>

@@ -55,22 +55,22 @@ namespace FlowerClient
             this.Close();
         }
 
-        void ResetComboboxBoxs()
-        {
-            (FindName("author") as ComboBox).SelectedItem = "Все";
-            (FindName("exposition") as ComboBox).SelectedItem = "Все";
-            (FindName("life_form") as ComboBox).SelectedItem = "Все";
-            (FindName("species_name") as ComboBox).SelectedItem = "Все";
-            (FindName("group") as ComboBox).SelectedItem = "Все";
-            (FindName("econ_group") as ComboBox).SelectedItem = "Все";
-            (FindName("people") as ComboBox).SelectedItem = "Все";
-            (FindName("history") as ComboBox).SelectedItem = "Все";
-            (FindName("buildings") as ComboBox).SelectedItem = "Все";
-            (FindName("category") as ComboBox).SelectedItem = "Все";
+        //void ResetComboboxBoxs()
+        //{
+        //    (FindName("surname") as ComboBox).SelectedItem = "Все";
+        //    (FindName("exposition") as ComboBox).SelectedItem = "Все";
+        //    (FindName("life_form") as ComboBox).SelectedItem = "Все";
+        //    (FindName("species_name") as ComboBox).SelectedItem = "Все";
+        //    (FindName("group") as ComboBox).SelectedItem = "Все";
+        //    (FindName("econ_group") as ComboBox).SelectedItem = "Все";
+        //    (FindName("people") as ComboBox).SelectedItem = "Все";
+        //    (FindName("history") as ComboBox).SelectedItem = "Все";
+        //    (FindName("buildings") as ComboBox).SelectedItem = "Все";
+        //    (FindName("category") as ComboBox).SelectedItem = "Все";
 
-            season.SelectedItem = "Все";
-            year.SelectedItem = "Все";
-        }
+        //    season.SelectedItem = "Все";
+        //    year.SelectedItem = "Все";
+        //}
 
         void LoadComboxBoxs()
         {
@@ -98,7 +98,6 @@ namespace FlowerClient
             cards.Add(card6);
 
             LoadComboxBoxs();
-            ResetComboboxBoxs();
 
             loadRecords(1);
             currentPage = 1;
@@ -115,9 +114,6 @@ namespace FlowerClient
             {
                 years.Add(i.ToString());
             }
-
-            years.Add("Все");
-            seasons.Add("Все");
 
             seasons.Add("Весна");
             seasons.Add("Лето");
@@ -265,9 +261,12 @@ namespace FlowerClient
         {
             Mediator.instance.SQL = "select * from " + refName + "_view";
             ComboBox c = FindName(refName) as ComboBox;
-            var temp = Mediator.instance.ConvertQueryToComboBox();
-            temp.Add("Все");
-            c.ItemsSource = temp;
+
+            if(c != null)
+            {
+                var temp = Mediator.instance.ConvertQueryToComboBox();
+                c.ItemsSource = temp;
+            }
         }
 
         private void MenuItem_Click_3(object sender, RoutedEventArgs e)
@@ -277,6 +276,18 @@ namespace FlowerClient
             ClearGallery();
             LoadComboxBoxs();
             UpdateGallery();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            tagPanel.Items.Add("Гаф");
+            tagPanel.Items.Add("Авававававававав");
+            tagPanel.Items.Add("Мяу");
+        }
+
+        private void Chip_DeleteClick(object sender, RoutedEventArgs e)
+        {
+            tagPanel.Items.Remove((sender as FrameworkElement).DataContext);
         }
     }
 }
