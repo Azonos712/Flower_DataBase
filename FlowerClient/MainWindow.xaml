@@ -6,11 +6,11 @@
         xmlns:local="clr-namespace:FlowerClient"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"    
-        Title="MainWindow" Height="720" Width="1500" TextElement.FontSize="14" Loaded="Window_Loaded" WindowStartupLocation="CenterScreen" Closed="Window_Closed">
-    <Grid RenderTransformOrigin="0.561,0.367">
+        Title="MainWindow" Height="720" Width="1360" TextElement.FontSize="14" ResizeMode="NoResize" Loaded="Window_Loaded" WindowStartupLocation="CenterScreen" Closed="Window_Closed">
+    <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="470*"/>
-            <ColumnDefinition Width="277*"/>
+            <ColumnDefinition Width="520*"/>
+            <ColumnDefinition Width="270*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="25"/>
@@ -19,7 +19,7 @@
             <RowDefinition Height="70" />
         </Grid.RowDefinitions>
 
-        <DockPanel Grid.ColumnSpan="2" Grid.Row="0" Margin="0,0,-0.4,49.2" Grid.RowSpan="2">
+        <DockPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3">
             <Menu x:Name="main_menu" VerticalAlignment="Center">
                 <MenuItem x:Name="admin_menuitem" Header="Администрирование" Height="20">
                     <MenuItem Header="Таблица пользователей" Click="MenuItem_Click"></MenuItem>
@@ -33,7 +33,7 @@
             </Menu>
         </DockPanel>
 
-        <WrapPanel Margin="10,9.8,6,10" Grid.Row="2" Grid.Column="0" RenderTransformOrigin="0.492,0.487">
+        <WrapPanel Margin="10 0 0 0" Grid.Row="2" Grid.Column="0">
             <Canvas x:Name="panel1" Width="250" Height="227" Margin="25,15,0,0" Background="White">
                 <materialDesign:Card RenderTransformOrigin="0.5 0.5" Visibility="Hidden" Width="250" Grid.Row="1" Height="227" HorizontalAlignment="Left" VerticalAlignment="Top" x:Name="card1" MouseLeftButtonDown="card_active_MouseLeftButtonDown">
                     <materialDesign:Card.RenderTransform>
@@ -306,48 +306,49 @@
             </Canvas>
         </WrapPanel>
 
-        <StackPanel x:Name="metadata" Visibility="Visible" Margin="14,9.8,9.6,10" Grid.Row="2" Grid.Column="1">
-            <Grid Margin="0,0,-0.4,0" Height="528">
+        <StackPanel x:Name="metadata" Visibility="Visible" Margin="0 0 10 0" Grid.Row="2" Grid.Column="1">
+            <Grid>
                 <Grid.RowDefinitions>
+                    <RowDefinition/>
                     <RowDefinition/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="284.8"/>
-                    <ColumnDefinition Width="174.4"/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
 
-                <ComboBox x:Name="author" Margin="25,52,0,0" Grid.Column="0" Height="30" VerticalAlignment="Top" Width="194" HorizontalAlignment="Left"/>
-                <ComboBox x:Name="exposition" Margin="15.4,52,-34.2,0" Grid.Column="1" Height="30" VerticalAlignment="Top" Width="194" HorizontalAlignment="Left" />
+                <StackPanel Grid.Row="0" Grid.Column="0">
+                    <Label FontWeight="DemiBold" Content="Автор" HorizontalAlignment="Left" Margin="25,10,0,0" VerticalAlignment="Top"/>
+                    <ComboBox x:Name="author" Margin="25,0,0,0" VerticalAlignment="Top" Width="200" HorizontalAlignment="Left"/>
+                    <Label FontWeight="DemiBold" Content="Название вида" HorizontalAlignment="Left" Margin="25,20,0,0" VerticalAlignment="Top"/>
+                    <ComboBox x:Name="species_name" Margin="25,0,0,0" VerticalAlignment="Top" Width="200" HorizontalAlignment="Left"/>
+                    <Label FontWeight="DemiBold" Content="Люди" HorizontalAlignment="Left" Margin="25,20,0,0" VerticalAlignment="Top"/>
+                    <ComboBox x:Name="people" Margin="25,0,0,0" VerticalAlignment="Top" Width="200" HorizontalAlignment="Left"/>
+                    <Label FontWeight="DemiBold" Content="Здания и сооружения" HorizontalAlignment="Left" Margin="25,20,0,0" VerticalAlignment="Top"/>
+                    <ComboBox x:Name="buildings" Margin="25,0,0,0" VerticalAlignment="Top" Width="200" HorizontalAlignment="Left"/>
+                    <Label FontWeight="DemiBold" Content="Группа" HorizontalAlignment="Left" Margin="25,20,0,0" VerticalAlignment="Top"/>
+                    <ComboBox x:Name="group" Margin="25,0,0,0" VerticalAlignment="Top" Width="200" HorizontalAlignment="Left"/>
+                    <Label FontWeight="DemiBold" Content="Сезон" HorizontalAlignment="Left" Margin="25,20,0,0" VerticalAlignment="Top"/>
+                    <ComboBox x:Name="season" Margin="25,0,0,0" VerticalAlignment="Top" Width="200" HorizontalAlignment="Left"/>
 
-                <ComboBox x:Name="species_name" Width="194" Margin="25,124,0,0" Grid.Column="0" Height="30" VerticalAlignment="Top" HorizontalAlignment="Left"/>
-                <ComboBox x:Name="life_form" Margin="15.4,124,-34.2,0" Grid.Column="1" Height="30" VerticalAlignment="Top" Width="194" HorizontalAlignment="Left"/>
-
-                <ComboBox x:Name="people" Width="194" Margin="25,198,0,0" Grid.Column="0" Height="30" VerticalAlignment="Top" HorizontalAlignment="Left"/>
-                <ComboBox x:Name="history" Margin="15.4,198,-34.2,0" Grid.Column="1" Height="30" VerticalAlignment="Top" Width="194" HorizontalAlignment="Left"/>
-
-                <ComboBox x:Name="buildings" Width="194" Margin="25,270,0,0" Grid.Column="0" Height="30" VerticalAlignment="Top" HorizontalAlignment="Left"/>
-                <ComboBox x:Name="category" Margin="15.4,270,-34.2,0" Grid.Column="1" Height="30" VerticalAlignment="Top" Width="194" HorizontalAlignment="Left"/>
-
-                <ComboBox x:Name="group" Width="194" Margin="25,345,0,0" Grid.Column="0" Height="30" VerticalAlignment="Top" HorizontalAlignment="Left" />
-                <ComboBox x:Name="econ_group" Margin="15.4,345,-34.2,0" Grid.Column="1" Height="30" VerticalAlignment="Top" Width="194" HorizontalAlignment="Left"/>
-
-                <ComboBox x:Name="season" Width="194" Margin="25,416,0,0" Grid.Column="0" VerticalAlignment="Top" Height="30" HorizontalAlignment="Left" />
-                <ComboBox x:Name="year" Margin="15.4,416,-34.2,0" Grid.Column="1" Height="30" VerticalAlignment="Top" Width="194" HorizontalAlignment="Left"/>
-
-                <Button x:Name="search_btn" Margin="133,482,55.8,0" Content="Поиск" Click="Search_btn_Click" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
-                <Label FontWeight="DemiBold"  Content="Сезон" HorizontalAlignment="Left" Margin="25,381,0,0" VerticalAlignment="Top" Padding="0,4,4,4"/>
-                <Label FontWeight="DemiBold" Content="Год" Grid.Column="1" HorizontalAlignment="Left" Margin="15.4,381,0,0" VerticalAlignment="Top" Padding="0,4,4,4"/>
-                <Label FontWeight="DemiBold" Content="Группа" HorizontalAlignment="Left" Margin="25,307,0,0" VerticalAlignment="Top" Padding="0,4,4,4"/>
-                <Label FontWeight="DemiBold" Content="Группа по хоз. назначению" Grid.Column="1" Margin="15,307,-34.2,0" VerticalAlignment="Top" Padding="0,4,4,4" HorizontalAlignment="Left" Width="194"/>
-                <Label FontWeight="DemiBold" Content="Здания и сооружения" HorizontalAlignment="Left" Margin="25,236,0,0" VerticalAlignment="Top" Padding="0,4,4,4"/>
-                <Label FontWeight="DemiBold" Content="Категория" Grid.Column="1" HorizontalAlignment="Left" Margin="15.4,236,0,0" VerticalAlignment="Top" Padding="0,4,4,4"/>
-                <Label FontWeight="DemiBold" Content="Люди" Margin="25,165,213.6,0" VerticalAlignment="Top"/>
-                <Label FontWeight="DemiBold" Content="История" Grid.Column="1" HorizontalAlignment="Left" Margin="15.4,165,0,0" VerticalAlignment="Top" Padding="0,4,4,4"/>
-                <Label FontWeight="DemiBold" Content="Название вида" HorizontalAlignment="Left" Margin="25,91,0,0" VerticalAlignment="Top" Padding="0,4,4,4"/>
-                <Label FontWeight="DemiBold" Content="Жизненная форма" Grid.Column="1" HorizontalAlignment="Left" Margin="15.4,91,0,0" VerticalAlignment="Top" Padding="0,4,4,4"/>
-                <Label FontWeight="DemiBold" Content="Автор" HorizontalAlignment="Left" Margin="25,19,0,0" VerticalAlignment="Top" Padding="0,4,4,4"/>
-                <Label FontWeight="DemiBold" Content="Экспозиция" Grid.Column="1" HorizontalAlignment="Left" Margin="15.4,19,0,0" VerticalAlignment="Top" Padding="0,4,4,4"/>
-
+                </StackPanel>
+                <StackPanel Grid.Row="0" Grid.Column="1" Margin="0 0 0 0">
+                    <Label FontWeight="DemiBold" Content="Экспозиция" HorizontalAlignment="Left" Margin="20,10,0,0" VerticalAlignment="Top"/>
+                    <ComboBox x:Name="exposition" Margin="20,0,0,0" VerticalAlignment="Top" Width="200" HorizontalAlignment="Left"/>
+                    <Label FontWeight="DemiBold" Content="Жизненная форма" HorizontalAlignment="Left" Margin="20,20,0,0" VerticalAlignment="Top"/>
+                    <ComboBox x:Name="life_form" Margin="20,0,0,0" VerticalAlignment="Top" Width="200" HorizontalAlignment="Left"/>
+                    <Label FontWeight="DemiBold" Content="История" HorizontalAlignment="Left" Margin="20,20,0,0" VerticalAlignment="Top"/>
+                    <ComboBox x:Name="history" Margin="20,0,0,0" VerticalAlignment="Top" Width="200" HorizontalAlignment="Left"/>
+                    <Label FontWeight="DemiBold" Content="Категория" HorizontalAlignment="Left" Margin="20,20,0,0" VerticalAlignment="Top"/>
+                    <ComboBox x:Name="category" Margin="20,0,0,0" VerticalAlignment="Top" Width="200" HorizontalAlignment="Left"/>
+                    <Label FontWeight="DemiBold" Content="Группа по хоз. назначению" HorizontalAlignment="Left" Margin="20,20,0,0" VerticalAlignment="Top"/>
+                    <ComboBox x:Name="econ_group" Margin="20,0,0,0" VerticalAlignment="Top" Width="200" HorizontalAlignment="Left"/>
+                    <Label FontWeight="DemiBold" Content="Год" Grid.Column="1" HorizontalAlignment="Left" Margin="20,20,0,0" VerticalAlignment="Top"/>
+                    <ComboBox x:Name="year" Margin="20,0,0,0" VerticalAlignment="Top" Width="200" HorizontalAlignment="Left"/>
+                </StackPanel>
+                <StackPanel Grid.Row="1" Grid.ColumnSpan="2" Margin="0 30 0 0">
+                    <Button x:Name="search_btn" Content="Поиск" Click="Search_btn_Click" VerticalAlignment="Center" HorizontalAlignment="Center" Width="250"/>
+                </StackPanel>
             </Grid>
             <!--<Label Content="Данные об изображении:" FontSize="22"></Label>
             <Label Content="Название вида:" FontSize="22" Margin="0, 10, 0, 0"></Label>
@@ -358,14 +359,11 @@
             <TextBlock Text="{Binding expositionP}" Margin="5,5,5,0" FontSize="24" TextWrapping="Wrap" Height="66"></TextBlock>
             <Label Content="Категория:" FontSize="22" Margin="0, 10, 0, 0"></Label>
             <TextBlock Text="{Binding categoryP}" Margin="5,5,5.2,0" FontSize="24" TextWrapping="Wrap" Height="66"></TextBlock>-->
-
         </StackPanel>
 
-        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal" Grid.Row="3" Grid.Column="0" Height="32" Margin="409,19,408,19.4" Width="123">
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal" Grid.Row="3" Grid.Column="0">
             <Button Margin="10 0 10 0" x:Name="prevPage" Content="&lt;" Click="prevPage_Click"/>
             <Button Margin="10 0 10 0" x:Name="nextPage" Content="&gt;" Click="nextPage_Click"/>
         </StackPanel>
-        <Label Content="Label" Grid.Column="1" HorizontalAlignment="Left" Margin="543,406.8,-0.4,0" Grid.Row="2" VerticalAlignment="Top"/>
-
     </Grid>
 </Window>
