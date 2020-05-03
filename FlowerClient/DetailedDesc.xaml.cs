@@ -46,6 +46,7 @@ namespace FlowerClient
                 {
                     btn_foto.Content = "Добавить фото";
                     btn_save.Content = "Добавить";
+                    this.Title = "Добавление новой записи";
                     btn_save_foto.Visibility = Visibility.Collapsed;
                 }
                 else
