@@ -315,42 +315,47 @@ namespace FlowerClient
         
         private void createSearchQuery()
         {
-            tags.Add(new FlowerClient.Tag { categoryP = "exposition", valP = "Партер" });
-            tags.Add(new FlowerClient.Tag { categoryP = "author", valP = "Коврик" });
-            tags.Add(new FlowerClient.Tag { categoryP = "season", valP = "Лето" });
-            tags.Add(new FlowerClient.Tag { categoryP = "season", valP = "Зима" });
-            tags.Add(new FlowerClient.Tag { categoryP = "year", valP = "2020" });
-            tags.Add(new FlowerClient.Tag { categoryP = "year", valP = "2019" });
-            tags.Add(new FlowerClient.Tag { categoryP = "author", valP = "Бездетный" });
-            tags.Add(new FlowerClient.Tag { categoryP = "exposition", valP = "Оранжереи" });
-            tags.Add(new FlowerClient.Tag { categoryP = "season", valP = "Весна" });
-
-            if (results != null)
+            Mediator.instance.SQL = "select * from plants_all_view";
+            if (tags.Count != 0)
             {
-                results.Clear();
-            }
+                tags.Add(new FlowerClient.Tag { categoryP = "exposition", valP = "Партер" });
+                //tags.Add(new FlowerClient.Tag { categoryP = "author", valP = "Коврик" });
+                //tags.Add(new FlowerClient.Tag { categoryP = "season", valP = "Лето" });
+                //tags.Add(new FlowerClient.Tag { categoryP = "season", valP = "Зима" });
+                //tags.Add(new FlowerClient.Tag { categoryP = "year", valP = "2020" });
+                //tags.Add(new FlowerClient.Tag { categoryP = "year", valP = "2019" });
+                //tags.Add(new FlowerClient.Tag { categoryP = "author", valP = "Бездетный" });
+                //tags.Add(new FlowerClient.Tag { categoryP = "exposition", valP = "Оранжереи" });
+                //tags.Add(new FlowerClient.Tag { categoryP = "season", valP = "Весна" });
 
-            Mediator.instance.SQL = "select * from plants_all_view where (";
-            string result = string.Empty;
-
-            for(int i = 0; i < tags.Count; i++)
-            {
-                if (result.Contains(tags[i].categoryP))
+                if (results != null)
                 {
-                    result = result.Insert(result.IndexOf(")", result.IndexOf(tags[i].categoryP)), " or " + tags[i].categoryP + " = '" + tags[i].valP + "'");
+                    results.Clear();
                 }
-                else
+
+                string result = string.Empty;
+
+                for (int i = 0; i < tags.Count; i++)
                 {
-                    result += tags[i].categoryP + " = '" + tags[i].valP + "')";
-                    result += " and (";
+                    if (result.Contains(tags[i].categoryP))
+                    {
+                        result = result.Insert(result.IndexOf(")", result.IndexOf(tags[i].categoryP)), " or " + tags[i].categoryP + " = '" + tags[i].valP + "'");
+                    }
+                    else
+                    {
+                        result += tags[i].categoryP + " = '" + tags[i].valP + "')";
+                        result += " and (";
+                    }
+
                 }
-                
+                if (result.Last() == '(')
+                {
+                    result = result.Remove(result.Length - 6, 6);
+                }
+
+                Mediator.instance.SQL += " where (" + result;
             }
-            if (result.Last() == '(')
-            {
-                result = result.Remove(result.Length - 6, 6);
-            }
-            Mediator.instance.SQL += result + " limit 6 offset 0";
+            Mediator.instance.SQL += " limit 6 offset 0";
             results = Mediator.instance.ConvertQueryToTable();
         }
     }
