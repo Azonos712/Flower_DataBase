@@ -1,21 +1,16 @@
-﻿using System;
+﻿using ImageMagick;
+using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Drawing;
 using System.Drawing.Imaging;
+using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Forms;
-using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using ComboBox = System.Windows.Controls.ComboBox;
-using System.IO;
 
 namespace FlowerClient
 {
@@ -159,6 +154,7 @@ namespace FlowerClient
                 using (FileStream fileStream = new FileStream(Mediator.instance.Path + fotoID + ".jpg", FileMode.Create))
                     jpegBitmapEncoder.Save(fileStream);
 
+
                 new MsgBox("Действие завершено успешно!", "Информация").ShowDialog();
                 DialogResult = true;
                 this.Close();
@@ -178,12 +174,9 @@ namespace FlowerClient
         {
             try
             {
-                photo.Source = null;
-                Card card = (Card)this.DataContext;
+                //Card card = (Card)this.DataContext;
                 OpenFileDialog op = new OpenFileDialog();
-
                 op.Filter = "";
-
                 ImageCodecInfo[] codecs = ImageCodecInfo.GetImageEncoders();
                 op.Filter = string.Format("{0}| All image files ({1})|{1}|All files|*",
                     string.Join("|", codecs.Select(codec =>
@@ -193,9 +186,17 @@ namespace FlowerClient
 
                 if (op.ShowDialog() == System.Windows.Forms.DialogResult.Cancel)
                     return;
+
+                photo.Source = null;
                 string filename = op.FileName;
 
-                photo.Source = Mediator.instance.NonBlockingLoad(filename);
+                var b_img = PhotoProcessing(filename);
+
+                var bitmap_img = Mediator.instance.ByteToImage(b_img);
+
+                photo.Source = bitmap_img;
+
+                //photo.Source = Mediator.instance.NonBlockingLoad(filename);
 
                 op.Dispose();
             }
@@ -203,6 +204,28 @@ namespace FlowerClient
             {
                 new MsgBox(ex.Message, "Ошибка").ShowDialog();
             }
+        }
+
+        byte[] PhotoProcessing(string path)
+        {
+            var img = new MagickImage(path);
+
+            img.Quality = 95;
+
+            if (img.Height > img.Width)
+                img.Resize(600, 800);
+            else
+                img.Resize(800, 600);
+            
+            img.Interlace = Interlace.Plane;
+            img.Format = MagickFormat.Jpg;
+
+            var watermark = new MagickImage(@"..\..\img\signature.png");
+
+            watermark.Evaluate(Channels.Alpha, EvaluateOperator.Divide, 2);
+            img.Composite(watermark, Gravity.Southwest, CompositeOperator.Over);
+
+            return img.ToByteArray();
         }
 
         private void btn_save_foto_Click(object sender, RoutedEventArgs e)
