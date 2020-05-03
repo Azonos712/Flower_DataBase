@@ -220,5 +220,12 @@ namespace FlowerClient
             c.ItemsSource = Mediator.instance.ConvertQueryToComboBox();
         }
 
+        private void MenuItem_Click_3(object sender, RoutedEventArgs e)
+        {
+            new ReferenceTableWindow().ShowDialog();
+            loadRecords(currentPage);
+            ClearGallery();
+            UpdateGallery();
+        }
     }
 }
