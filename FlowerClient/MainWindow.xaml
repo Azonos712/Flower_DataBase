@@ -34,21 +34,22 @@
             </Menu>
         </DockPanel>
 
-        <ScrollViewer BorderBrush="Black" BorderThickness="1" Grid.Row="1" Grid.Column ="0" VerticalScrollBarVisibility="Hidden" HorizontalScrollBarVisibility="Visible" Margin="35 0 10 0">
-            <ItemsControl x:Name="tagPanel" VerticalAlignment="Center" Height="30">
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <materialDesign:Chip VerticalAlignment="Center" Height="25" Content="{Binding valP}" IsDeletable="True" Margin="1" DeleteClick="Chip_DeleteClick"></materialDesign:Chip>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-                <ItemsControl.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <WrapPanel/>
-                    </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
-            </ItemsControl>
-
-        </ScrollViewer>
+        <Border  Grid.Row="1" Grid.Column ="0" Margin="35 10 10 10" BorderBrush="Black" BorderThickness="1">
+        <ScrollViewer VerticalScrollBarVisibility="Hidden" HorizontalScrollBarVisibility="Visible">
+                <ItemsControl x:Name="tagPanel" VerticalAlignment="Center" Height="30">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <materialDesign:Chip FontSize="16" VerticalAlignment="Center" Height="30" Content="{Binding valP}" IsDeletable="True" Margin="1" DeleteClick="Chip_DeleteClick"></materialDesign:Chip>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                </ItemsControl>
+            </ScrollViewer>
+        </Border>
 
         <Button Grid.Column="1" Grid.Row="1" x:Name="search_btn" Content="Поиск" Click="Search_btn_Click" VerticalAlignment="Center" HorizontalAlignment="Center" Width="250"/>
 

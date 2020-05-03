@@ -297,11 +297,17 @@ namespace FlowerClient
                 }
 
                 if(cbx.SelectedItem == null)
-                    throw new Exception("Выберете категорию для добавления");
+                    throw new Exception("Выберете категорию для добавления!");
 
                 Tag tmp = new Tag();
                 tmp.categoryP = cbx.Name;
                 tmp.valP = cbx.SelectedItem.ToString();
+
+                for (int i = 0; i < tagPanel.Items.Count; i++)
+                {
+                    if ((tagPanel.Items[i] as Tag).valP == tmp.valP)
+                        throw new Exception("Такой фильтр уже используется!");
+                }
 
                 tagPanel.Items.Add(tmp);
 
