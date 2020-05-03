@@ -55,15 +55,25 @@ namespace FlowerClient
             this.Close();
         }
 
-        private void Window_Loaded(object sender, RoutedEventArgs e)
+        void ResetComboboxBoxs()
         {
-            cards.Add(card1);
-            cards.Add(card2);
-            cards.Add(card3);
-            cards.Add(card4);
-            cards.Add(card5);
-            cards.Add(card6);
+            (FindName("author") as ComboBox).SelectedItem = "Все";
+            (FindName("exposition") as ComboBox).SelectedItem = "Все";
+            (FindName("life_form") as ComboBox).SelectedItem = "Все";
+            (FindName("species_name") as ComboBox).SelectedItem = "Все";
+            (FindName("group") as ComboBox).SelectedItem = "Все";
+            (FindName("econ_group") as ComboBox).SelectedItem = "Все";
+            (FindName("people") as ComboBox).SelectedItem = "Все";
+            (FindName("history") as ComboBox).SelectedItem = "Все";
+            (FindName("buildings") as ComboBox).SelectedItem = "Все";
+            (FindName("category") as ComboBox).SelectedItem = "Все";
 
+            season.SelectedItem = "Все";
+            year.SelectedItem = "Все";
+        }
+
+        void LoadComboxBoxs()
+        {
             loadReference("author");
             loadReference("exposition");
             loadReference("life_form");
@@ -75,6 +85,20 @@ namespace FlowerClient
             loadReference("buildings");
             loadReference("category");
             fillYearsSeasons();
+        }
+
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            cards.Add(card1);
+            cards.Add(card2);
+            cards.Add(card3);
+            cards.Add(card4);
+            cards.Add(card5);
+            cards.Add(card6);
+
+            LoadComboxBoxs();
+            ResetComboboxBoxs();
 
             loadRecords(1);
             currentPage = 1;
@@ -84,13 +108,17 @@ namespace FlowerClient
 
         private void fillYearsSeasons()
         {
-            List<int> years = new List<int>();
+            List<string> years = new List<string>();
             List<string> seasons = new List<string>();
 
             for (int i = 2017; i < 2031; i++)
             {
-                years.Add(i);
+                years.Add(i.ToString());
             }
+
+            years.Add("Все");
+            seasons.Add("Все");
+
             seasons.Add("Весна");
             seasons.Add("Лето");
             seasons.Add("Осень");
@@ -237,7 +265,9 @@ namespace FlowerClient
         {
             Mediator.instance.SQL = "select * from " + refName + "_view";
             ComboBox c = FindName(refName) as ComboBox;
-            c.ItemsSource = Mediator.instance.ConvertQueryToComboBox();
+            var temp = Mediator.instance.ConvertQueryToComboBox();
+            temp.Add("Все");
+            c.ItemsSource = temp;
         }
 
         private void MenuItem_Click_3(object sender, RoutedEventArgs e)
@@ -245,6 +275,7 @@ namespace FlowerClient
             new ReferenceTableWindow().ShowDialog();
             loadRecords(currentPage);
             ClearGallery();
+            LoadComboxBoxs();
             UpdateGallery();
         }
     }
