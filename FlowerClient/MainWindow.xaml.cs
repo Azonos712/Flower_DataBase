@@ -145,7 +145,7 @@ namespace FlowerClient
                 results.Clear();
             }
             Mediator.instance.SQL = "select * from plants_all_view limit 6 offset " + ((currentPage - 1) * 6).ToString();
-            results = Mediator.instance.ExecuteQuery();
+            results = Mediator.instance.ConvertQueryToTable();
         }
 
         private void loadPage(bool direction)

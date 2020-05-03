@@ -115,7 +115,6 @@ namespace FlowerClient
             if (c.SelectedItem == null)
                 throw new Exception("Выберите все поля!");
 
-            
             return c.SelectedItem.ToString();
         }
 
