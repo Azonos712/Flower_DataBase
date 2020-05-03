@@ -23,6 +23,7 @@ namespace FlowerClient
     {
         private List<MaterialDesignThemes.Wpf.Card> cards = new List<MaterialDesignThemes.Wpf.Card>(6);
         private List<Card> gallery = new List<Card>(6);
+        private List<Tag> tags = new List<Tag>();
         private DataTable results;
         private int currentPage;
         public MainWindow()
@@ -104,6 +105,8 @@ namespace FlowerClient
             currentPage = 1;
 
             UpdateGallery();
+
+            createSearchQuery();
         }
 
         private void fillYearsSeasons()
@@ -277,6 +280,47 @@ namespace FlowerClient
             ClearGallery();
             LoadComboxBoxs();
             UpdateGallery();
+        }
+        
+        private void createSearchQuery()
+        {
+            tags.Add(new FlowerClient.Tag { categoryP = "exposition", valP = "Партер" });
+            tags.Add(new FlowerClient.Tag { categoryP = "author", valP = "Коврик" });
+            tags.Add(new FlowerClient.Tag { categoryP = "season", valP = "Лето" });
+            tags.Add(new FlowerClient.Tag { categoryP = "season", valP = "Зима" });
+            tags.Add(new FlowerClient.Tag { categoryP = "year", valP = "2020" });
+            tags.Add(new FlowerClient.Tag { categoryP = "year", valP = "2019" });
+            tags.Add(new FlowerClient.Tag { categoryP = "author", valP = "Бездетный" });
+            tags.Add(new FlowerClient.Tag { categoryP = "exposition", valP = "Оранжереи" });
+            tags.Add(new FlowerClient.Tag { categoryP = "season", valP = "Весна" });
+
+            if (results != null)
+            {
+                results.Clear();
+            }
+
+            Mediator.instance.SQL = "select * from plants_all_view where (";
+            string result = string.Empty;
+
+            for(int i = 0; i < tags.Count; i++)
+            {
+                if (result.Contains(tags[i].categoryP))
+                {
+                    result = result.Insert(result.IndexOf(")", result.IndexOf(tags[i].categoryP)), " or " + tags[i].categoryP + " = '" + tags[i].valP + "'");
+                }
+                else
+                {
+                    result += tags[i].categoryP + " = '" + tags[i].valP + "')";
+                    result += " and (";
+                }
+                
+            }
+            if (result.Last() == '(')
+            {
+                result = result.Remove(result.Length - 6, 6);
+            }
+            Mediator.instance.SQL += result + " limit 6 offset 0";
+            results = Mediator.instance.ConvertQueryToTable();
         }
     }
 }
