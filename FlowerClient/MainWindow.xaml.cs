@@ -283,9 +283,29 @@ namespace FlowerClient
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            tagPanel.Items.Add("Гаф");
-            tagPanel.Items.Add("Авававававававав");
-            tagPanel.Items.Add("Мяу");
+            try
+            {
+                Button temp = sender as Button;
+                StackPanel s = temp.Parent as StackPanel;
+                ComboBox cbx = null;
+
+                foreach (var c in s.Children)
+                {
+                    if (c is ComboBox)
+                    {
+                        cbx = c as ComboBox;
+                    }
+                }
+
+                if(cbx.SelectedItem == null)
+                    throw new Exception("Выберете категорию для добавления");
+
+                tagPanel.Items.Add(cbx.SelectedItem.ToString());
+            }
+            catch (Exception ex)
+            {
+                new MsgBox(ex.Message, "Ошибка").ShowDialog();
+            }
         }
 
         private void Chip_DeleteClick(object sender, RoutedEventArgs e)
