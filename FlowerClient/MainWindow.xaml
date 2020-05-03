@@ -23,6 +23,7 @@
             <Menu x:Name="main_menu" VerticalAlignment="Center">
                 <MenuItem x:Name="admin_menuitem" Header="Администрирование" Height="20">
                     <MenuItem Header="Таблица пользователей" Click="MenuItem_Click"></MenuItem>
+                    <MenuItem Header="Таблица справочников" Click="MenuItem_Click_2"></MenuItem>
                 </MenuItem>
                 <MenuItem x:Name="system_menuitem" Header="Система" Height="20">
                     <MenuItem Header="Выход из учетной записи" Click="MenuItem_Click_1"></MenuItem>
