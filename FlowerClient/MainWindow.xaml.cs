@@ -149,8 +149,8 @@ namespace FlowerClient
 
         private void Search_btn_Click(object sender, RoutedEventArgs e)
         {
-            //currentPage = 1;
-            createSearchQuery(1);
+            currentPage = 1;
+            createSearchQuery(currentPage);
             ClearGallery();
             UpdateGallery();
         }
@@ -334,11 +334,11 @@ namespace FlowerClient
                     
                     if (result.Contains((tagPanel.Items[i] as Tag).categoryP))
                     {
-                        result = result.Insert(result.IndexOf(")", result.IndexOf((tagPanel.Items[i] as Tag).categoryP)), " or " + (tagPanel.Items[i] as Tag).categoryP + " = '" + (tagPanel.Items[i] as Tag).valP + "'");
+                        result = result.Insert(result.IndexOf(")", result.IndexOf((tagPanel.Items[i] as Tag).categoryP)), " or \"" + (tagPanel.Items[i] as Tag).categoryP + "\" = '" + (tagPanel.Items[i] as Tag).valP + "'");
                     }
                     else
                     {
-                        result += (tagPanel.Items[i] as Tag).categoryP + " = '" + (tagPanel.Items[i] as Tag).valP + "')";
+                        result += "\"" + (tagPanel.Items[i] as Tag).categoryP + "\" = '" + (tagPanel.Items[i] as Tag).valP + "')";
                         result += " and (";
                     }
 
