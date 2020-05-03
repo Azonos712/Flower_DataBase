@@ -213,12 +213,12 @@ namespace FlowerClient
 
             var img = new MagickImage(path);
 
-            img.Quality = 75;
+            img.Quality = 70;
 
             if (img.Height > img.Width)
-                img.Resize(240, 440);
+                img.Scale(140, 340);
             else
-                img.Resize(440, 240);
+                img.Scale(340, 140);
 
             return img.ToByteArray();
         }
