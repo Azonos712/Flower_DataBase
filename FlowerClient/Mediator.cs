@@ -73,6 +73,9 @@ namespace FlowerClient
 
         public BitmapImage ByteToImage(byte[] imageData)
         {
+            if (imageData == null)
+                return null;
+
             BitmapImage biImg = new BitmapImage();
             MemoryStream ms = new MemoryStream(imageData);
             biImg.BeginInit();

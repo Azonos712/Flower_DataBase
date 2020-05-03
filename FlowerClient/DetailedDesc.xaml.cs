@@ -208,6 +208,9 @@ namespace FlowerClient
 
         byte[] PhotoProcessing(string path)
         {
+            if (!(File.Exists(path)))
+                return null;
+
             var img = new MagickImage(path);
 
             img.Quality = 95;
