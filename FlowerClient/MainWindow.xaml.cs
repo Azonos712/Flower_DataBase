@@ -1,7 +1,9 @@
-﻿using Npgsql;
+﻿using ImageMagick;
+using Npgsql;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -190,7 +192,8 @@ namespace FlowerClient
             {
                 gallery.Add(new Card(results.Rows[i]));
                 gallery.Last().captionP = gallery.Last().groupP + " - " + gallery.Last().economicGroupP;
-                gallery.Last().ImageS = Mediator.instance.NonBlockingLoad(Mediator.instance.Path + gallery.Last().idP + ".jpg");
+                gallery.Last().ImageS = Mediator.instance.ByteToImage(MinimizeImage(Mediator.instance.Path + gallery.Last().idP + ".jpg"));
+                //gallery.Last().ImageS = Mediator.instance.NonBlockingLoad(Mediator.instance.Path + gallery.Last().idP + ".jpg");
             }
 
             for (int i = 0; i < gallery.Count; i++)
@@ -201,6 +204,23 @@ namespace FlowerClient
                     cards[i].Visibility = Visibility.Visible;
                 }
             }
+        }
+
+        byte[] MinimizeImage(string path)
+        {
+            if (!(File.Exists(path)))
+                return null;
+
+            var img = new MagickImage(path);
+
+            img.Quality = 70;
+
+            if (img.Height > img.Width)
+                img.Scale(140, 340);
+            else
+                img.Scale(340, 140);
+
+            return img.ToByteArray();
         }
 
         private void MenuItem_Click_2(object sender, RoutedEventArgs e)
