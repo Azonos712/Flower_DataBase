@@ -90,7 +90,7 @@ namespace FlowerClient
         {
             try
             {
-                CallEditForm(true);ы
+                CallEditForm(true);
             }
             catch (Exception ex)
             {
