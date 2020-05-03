@@ -38,7 +38,7 @@
             <ItemsControl x:Name="tagPanel" VerticalAlignment="Center" Height="30">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <materialDesign:Chip VerticalAlignment="Center" Height="25" Content="{Binding}" IsDeletable="True" Margin="1" DeleteClick="Chip_DeleteClick"></materialDesign:Chip>
+                        <materialDesign:Chip VerticalAlignment="Center" Height="25" Content="{Binding valP}" IsDeletable="True" Margin="1" DeleteClick="Chip_DeleteClick"></materialDesign:Chip>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
                 <ItemsControl.ItemsPanel>

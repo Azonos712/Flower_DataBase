@@ -23,7 +23,6 @@ namespace FlowerClient
     {
         private List<MaterialDesignThemes.Wpf.Card> cards = new List<MaterialDesignThemes.Wpf.Card>(6);
         private List<Card> gallery = new List<Card>(6);
-        private List<Tag> tags = new List<Tag>();
         private DataTable results;
         private int currentPage;
         public MainWindow()
@@ -100,12 +99,11 @@ namespace FlowerClient
 
             LoadComboxBoxs();
 
-            loadRecords(1);
+            //loadRecords(1);
             currentPage = 1;
+            createSearchQuery(1);
 
             UpdateGallery();
-
-            createSearchQuery();
         }
 
         private void fillYearsSeasons()
@@ -142,7 +140,8 @@ namespace FlowerClient
 
             if (d.ShowDialog() == true)
             {
-                loadRecords(currentPage);
+                createSearchQuery(currentPage);
+                //loadRecords(currentPage);
                 ClearGallery();
                 UpdateGallery();
             }
@@ -150,11 +149,10 @@ namespace FlowerClient
 
         private void Search_btn_Click(object sender, RoutedEventArgs e)
         {
-            /*Button temp = sender as Button;
-            StackPanel tempst = temp.Parent as StackPanel;
-            DetailedDesc d = new DetailedDesc();
-            d.DataContext = tempst.DataContext;
-            d.Show();*/
+            //currentPage = 1;
+            createSearchQuery(1);
+            ClearGallery();
+            UpdateGallery();
         }
 
         private void nextPage_Click(object sender, RoutedEventArgs e)
@@ -167,7 +165,7 @@ namespace FlowerClient
             loadPage(false);
         }
 
-        private void loadRecords(int currentPage)
+        /*private void loadRecords(int currentPage)
         {
             if (results != null)
             {
@@ -175,13 +173,14 @@ namespace FlowerClient
             }
             Mediator.instance.SQL = "select * from plants_all_view limit 6 offset " + ((currentPage - 1) * 6).ToString();
             results = Mediator.instance.ConvertQueryToTable();
-        }
+        }*/
 
         private void loadPage(bool direction)
         {
             if (direction)
             {
-                loadRecords(currentPage + 1);
+                createSearchQuery(currentPage + 1);
+                //loadRecords(currentPage + 1);
 
                 if (results.Rows.Count > 0)
                     currentPage++;
@@ -195,7 +194,7 @@ namespace FlowerClient
                 else
                     return;
 
-                loadRecords(currentPage);
+                createSearchQuery(currentPage);
             }
 
             ClearGallery();
@@ -254,7 +253,7 @@ namespace FlowerClient
         {
             if (new DetailedDesc().ShowDialog() == true)
             {
-                loadRecords(currentPage);
+                createSearchQuery(currentPage);
                 ClearGallery();
                 UpdateGallery();
             }
@@ -275,7 +274,7 @@ namespace FlowerClient
         private void MenuItem_Click_3(object sender, RoutedEventArgs e)
         {
             new ReferenceTableWindow().ShowDialog();
-            loadRecords(currentPage);
+            createSearchQuery(currentPage);
             ClearGallery();
             LoadComboxBoxs();
             UpdateGallery();
@@ -300,7 +299,12 @@ namespace FlowerClient
                 if(cbx.SelectedItem == null)
                     throw new Exception("Выберете категорию для добавления");
 
-                tagPanel.Items.Add(cbx.SelectedItem.ToString());
+                Tag tmp = new Tag();
+                tmp.categoryP = cbx.Name;
+                tmp.valP = cbx.SelectedItem.ToString();
+
+                tagPanel.Items.Add(tmp);
+
             }
             catch (Exception ex)
             {
@@ -313,21 +317,11 @@ namespace FlowerClient
             tagPanel.Items.Remove((sender as FrameworkElement).DataContext);
         }
         
-        private void createSearchQuery()
+        private void createSearchQuery(int page)
         {
             Mediator.instance.SQL = "select * from plants_all_view";
-            if (tags.Count != 0)
+            if (tagPanel.Items.Count != 0)
             {
-                tags.Add(new FlowerClient.Tag { categoryP = "exposition", valP = "Партер" });
-                //tags.Add(new FlowerClient.Tag { categoryP = "author", valP = "Коврик" });
-                //tags.Add(new FlowerClient.Tag { categoryP = "season", valP = "Лето" });
-                //tags.Add(new FlowerClient.Tag { categoryP = "season", valP = "Зима" });
-                //tags.Add(new FlowerClient.Tag { categoryP = "year", valP = "2020" });
-                //tags.Add(new FlowerClient.Tag { categoryP = "year", valP = "2019" });
-                //tags.Add(new FlowerClient.Tag { categoryP = "author", valP = "Бездетный" });
-                //tags.Add(new FlowerClient.Tag { categoryP = "exposition", valP = "Оранжереи" });
-                //tags.Add(new FlowerClient.Tag { categoryP = "season", valP = "Весна" });
-
                 if (results != null)
                 {
                     results.Clear();
@@ -335,15 +329,16 @@ namespace FlowerClient
 
                 string result = string.Empty;
 
-                for (int i = 0; i < tags.Count; i++)
+                for (int i = 0; i < tagPanel.Items.Count; i++)
                 {
-                    if (result.Contains(tags[i].categoryP))
+                    
+                    if (result.Contains((tagPanel.Items[i] as Tag).categoryP))
                     {
-                        result = result.Insert(result.IndexOf(")", result.IndexOf(tags[i].categoryP)), " or " + tags[i].categoryP + " = '" + tags[i].valP + "'");
+                        result = result.Insert(result.IndexOf(")", result.IndexOf((tagPanel.Items[i] as Tag).categoryP)), " or " + (tagPanel.Items[i] as Tag).categoryP + " = '" + (tagPanel.Items[i] as Tag).valP + "'");
                     }
                     else
                     {
-                        result += tags[i].categoryP + " = '" + tags[i].valP + "')";
+                        result += (tagPanel.Items[i] as Tag).categoryP + " = '" + (tagPanel.Items[i] as Tag).valP + "')";
                         result += " and (";
                     }
 
@@ -355,7 +350,7 @@ namespace FlowerClient
 
                 Mediator.instance.SQL += " where (" + result;
             }
-            Mediator.instance.SQL += " limit 6 offset 0";
+            Mediator.instance.SQL += " limit 6 offset " + ((page - 1) * 6).ToString();
             results = Mediator.instance.ConvertQueryToTable();
         }
     }
