@@ -6,6 +6,7 @@ using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -20,13 +21,118 @@ namespace FlowerClient
         private DataTable results;
         private int currentPage;
         private string currentSQL;
+
         public MainWindow()
         {
             InitializeComponent();
 
             if (Mediator.instance.Role == "Flower_Employee")
                 admin_menuitem.Visibility = Visibility.Collapsed;
+
+            OnControls();
         }
+
+        void OnControls()
+        {
+            blck_pnl.Visibility = Visibility.Hidden;
+            prgrss_br.Visibility = Visibility.Hidden;
+            metadata.IsEnabled = true;
+            search_panel.IsEnabled = true;
+            tagPanel.IsEnabled = true;
+            page_panel.IsEnabled = true;
+            main_menu.IsEnabled = true;
+        }
+
+        void OffControls()
+        {
+            blck_pnl.Visibility = Visibility.Visible;
+            prgrss_br.Visibility = Visibility.Visible;
+            metadata.IsEnabled = false;
+            search_panel.IsEnabled = false;
+            tagPanel.IsEnabled = false;
+            page_panel.IsEnabled = false;
+            main_menu.IsEnabled = false;
+        }
+
+        ComboBox GetComboBoxByName(string refName)
+        {
+            var c = FindName(refName) as ComboBox;
+            return c;
+        }
+
+        List<string> LoadReference(string refName)
+        {
+            Mediator.instance.SQL = "select * from " + refName + "_view";
+            var temp = Mediator.instance.ConvertQueryToComboBox();
+            return temp;
+        }
+
+        List<string> LoadYears()
+        {
+            List<string> years = new List<string>();
+            for (int i = 2017; i < 2031; i++)
+            {
+                years.Add(i.ToString());
+            }
+            return years;
+        }
+
+        List<string> LoadSeasons()
+        {
+            List<string> seasons = new List<string>();
+            seasons.Add("Весна");
+            seasons.Add("Лето");
+            seasons.Add("Осень");
+            seasons.Add("Зима");
+            return seasons;
+        }
+
+        async void LoadComboBoxs()
+        {
+            GetComboBoxByName("author").ItemsSource = await Task.Run(() => LoadReference("author"));
+            GetComboBoxByName("exposition").ItemsSource = await Task.Run(() => LoadReference("exposition"));
+            GetComboBoxByName("life_form").ItemsSource = await Task.Run(() => LoadReference("life_form"));
+            GetComboBoxByName("species_name").ItemsSource = await Task.Run(() => LoadReference("species_name"));
+            GetComboBoxByName("group").ItemsSource = await Task.Run(() => LoadReference("group"));
+            GetComboBoxByName("econ_group").ItemsSource = await Task.Run(() => LoadReference("econ_group"));
+            GetComboBoxByName("people").ItemsSource = await Task.Run(() => LoadReference("people"));
+            GetComboBoxByName("history").ItemsSource = await Task.Run(() => LoadReference("history"));
+            GetComboBoxByName("buildings").ItemsSource = await Task.Run(() => LoadReference("buildings"));
+            GetComboBoxByName("category").ItemsSource = await Task.Run(() => LoadReference("category"));
+            GetComboBoxByName("season").ItemsSource = await Task.Run(() => LoadSeasons());
+            GetComboBoxByName("year").ItemsSource = await Task.Run(() => LoadYears());
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                cards.Add(card1);
+                cards.Add(card2);
+                cards.Add(card3);
+                cards.Add(card4);
+                cards.Add(card5);
+                cards.Add(card6);
+
+                OffControls();
+
+                LoadComboBoxs();
+
+                //loadRecords(1);
+                currentPage = 1;
+                createSearchQuery(currentPage);
+
+                UpdateGallery();
+
+                OnControls();
+            }
+            catch (Exception ex)
+            {
+                new MsgBox(ex.Message, "Ошибка").ShowDialog();
+            }
+            
+        }
+
         private void Window_Closed(object sender, EventArgs e)
         {
             try
@@ -49,60 +155,7 @@ namespace FlowerClient
             new Login().Show();
             this.Close();
         }
-
-        void LoadComboxBoxs()
-        {
-            loadReference("author");
-            loadReference("exposition");
-            loadReference("life_form");
-            loadReference("species_name");
-            loadReference("group");
-            loadReference("econ_group");
-            loadReference("people");
-            loadReference("history");
-            loadReference("buildings");
-            loadReference("category");
-            fillYearsSeasons();
-        }
-
-
-        private void Window_Loaded(object sender, RoutedEventArgs e)
-        {
-            cards.Add(card1);
-            cards.Add(card2);
-            cards.Add(card3);
-            cards.Add(card4);
-            cards.Add(card5);
-            cards.Add(card6);
-
-            LoadComboxBoxs();
-
-            //loadRecords(1);
-            currentPage = 1;
-            createSearchQuery(currentPage);
-
-            UpdateGallery();
-        }
-
-        private void fillYearsSeasons()
-        {
-            List<string> years = new List<string>();
-            List<string> seasons = new List<string>();
-
-            for (int i = 2017; i < 2031; i++)
-            {
-                years.Add(i.ToString());
-            }
-
-            seasons.Add("Весна");
-            seasons.Add("Лето");
-            seasons.Add("Осень");
-            seasons.Add("Зима");
-
-            season.ItemsSource = seasons;
-            year.ItemsSource = years;
-        }
-
+        
         public void cardActivate(object sender)
         {
             MaterialDesignThemes.Wpf.Card temp = sender as MaterialDesignThemes.Wpf.Card;
@@ -281,25 +334,13 @@ namespace FlowerClient
             }
         }
 
-        private void loadReference(string refName)
-        {
-            Mediator.instance.SQL = "select * from " + refName + "_view";
-            ComboBox c = FindName(refName) as ComboBox;
-
-            if(c != null)
-            {
-                var temp = Mediator.instance.ConvertQueryToComboBox();
-                c.ItemsSource = temp;
-            }
-        }
-
         private void MenuItem_Click_3(object sender, RoutedEventArgs e)
         {
             new ReferenceTableWindow().ShowDialog();
             //createSearchQuery(currentPage);
             loadRecords(currentPage);
             ClearGallery();
-            LoadComboxBoxs();
+            LoadComboBoxs();
             UpdateGallery();
         }
 
