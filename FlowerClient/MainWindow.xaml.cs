@@ -1,12 +1,15 @@
 ﻿using ImageMagick;
+using MaterialDesignThemes.Wpf;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
 
 namespace FlowerClient
 {
@@ -122,10 +125,43 @@ namespace FlowerClient
             }
         }
 
+        public static T FindChild<T>(DependencyObject parent) where T : DependencyObject
+        {
+            if (parent != null)
+            {
+                for (int i = 0; i < VisualTreeHelper.GetChildrenCount(parent); i++)
+                {
+                    DependencyObject child = VisualTreeHelper.GetChild(parent, i);
+                    if (child != null && child is T)
+                    {
+                        return (T)child;
+                    }
+
+                    T childItem = FindChild<T>(child);
+                    if (childItem != null)
+                    {
+                        return childItem;
+                    }
+                }
+            }
+            return null;
+        }
+
+        void ConfirmFilterColor()
+        {
+            foreach (var t in tagPanel.Items)
+            {
+                var parentObject = tagPanel.ItemContainerGenerator.ContainerFromItem(t);
+                Chip c = FindChild<Chip>(parentObject);
+                c.Background = System.Windows.Media.Brushes.LightGreen;
+            }
+        }
+
         private void Search_btn_Click(object sender, RoutedEventArgs e)
         {
             currentPage = 1;
             createSearchQuery(currentPage);
+            ConfirmFilterColor();
             ClearGallery();
             UpdateGallery();
         }
