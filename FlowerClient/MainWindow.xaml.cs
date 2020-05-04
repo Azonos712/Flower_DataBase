@@ -34,13 +34,13 @@ namespace FlowerClient
 
         void OnControls()
         {
-            blck_pnl.Visibility = Visibility.Hidden;
-            prgrss_br.Visibility = Visibility.Hidden;
             metadata.IsEnabled = true;
             search_panel.IsEnabled = true;
             tagPanel.IsEnabled = true;
             page_panel.IsEnabled = true;
             main_menu.IsEnabled = true;
+            blck_pnl.Visibility = Visibility.Hidden;
+            prgrss_br.Visibility = Visibility.Hidden;
         }
 
         void OffControls()
@@ -87,23 +87,23 @@ namespace FlowerClient
             return seasons;
         }
 
-        async void LoadComboBoxs()
-        {
-            GetComboBoxByName("author").ItemsSource = await Task.Run(() => LoadReference("author"));
-            GetComboBoxByName("exposition").ItemsSource = await Task.Run(() => LoadReference("exposition"));
-            GetComboBoxByName("life_form").ItemsSource = await Task.Run(() => LoadReference("life_form"));
-            GetComboBoxByName("species_name").ItemsSource = await Task.Run(() => LoadReference("species_name"));
-            GetComboBoxByName("group").ItemsSource = await Task.Run(() => LoadReference("group"));
-            GetComboBoxByName("econ_group").ItemsSource = await Task.Run(() => LoadReference("econ_group"));
-            GetComboBoxByName("people").ItemsSource = await Task.Run(() => LoadReference("people"));
-            GetComboBoxByName("history").ItemsSource = await Task.Run(() => LoadReference("history"));
-            GetComboBoxByName("buildings").ItemsSource = await Task.Run(() => LoadReference("buildings"));
-            GetComboBoxByName("category").ItemsSource = await Task.Run(() => LoadReference("category"));
-            GetComboBoxByName("season").ItemsSource = await Task.Run(() => LoadSeasons());
-            GetComboBoxByName("year").ItemsSource = await Task.Run(() => LoadYears());
-        }
+        //async void LoadComboBoxs()
+        //{
+        //    GetComboBoxByName("author").ItemsSource = await Task.Run(() => LoadReference("author"));
+        //    GetComboBoxByName("exposition").ItemsSource = await Task.Run(() => LoadReference("exposition"));
+        //    GetComboBoxByName("life_form").ItemsSource = await Task.Run(() => LoadReference("life_form"));
+        //    GetComboBoxByName("species_name").ItemsSource = await Task.Run(() => LoadReference("species_name"));
+        //    GetComboBoxByName("group").ItemsSource = await Task.Run(() => LoadReference("group"));
+        //    GetComboBoxByName("econ_group").ItemsSource = await Task.Run(() => LoadReference("econ_group"));
+        //    GetComboBoxByName("people").ItemsSource = await Task.Run(() => LoadReference("people"));
+        //    GetComboBoxByName("history").ItemsSource = await Task.Run(() => LoadReference("history"));
+        //    GetComboBoxByName("buildings").ItemsSource = await Task.Run(() => LoadReference("buildings"));
+        //    GetComboBoxByName("category").ItemsSource = await Task.Run(() => LoadReference("category"));
+        //    GetComboBoxByName("season").ItemsSource = await Task.Run(() => LoadSeasons());
+        //    GetComboBoxByName("year").ItemsSource = await Task.Run(() => LoadYears());
+        //}
 
-        private void Window_Loaded(object sender, RoutedEventArgs e)
+        async void Window_Loaded(object sender, RoutedEventArgs e)
         {
             try
             {
@@ -116,11 +116,23 @@ namespace FlowerClient
 
                 OffControls();
 
-                LoadComboBoxs();
+                GetComboBoxByName("author").ItemsSource = await Task.Run(() => LoadReference("author"));
+                GetComboBoxByName("exposition").ItemsSource = await Task.Run(() => LoadReference("exposition"));
+                GetComboBoxByName("life_form").ItemsSource = await Task.Run(() => LoadReference("life_form"));
+                GetComboBoxByName("species_name").ItemsSource = await Task.Run(() => LoadReference("species_name"));
+                GetComboBoxByName("group").ItemsSource = await Task.Run(() => LoadReference("group"));
+                GetComboBoxByName("econ_group").ItemsSource = await Task.Run(() => LoadReference("econ_group"));
+                GetComboBoxByName("people").ItemsSource = await Task.Run(() => LoadReference("people"));
+                GetComboBoxByName("history").ItemsSource = await Task.Run(() => LoadReference("history"));
+                GetComboBoxByName("buildings").ItemsSource = await Task.Run(() => LoadReference("buildings"));
+                GetComboBoxByName("category").ItemsSource = await Task.Run(() => LoadReference("category"));
+                GetComboBoxByName("season").ItemsSource = await Task.Run(() => LoadSeasons());
+                GetComboBoxByName("year").ItemsSource = await Task.Run(() => LoadYears());
 
                 //loadRecords(1);
                 currentPage = 1;
-                createSearchQuery(currentPage);
+                await Task.Run(() => SearchQuery(currentPage));
+                //SearchQuery(currentPage);
 
                 UpdateGallery();
 
@@ -128,6 +140,7 @@ namespace FlowerClient
             }
             catch (Exception ex)
             {
+                OnControls();
                 new MsgBox(ex.Message, "Ошибка").ShowDialog();
             }
             
@@ -163,18 +176,29 @@ namespace FlowerClient
             metadata.Visibility = Visibility.Visible;
         }
 
-        private void card_active_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        async void card_active_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            DetailedDesc d = new DetailedDesc();
-            MaterialDesignThemes.Wpf.Card temp = sender as MaterialDesignThemes.Wpf.Card;
-            d.DataContext = temp.DataContext;
-
-            if (d.ShowDialog() == true)
+            try
             {
-                //createSearchQuery(currentPage);
-                loadRecords(currentPage);
-                ClearGallery();
-                UpdateGallery();
+                DetailedDesc d = new DetailedDesc();
+                MaterialDesignThemes.Wpf.Card temp = sender as MaterialDesignThemes.Wpf.Card;
+                d.DataContext = temp.DataContext;
+
+                if (d.ShowDialog() == true)
+                {
+                    //SearchQuery(currentPage);
+                    OffControls();
+                    await Task.Run(() => loadRecords(currentPage));
+                    //loadRecords(currentPage);
+                    ClearGallery();
+                    UpdateGallery();
+                    OnControls();
+                }
+            }
+            catch (Exception ex)
+            {
+                OnControls();
+                new MsgBox(ex.Message, "Ошибка").ShowDialog();
             }
         }
 
@@ -210,22 +234,34 @@ namespace FlowerClient
             }
         }
 
-        private void Search_btn_Click(object sender, RoutedEventArgs e)
+        async void UpdateAll()
         {
-            currentPage = 1;
-            createSearchQuery(currentPage);
-            ConfirmFilterColor();
-            ClearGallery();
-            UpdateGallery();
+            try
+            {
+                OffControls();
+                currentPage = 1;
+                await Task.Run(() => SearchQuery(currentPage));
+                ConfirmFilterColor();
+                ClearGallery();
+                UpdateGallery();
+                OnControls();
+            }
+            catch (Exception ex)
+            {
+                OnControls();
+                new MsgBox(ex.Message, "Ошибка").ShowDialog();
+            }
         }
 
-        private void reset_btn_Click(object sender, RoutedEventArgs e)
+        void Search_btn_Click(object sender, RoutedEventArgs e)
+        {
+            UpdateAll();
+        }
+
+        void reset_btn_Click(object sender, RoutedEventArgs e)
         {
             tagPanel.Items.Clear();
-            currentPage = 1;
-            createSearchQuery(currentPage);
-            ClearGallery();
-            UpdateGallery();
+            UpdateAll();
         }
 
         private void nextPage_Click(object sender, RoutedEventArgs e)
@@ -248,51 +284,74 @@ namespace FlowerClient
             results = Mediator.instance.ConvertQueryToTable();
         }
 
-        private void loadPage(bool direction)
+        async void loadPage(bool direction)
         {
-            if (direction)
+            try
             {
-                //createSearchQuery(currentPage + 1);
-                loadRecords(currentPage + 1);
+                OffControls();
+                if (direction)
+                {
+                    //SearchQuery(currentPage + 1);
+                    await Task.Run(() => loadRecords(currentPage + 1));
+                    //loadRecords(currentPage + 1);
 
-                if (results.Rows.Count > 0)
-                    currentPage++;
+                    if (results.Rows.Count > 0)
+                        currentPage++;
+                    else
+                    {
+                        OnControls();
+                        return;
+                    }
+                }
                 else
-                    return;
+                {
+                    if (currentPage != 1)
+                        currentPage--;
+                    else
+                    {
+                        OnControls();
+                        return;
+                    }
+
+                    //SearchQuery(currentPage);
+                    await Task.Run(() => loadRecords(currentPage));
+                    //loadRecords(currentPage);
+                }
+
+                ClearGallery();
+                UpdateGallery();
+                OnControls();
             }
-            else
+            catch (Exception ex)
             {
-                if (currentPage != 1)
-                    currentPage--;
-                else
-                    return;
-
-                //createSearchQuery(currentPage);
-                loadRecords(currentPage);
+                OnControls();
+                new MsgBox(ex.Message, "Ошибка").ShowDialog();
             }
-
-            ClearGallery();
-            UpdateGallery();
         }
 
         void ClearGallery()
         {
-            gallery.Clear();
-            foreach (MaterialDesignThemes.Wpf.Card c in cards)
+            if (gallery.Count != 0)
             {
-                c.DataContext = null;
-                c.Visibility = Visibility.Hidden;
+                gallery.Clear();
+                foreach (MaterialDesignThemes.Wpf.Card c in cards)
+                {
+                    c.DataContext = null;
+                    c.Visibility = Visibility.Hidden;
+                }
+                GC.Collect();
             }
-            GC.Collect();
         }
 
-        void UpdateGallery()
+        async void UpdateGallery()
         {
             for (int i = 0; i < results.Rows.Count; i++)
             {
                 gallery.Add(new Card(results.Rows[i]));
                 gallery.Last().captionP = gallery.Last().groupP + " - " + gallery.Last().economicGroupP;
-                gallery.Last().ImageS = Mediator.instance.ByteToImage(MinimizeImage(Mediator.instance.Path + gallery.Last().idP + ".jpg"));
+                var temp1 = await Task.Run(() => MinimizeImage(Mediator.instance.Path + gallery.Last().idP + ".jpg"));
+                gallery.Last().ImageS = Mediator.instance.ByteToImage(temp1);
+                //gallery.Last().ImageS = Mediator.instance.ByteToImage(MinimizeImage(Mediator.instance.Path + gallery.Last().idP + ".jpg"));
                 //gallery.Last().ImageS = Mediator.instance.NonBlockingLoad(Mediator.instance.Path + gallery.Last().idP + ".jpg");
             }
 
@@ -323,25 +382,60 @@ namespace FlowerClient
             return img.ToByteArray();
         }
 
-        private void MenuItem_Click_2(object sender, RoutedEventArgs e)
+        async void MenuItem_Click_2(object sender, RoutedEventArgs e)
         {
-            if (new DetailedDesc().ShowDialog() == true)
+            try
             {
-                //createSearchQuery(currentPage);
-                loadRecords(currentPage);
-                ClearGallery();
-                UpdateGallery();
+                if (new DetailedDesc().ShowDialog() == true)
+                {
+                    //SearchQuery(currentPage);
+                    //loadRecords(currentPage);
+                    OffControls();
+                    await Task.Run(() => loadRecords(currentPage));
+                    ClearGallery();
+                    UpdateGallery();
+                    OnControls();
+                }
+            }
+            catch (Exception ex)
+            {
+                OnControls();
+                new MsgBox(ex.Message, "Ошибка").ShowDialog();
             }
         }
 
-        private void MenuItem_Click_3(object sender, RoutedEventArgs e)
+        async void MenuItem_Click_3(object sender, RoutedEventArgs e)
         {
-            new ReferenceTableWindow().ShowDialog();
-            //createSearchQuery(currentPage);
-            loadRecords(currentPage);
-            ClearGallery();
-            LoadComboBoxs();
-            UpdateGallery();
+            try
+            {
+                new ReferenceTableWindow().ShowDialog();
+                OffControls();
+                //SearchQuery(currentPage);
+                //loadRecords(currentPage);
+                await Task.Run(() => loadRecords(currentPage));
+                ClearGallery();
+
+                GetComboBoxByName("author").ItemsSource = await Task.Run(() => LoadReference("author"));
+                GetComboBoxByName("exposition").ItemsSource = await Task.Run(() => LoadReference("exposition"));
+                GetComboBoxByName("life_form").ItemsSource = await Task.Run(() => LoadReference("life_form"));
+                GetComboBoxByName("species_name").ItemsSource = await Task.Run(() => LoadReference("species_name"));
+                GetComboBoxByName("group").ItemsSource = await Task.Run(() => LoadReference("group"));
+                GetComboBoxByName("econ_group").ItemsSource = await Task.Run(() => LoadReference("econ_group"));
+                GetComboBoxByName("people").ItemsSource = await Task.Run(() => LoadReference("people"));
+                GetComboBoxByName("history").ItemsSource = await Task.Run(() => LoadReference("history"));
+                GetComboBoxByName("buildings").ItemsSource = await Task.Run(() => LoadReference("buildings"));
+                GetComboBoxByName("category").ItemsSource = await Task.Run(() => LoadReference("category"));
+                GetComboBoxByName("season").ItemsSource = await Task.Run(() => LoadSeasons());
+                GetComboBoxByName("year").ItemsSource = await Task.Run(() => LoadYears());
+
+                UpdateGallery();
+                OnControls();
+            }
+            catch (Exception ex)
+            {
+                OnControls();
+                new MsgBox(ex.Message, "Ошибка").ShowDialog();
+            }
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -387,7 +481,7 @@ namespace FlowerClient
             tagPanel.Items.Remove((sender as FrameworkElement).DataContext);
         }
         
-        private void createSearchQuery(int page)
+        private void SearchQuery(int page)
         {
             Mediator.instance.SQL = "select * from plants_all_view";
             if (tagPanel.Items.Count != 0)
