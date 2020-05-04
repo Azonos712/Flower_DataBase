@@ -22,14 +22,14 @@
         <DockPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3">
             <Menu x:Name="main_menu" VerticalAlignment="Center">
                 <MenuItem x:Name="admin_menuitem" Header="Администрирование" Height="20">
-                    <MenuItem Header="Таблица пользователей" Click="MenuItem_Click"></MenuItem>
-                    <MenuItem Header="Таблица справочников" Click="MenuItem_Click_3"></MenuItem>
-                </MenuItem>
-                <MenuItem x:Name="system_menuitem" Header="Система" Height="20">
-                    <MenuItem Header="Выход из учетной записи" Click="MenuItem_Click_1"></MenuItem>
+                    <MenuItem Header="Редактор пользователей" Click="MenuItem_Click"></MenuItem>
+                    <MenuItem Header="Редактор справочников" Click="MenuItem_Click_3"></MenuItem>
                 </MenuItem>
                 <MenuItem x:Name="foto_menuitem" Header="Фото" Height="20">
                     <MenuItem Header="Добавить" Click="MenuItem_Click_2"></MenuItem>
+                </MenuItem>
+                <MenuItem x:Name="system_menuitem" Header="Система" Height="20">
+                    <MenuItem Header="Выход из учетной записи" Click="MenuItem_Click_1"></MenuItem>
                 </MenuItem>
             </Menu>
         </DockPanel>
@@ -51,7 +51,7 @@
             </ScrollViewer>
         </Border>
 
-        <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" >
+        <StackPanel x:Name="search_panel" Orientation="Horizontal" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" >
             <Button x:Name="search_btn" Content="Поиск" Click="Search_btn_Click" Margin="10" Width="150"/>
             <Button x:Name="reset_btn"  Content="Сброс"  Click="reset_btn_Click" Margin="10" Width="150"></Button>
         </StackPanel>
@@ -329,6 +329,9 @@
             </Canvas>
         </WrapPanel>
 
+        <ProgressBar Grid.Row="2" Grid.Column="0" Width="400" Height="400" x:Name="prgrss_br"  Style="{StaticResource MaterialDesignCircularProgressBar}" IsIndeterminate="True" HorizontalAlignment="Center" VerticalAlignment="Center"></ProgressBar>
+
+
         <StackPanel x:Name="metadata" Visibility="Visible" Margin="0 0 10 0" Grid.Row="2" Grid.Column="1" Grid.RowSpan="2">
             <Grid>
                 <Grid.ColumnDefinitions>
@@ -437,7 +440,7 @@
             <TextBlock Text="{Binding categoryP}" Margin="5,5,5.2,0" FontSize="24" TextWrapping="Wrap" Height="66"></TextBlock>-->
         </StackPanel>
 
-        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal" Grid.Row="3" Grid.Column="0">
+        <StackPanel x:Name="page_panel" HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal" Grid.Row="3" Grid.Column="0">
             <Button Margin="10 0 10 0" x:Name="prevPage" Content="&lt;" Click="prevPage_Click"/>
             <Button Margin="10 0 10 0" x:Name="nextPage" Content="&gt;" Click="nextPage_Click"/>
         </StackPanel>
