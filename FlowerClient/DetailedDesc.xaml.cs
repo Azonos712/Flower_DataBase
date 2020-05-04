@@ -141,6 +141,9 @@ namespace FlowerClient
                 if (Directory.Exists(Mediator.instance.Path) == false)
                     throw new Exception("Путь сохранения фотографий не существует!");
 
+                if (photo.Source == null)
+                    throw new Exception("Загрузите фотографию!");
+
                 Card temp = (Card)this.DataContext;
 
                 int fotoID = -1;
