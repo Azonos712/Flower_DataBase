@@ -14,6 +14,6 @@
         <PasswordBox materialDesign:HintAssist.Hint="Пароль" x:Name="txt_password" HorizontalAlignment="Left" Height="30" Margin="10,80,0,0" VerticalAlignment="Top" Width="220" Password="admin"/>
         
         <DockPanel x:Name="blck_pnl" Visibility="Visible" Background="Black" Opacity="0.1"></DockPanel>
-        <ProgressBar Width="140" Height="140" x:Name="prgrss_br"  Style="{StaticResource MaterialDesignCircularProgressBar}" IsIndeterminate="True" HorizontalAlignment="Center" VerticalAlignment="Center"></ProgressBar>
+        <ProgressBar Width="120" Height="120" x:Name="prgrss_br" Margin="5"  Style="{StaticResource MaterialDesignCircularProgressBar}" IsIndeterminate="True" HorizontalAlignment="Center" VerticalAlignment="Top"></ProgressBar>
     </Grid>
 </Window>
