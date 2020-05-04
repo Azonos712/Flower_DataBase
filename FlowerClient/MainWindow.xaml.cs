@@ -1,21 +1,12 @@
 ﻿using ImageMagick;
-using Npgsql;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace FlowerClient
 {
@@ -25,6 +16,7 @@ namespace FlowerClient
         private List<Card> gallery = new List<Card>(6);
         private DataTable results;
         private int currentPage;
+        private string currentSQL;
         public MainWindow()
         {
             InitializeComponent();
@@ -55,23 +47,6 @@ namespace FlowerClient
             this.Close();
         }
 
-        //void ResetComboboxBoxs()
-        //{
-        //    (FindName("surname") as ComboBox).SelectedItem = "Все";
-        //    (FindName("exposition") as ComboBox).SelectedItem = "Все";
-        //    (FindName("life_form") as ComboBox).SelectedItem = "Все";
-        //    (FindName("species_name") as ComboBox).SelectedItem = "Все";
-        //    (FindName("group") as ComboBox).SelectedItem = "Все";
-        //    (FindName("econ_group") as ComboBox).SelectedItem = "Все";
-        //    (FindName("people") as ComboBox).SelectedItem = "Все";
-        //    (FindName("history") as ComboBox).SelectedItem = "Все";
-        //    (FindName("buildings") as ComboBox).SelectedItem = "Все";
-        //    (FindName("category") as ComboBox).SelectedItem = "Все";
-
-        //    season.SelectedItem = "Все";
-        //    year.SelectedItem = "Все";
-        //}
-
         void LoadComboxBoxs()
         {
             loadReference("author");
@@ -101,7 +76,7 @@ namespace FlowerClient
 
             //loadRecords(1);
             currentPage = 1;
-            createSearchQuery(1);
+            createSearchQuery(currentPage);
 
             UpdateGallery();
         }
@@ -140,8 +115,8 @@ namespace FlowerClient
 
             if (d.ShowDialog() == true)
             {
-                createSearchQuery(currentPage);
-                //loadRecords(currentPage);
+                //createSearchQuery(currentPage);
+                loadRecords(currentPage);
                 ClearGallery();
                 UpdateGallery();
             }
@@ -155,6 +130,11 @@ namespace FlowerClient
             UpdateGallery();
         }
 
+        private void reset_btn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
         private void nextPage_Click(object sender, RoutedEventArgs e)
         {
             loadPage(true);
@@ -165,22 +145,22 @@ namespace FlowerClient
             loadPage(false);
         }
 
-        /*private void loadRecords(int currentPage)
+        private void loadRecords(int page)
         {
             if (results != null)
             {
                 results.Clear();
             }
-            Mediator.instance.SQL = "select * from plants_all_view limit 6 offset " + ((currentPage - 1) * 6).ToString();
+            Mediator.instance.SQL = currentSQL + " limit 6 offset " + ((page - 1) * 6).ToString();
             results = Mediator.instance.ConvertQueryToTable();
-        }*/
+        }
 
         private void loadPage(bool direction)
         {
             if (direction)
             {
-                createSearchQuery(currentPage + 1);
-                //loadRecords(currentPage + 1);
+                //createSearchQuery(currentPage + 1);
+                loadRecords(currentPage + 1);
 
                 if (results.Rows.Count > 0)
                     currentPage++;
@@ -194,7 +174,8 @@ namespace FlowerClient
                 else
                     return;
 
-                createSearchQuery(currentPage);
+                //createSearchQuery(currentPage);
+                loadRecords(currentPage);
             }
 
             ClearGallery();
@@ -253,7 +234,8 @@ namespace FlowerClient
         {
             if (new DetailedDesc().ShowDialog() == true)
             {
-                createSearchQuery(currentPage);
+                //createSearchQuery(currentPage);
+                loadRecords(currentPage);
                 ClearGallery();
                 UpdateGallery();
             }
@@ -274,7 +256,8 @@ namespace FlowerClient
         private void MenuItem_Click_3(object sender, RoutedEventArgs e)
         {
             new ReferenceTableWindow().ShowDialog();
-            createSearchQuery(currentPage);
+            //createSearchQuery(currentPage);
+            loadRecords(currentPage);
             ClearGallery();
             LoadComboxBoxs();
             UpdateGallery();
@@ -356,6 +339,8 @@ namespace FlowerClient
 
                 Mediator.instance.SQL += " where (" + result;
             }
+            currentSQL = Mediator.instance.SQL;
+
             Mediator.instance.SQL += " limit 6 offset " + ((page - 1) * 6).ToString();
             results = Mediator.instance.ConvertQueryToTable();
         }
