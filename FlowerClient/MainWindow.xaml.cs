@@ -132,7 +132,11 @@ namespace FlowerClient
 
         private void reset_btn_Click(object sender, RoutedEventArgs e)
         {
-
+            tagPanel.Items.Clear();
+            currentPage = 1;
+            createSearchQuery(currentPage);
+            ClearGallery();
+            UpdateGallery();
         }
 
         private void nextPage_Click(object sender, RoutedEventArgs e)
