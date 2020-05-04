@@ -22,8 +22,8 @@
         <DockPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3">
             <Menu x:Name="main_menu" VerticalAlignment="Center">
                 <MenuItem x:Name="admin_menuitem" Header="Администрирование" Height="20">
-                    <MenuItem Header="Таблица пользователей" Click="MenuItem_Click"></MenuItem>
-                    <MenuItem Header="Таблица справочников" Click="MenuItem_Click_3"></MenuItem>
+                    <MenuItem Header="Редактор пользователей" Click="MenuItem_Click"></MenuItem>
+                    <MenuItem Header="Редактор справочников" Click="MenuItem_Click_3"></MenuItem>
                 </MenuItem>
                 <MenuItem x:Name="system_menuitem" Header="Система" Height="20">
                     <MenuItem Header="Выход из учетной записи" Click="MenuItem_Click_1"></MenuItem>
@@ -329,7 +329,6 @@
             </Canvas>
         </WrapPanel>
 
-        <DockPanel Grid.Row="2" Grid.Column="0" Margin="35 10 10 10" x:Name="blck_pnl" Visibility="Visible" Background="Black" Opacity="0.1"></DockPanel>
         <ProgressBar Grid.Row="2" Grid.Column="0" Width="400" Height="400" x:Name="prgrss_br"  Style="{StaticResource MaterialDesignCircularProgressBar}" IsIndeterminate="True" HorizontalAlignment="Center" VerticalAlignment="Center"></ProgressBar>
 
 

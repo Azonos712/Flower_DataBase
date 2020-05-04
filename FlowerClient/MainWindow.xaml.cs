@@ -34,20 +34,18 @@ namespace FlowerClient
 
         void OnControls()
         {
-            metadata.IsEnabled = true;
+            //metadata.IsEnabled = true;
             search_panel.IsEnabled = true;
             tagPanel.IsEnabled = true;
             page_panel.IsEnabled = true;
             main_menu.IsEnabled = true;
-            blck_pnl.Visibility = Visibility.Hidden;
             prgrss_br.Visibility = Visibility.Hidden;
         }
 
         void OffControls()
         {
-            blck_pnl.Visibility = Visibility.Visible;
             prgrss_br.Visibility = Visibility.Visible;
-            metadata.IsEnabled = false;
+            //metadata.IsEnabled = false;
             search_panel.IsEnabled = false;
             tagPanel.IsEnabled = false;
             page_panel.IsEnabled = false;
@@ -129,12 +127,12 @@ namespace FlowerClient
                 GetComboBoxByName("season").ItemsSource = await Task.Run(() => LoadSeasons());
                 GetComboBoxByName("year").ItemsSource = await Task.Run(() => LoadYears());
 
-                //loadRecords(1);
                 currentPage = 1;
                 await Task.Run(() => SearchQuery(currentPage));
                 //SearchQuery(currentPage);
 
-                UpdateGallery();
+                await Task.Run(() => UpdateGallery());
+                //UpdateGallery();
 
                 OnControls();
             }
@@ -158,9 +156,24 @@ namespace FlowerClient
             }
         }
 
-        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        async void MenuItem_Click(object sender, RoutedEventArgs e)
         {
             new AdminWindow().ShowDialog();
+
+            try
+            {
+                new AdminWindow().ShowDialog();
+                OffControls();
+                await Task.Run(() => LoadRecords(currentPage));
+                ClearGallery();
+                await Task.Run(() => UpdateGallery());
+                OnControls();
+            }
+            catch (Exception ex)
+            {
+                OnControls();
+                new MsgBox(ex.Message, "Ошибка").ShowDialog();
+            }
         }
 
         private void MenuItem_Click_1(object sender, RoutedEventArgs e)
@@ -186,12 +199,10 @@ namespace FlowerClient
 
                 if (d.ShowDialog() == true)
                 {
-                    //SearchQuery(currentPage);
                     OffControls();
-                    await Task.Run(() => loadRecords(currentPage));
-                    //loadRecords(currentPage);
+                    await Task.Run(() => LoadRecords(currentPage));
                     ClearGallery();
-                    UpdateGallery();
+                    await Task.Run(() => UpdateGallery());
                     OnControls();
                 }
             }
@@ -243,7 +254,7 @@ namespace FlowerClient
                 await Task.Run(() => SearchQuery(currentPage));
                 ConfirmFilterColor();
                 ClearGallery();
-                UpdateGallery();
+                await Task.Run(() => UpdateGallery());
                 OnControls();
             }
             catch (Exception ex)
@@ -274,7 +285,7 @@ namespace FlowerClient
             loadPage(false);
         }
 
-        private void loadRecords(int page)
+        void LoadRecords(int page)
         {
             if (results != null)
             {
@@ -291,9 +302,7 @@ namespace FlowerClient
                 OffControls();
                 if (direction)
                 {
-                    //SearchQuery(currentPage + 1);
-                    await Task.Run(() => loadRecords(currentPage + 1));
-                    //loadRecords(currentPage + 1);
+                    await Task.Run(() => LoadRecords(currentPage + 1));
 
                     if (results.Rows.Count > 0)
                         currentPage++;
@@ -313,13 +322,12 @@ namespace FlowerClient
                         return;
                     }
 
-                    //SearchQuery(currentPage);
-                    await Task.Run(() => loadRecords(currentPage));
-                    //loadRecords(currentPage);
+                    await Task.Run(() => LoadRecords(currentPage));
                 }
 
                 ClearGallery();
-                UpdateGallery();
+                await Task.Run(() => UpdateGallery());
+                //UpdateGallery();
                 OnControls();
             }
             catch (Exception ex)
@@ -343,15 +351,13 @@ namespace FlowerClient
             }
         }
 
-        async void UpdateGallery()
+        void UpdateGallery()
         {
             for (int i = 0; i < results.Rows.Count; i++)
             {
                 gallery.Add(new Card(results.Rows[i]));
                 gallery.Last().captionP = gallery.Last().groupP + " - " + gallery.Last().economicGroupP;
-                var temp1 = await Task.Run(() => MinimizeImage(Mediator.instance.Path + gallery.Last().idP + ".jpg"));
-                gallery.Last().ImageS = Mediator.instance.ByteToImage(temp1);
-                //gallery.Last().ImageS = Mediator.instance.ByteToImage(MinimizeImage(Mediator.instance.Path + gallery.Last().idP + ".jpg"));
+                gallery.Last().ImageS = Mediator.instance.ByteToImage(MinimizeImage(Mediator.instance.Path + gallery.Last().idP + ".jpg"));
                 //gallery.Last().ImageS = Mediator.instance.NonBlockingLoad(Mediator.instance.Path + gallery.Last().idP + ".jpg");
             }
 
@@ -359,8 +365,11 @@ namespace FlowerClient
             {
                 if (gallery[i] != null)
                 {
-                    cards[i].DataContext = gallery[i];
-                    cards[i].Visibility = Visibility.Visible;
+                    Dispatcher.Invoke(() =>
+                    {
+                        cards[i].DataContext = gallery[i];
+                        cards[i].Visibility = Visibility.Visible;
+                    });
                 }
             }
         }
@@ -388,12 +397,10 @@ namespace FlowerClient
             {
                 if (new DetailedDesc().ShowDialog() == true)
                 {
-                    //SearchQuery(currentPage);
-                    //loadRecords(currentPage);
                     OffControls();
-                    await Task.Run(() => loadRecords(currentPage));
+                    await Task.Run(() => LoadRecords(currentPage));
                     ClearGallery();
-                    UpdateGallery();
+                    await Task.Run(() => UpdateGallery());
                     OnControls();
                 }
             }
@@ -410,9 +417,9 @@ namespace FlowerClient
             {
                 new ReferenceTableWindow().ShowDialog();
                 OffControls();
-                //SearchQuery(currentPage);
-                //loadRecords(currentPage);
-                await Task.Run(() => loadRecords(currentPage));
+                metadata.IsEnabled = false;
+
+                await Task.Run(() => LoadRecords(currentPage));
                 ClearGallery();
 
                 GetComboBoxByName("author").ItemsSource = await Task.Run(() => LoadReference("author"));
@@ -428,12 +435,14 @@ namespace FlowerClient
                 GetComboBoxByName("season").ItemsSource = await Task.Run(() => LoadSeasons());
                 GetComboBoxByName("year").ItemsSource = await Task.Run(() => LoadYears());
 
-                UpdateGallery();
+                await Task.Run(() => UpdateGallery());
                 OnControls();
+                metadata.IsEnabled = true;
             }
             catch (Exception ex)
             {
                 OnControls();
+                metadata.IsEnabled = true;
                 new MsgBox(ex.Message, "Ошибка").ShowDialog();
             }
         }

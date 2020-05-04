@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Forms;
 using System.Windows.Media;
@@ -22,6 +23,25 @@ namespace FlowerClient
         public DetailedDesc()
         {
             InitializeComponent();
+            OnControls();
+        }
+
+        void OnControls()
+        {
+            prgrss_br.Visibility = Visibility.Hidden;
+            btn_foto.IsEnabled = true;
+            btn_save_foto.IsEnabled = true;
+            btn_save.IsEnabled = true;
+            btn_cancel.IsEnabled = true;
+        }
+
+        void OffControls()
+        {
+            prgrss_br.Visibility = Visibility.Visible;
+            btn_foto.IsEnabled = false;
+            btn_save_foto.IsEnabled = false;
+            btn_save.IsEnabled = false;
+            btn_cancel.IsEnabled = false;
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -171,7 +191,7 @@ namespace FlowerClient
             LoadNewPhoto();
         }
 
-        private void LoadNewPhoto()
+        async void LoadNewPhoto()
         {
             try
             {
@@ -191,18 +211,23 @@ namespace FlowerClient
                 photo.Source = null;
                 string filename = op.FileName;
 
-                var b_img = PhotoProcessing(filename);
+
+                OffControls();
+
+                var b_img = await Task.Run(() => PhotoProcessing(filename)); //PhotoProcessing(filename);
 
                 var bitmap_img = Mediator.instance.ByteToImage(b_img);
 
                 photo.Source = bitmap_img;
 
+                OnControls();
                 //photo.Source = Mediator.instance.NonBlockingLoad(filename);
 
                 op.Dispose();
             }
             catch (Exception ex)
             {
+                OnControls();
                 new MsgBox(ex.Message, "Ошибка").ShowDialog();
             }
         }
