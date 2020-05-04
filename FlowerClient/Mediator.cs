@@ -81,6 +81,7 @@ namespace FlowerClient
             biImg.BeginInit();
             biImg.StreamSource = ms;
             biImg.EndInit();
+            biImg.Freeze();
             return biImg;
         }
 
