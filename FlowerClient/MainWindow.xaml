@@ -25,11 +25,11 @@
                     <MenuItem Header="Редактор пользователей" Click="MenuItem_Click"></MenuItem>
                     <MenuItem Header="Редактор справочников" Click="MenuItem_Click_3"></MenuItem>
                 </MenuItem>
-                <MenuItem x:Name="system_menuitem" Header="Система" Height="20">
-                    <MenuItem Header="Выход из учетной записи" Click="MenuItem_Click_1"></MenuItem>
-                </MenuItem>
                 <MenuItem x:Name="foto_menuitem" Header="Фото" Height="20">
                     <MenuItem Header="Добавить" Click="MenuItem_Click_2"></MenuItem>
+                </MenuItem>
+                <MenuItem x:Name="system_menuitem" Header="Система" Height="20">
+                    <MenuItem Header="Выход из учетной записи" Click="MenuItem_Click_1"></MenuItem>
                 </MenuItem>
             </Menu>
         </DockPanel>

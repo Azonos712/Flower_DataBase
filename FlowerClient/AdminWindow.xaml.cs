@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Data;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -26,6 +27,24 @@ namespace FlowerClient
             }
         }
 
+        void OnControls()
+        {
+            btn_pic_path.IsEnabled = true;
+            btn_add.IsEnabled = true;
+            btn_del.IsEnabled = true;
+            cbx_roles.IsEnabled = true;
+            prgrss_br.Visibility = Visibility.Hidden;
+        }
+
+        void OffControls()
+        {
+            prgrss_br.Visibility = Visibility.Visible;
+            btn_pic_path.IsEnabled = false;
+            btn_add.IsEnabled = false;
+            btn_del.IsEnabled = false;
+            cbx_roles.IsEnabled = false;
+        }
+
         private DataView ShowUsersByRole(string role)
         {
             Mediator.instance.SQL = "select * from show_users_by_role('" + role + "')";
@@ -33,40 +52,57 @@ namespace FlowerClient
             return temp;
         }
 
-        void UpdateUserTable()
+        private async void Cbx_roles_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             try
             {
+                OffControls();
                 ComboBoxItem selectedItem = (ComboBoxItem)cbx_roles.SelectedItem;
                 if (selectedItem.Content.ToString() == "Пользователи")
                 {
-                    users_table.DataContext = ShowUsersByRole("Flower_Employee");
+                    users_table.DataContext = await Task.Run(() => ShowUsersByRole("Flower_Employee"));
                 }
                 else
                 {
-                    users_table.DataContext = ShowUsersByRole("Flower_Admin");
+                    users_table.DataContext = await Task.Run(() => ShowUsersByRole("Flower_Admin"));
                 }
+                OnControls();
             }
             catch (Exception ex)
             {
+                OnControls();
                 new MsgBox(ex.Message, "Ошибка").ShowDialog();
             }
         }
 
-        private void Cbx_roles_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            UpdateUserTable();
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
+        async void Button_Click(object sender, RoutedEventArgs e)
         {
             if (new AddUser().ShowDialog() == true)
             {
-                UpdateUserTable();
+                try
+                {
+                    OffControls();
+                    ComboBoxItem selectedItem = (ComboBoxItem)cbx_roles.SelectedItem;
+                    if (selectedItem.Content.ToString() == "Пользователи")
+                    {
+                        users_table.DataContext = await Task.Run(() => ShowUsersByRole("Flower_Employee"));
+                    }
+                    else
+                    {
+                        users_table.DataContext = await Task.Run(() => ShowUsersByRole("Flower_Admin"));
+                    }
+                    OnControls();
+                }
+                catch (Exception ex)
+                {
+                    OnControls();
+                    new MsgBox(ex.Message, "Ошибка").ShowDialog();
+                }
             }
         }
         #region DELETE USER
-        void DeleteUser()
+
+        async void Button_Click_1(object sender, RoutedEventArgs e)
         {
             try
             {
@@ -80,18 +116,26 @@ namespace FlowerClient
                     Mediator.instance.Execute();
 
                     new MsgBox("Удаление пользователя прошло успешно!", "Информация").ShowDialog();
-                    UpdateUserTable();
+
+
+                    OffControls();
+                    ComboBoxItem selectedItem = (ComboBoxItem)cbx_roles.SelectedItem;
+                    if (selectedItem.Content.ToString() == "Пользователи")
+                    {
+                        users_table.DataContext = await Task.Run(() => ShowUsersByRole("Flower_Employee"));
+                    }
+                    else
+                    {
+                        users_table.DataContext = await Task.Run(() => ShowUsersByRole("Flower_Admin"));
+                    }
+                    OnControls();
                 }
             }
             catch (Exception ex)
             {
+                OnControls();
                 new MsgBox(ex.Message, "Ошибка").ShowDialog();
             }
-        }
-
-        private void Button_Click_1(object sender, RoutedEventArgs e)
-        {
-            DeleteUser();
         }
         #endregion
         private void Btn_pic_path_Click(object sender, RoutedEventArgs e)

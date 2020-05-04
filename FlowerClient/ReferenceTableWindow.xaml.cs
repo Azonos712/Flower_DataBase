@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Data;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -11,6 +13,22 @@ namespace FlowerClient
         {
             InitializeComponent();
             cbx_category.SelectedIndex = 0;
+        }
+
+        void OnControls()
+        {
+            btn_add.IsEnabled = true;
+            btn_del.IsEnabled = true;
+            cbx_category.IsEnabled = true;
+            prgrss_br.Visibility = Visibility.Hidden;
+        }
+
+        void OffControls()
+        {
+            prgrss_br.Visibility = Visibility.Visible;
+            btn_add.IsEnabled = false;
+            btn_del.IsEnabled = false;
+            cbx_category.IsEnabled = false;
         }
 
         string StringToNameTable(string str)
@@ -61,28 +79,24 @@ namespace FlowerClient
             return temp;
         }
 
-        void UpdateReferenceTable()
+        async void CallEditForm(bool mode, string value = "")
         {
             try
             {
                 ComboBoxItem selectedItem = (ComboBoxItem)cbx_category.SelectedItem;
                 string temp = StringToNameTable(selectedItem.Content.ToString());
-                reference_table.DataContext = ShowReference(temp + "_view");
+
+                if (new ReferenceEditWindow(mode, temp, value).ShowDialog() == true)
+                {
+                    OffControls();
+                    reference_table.DataContext = await Task.Run(() => ShowReference(temp + "_view"));
+                    OnControls();
+                }
             }
             catch (Exception ex)
             {
+                OnControls();
                 new MsgBox(ex.Message, "Ошибка").ShowDialog();
-            }
-        }
-
-        void CallEditForm(bool mode, string value = "")
-        {
-            ComboBoxItem selectedItem = (ComboBoxItem)cbx_category.SelectedItem;
-            string temp = StringToNameTable(selectedItem.Content.ToString());
-
-            if (new ReferenceEditWindow(mode, temp, value).ShowDialog() == true)
-            {
-                UpdateReferenceTable();
             }
         }
 
@@ -114,9 +128,21 @@ namespace FlowerClient
             }
         }
 
-        private void Cbx_category_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        async void Cbx_category_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            UpdateReferenceTable();
+            try
+            {
+                OffControls();
+                ComboBoxItem selectedItem = (ComboBoxItem)cbx_category.SelectedItem;
+                string temp = StringToNameTable(selectedItem.Content.ToString());
+                reference_table.DataContext = await Task.Run(() => ShowReference(temp + "_view"));
+                OnControls();
+            }
+            catch (Exception ex)
+            {
+                OnControls();
+                new MsgBox(ex.Message, "Ошибка").ShowDialog();
+            }
         }
     }
 }

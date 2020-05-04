@@ -158,8 +158,6 @@ namespace FlowerClient
 
         async void MenuItem_Click(object sender, RoutedEventArgs e)
         {
-            new AdminWindow().ShowDialog();
-
             try
             {
                 new AdminWindow().ShowDialog();
