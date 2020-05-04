@@ -6,11 +6,14 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:FlowerClient"
         mc:Ignorable="d"
-        Title="Login" Height="212" Width="229" TextElement.FontSize="14" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+        Title="Вход" Height="210" Width="260" TextElement.FontSize="14" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
     <Grid>
-        <Button Content="Вход" HorizontalAlignment="Left" Margin="10,129,0,0" VerticalAlignment="Top" Width="191" Click="Button_Click"/>
-        <TextBox materialDesign:HintAssist.Hint="Сервер" x:Name="txt_adress" HorizontalAlignment="Left" Height="30" Margin="10,10,0,0" TextWrapping="Wrap" Text="31.6.98.114" VerticalAlignment="Top" Width="190"/>
-        <TextBox materialDesign:HintAssist.Hint="Логин" x:Name="txt_login" HorizontalAlignment="Left" Height="30" Margin="10,45,0,0" TextWrapping="Wrap" Text="admin" VerticalAlignment="Top" Width="190"/>
-        <PasswordBox materialDesign:HintAssist.Hint="Пароль" x:Name="txt_password" HorizontalAlignment="Left" Height="30" Margin="10,80,0,0" VerticalAlignment="Top" Width="190" Password="admin"/>
+        <Button Content="Вход" HorizontalAlignment="Left" Margin="10,129,0,0" VerticalAlignment="Top" Width="220" Click="Button_Click"/>
+        <TextBox materialDesign:HintAssist.Hint="Сервер" x:Name="txt_adress" HorizontalAlignment="Left" Height="30" Margin="10,10,0,0" TextWrapping="Wrap" Text="31.6.98.114" VerticalAlignment="Top" Width="220"/>
+        <TextBox materialDesign:HintAssist.Hint="Логин" x:Name="txt_login" HorizontalAlignment="Left" Height="30" Margin="10,45,0,0" TextWrapping="Wrap" Text="admin" VerticalAlignment="Top" Width="220"/>
+        <PasswordBox materialDesign:HintAssist.Hint="Пароль" x:Name="txt_password" HorizontalAlignment="Left" Height="30" Margin="10,80,0,0" VerticalAlignment="Top" Width="220" Password="admin"/>
+        
+        <DockPanel x:Name="blck_pnl" Visibility="Visible" Background="Black" Opacity="0.1"></DockPanel>
+        <ProgressBar Width="140" Height="140" x:Name="prgrss_br"  Style="{StaticResource MaterialDesignCircularProgressBar}" IsIndeterminate="True" HorizontalAlignment="Center" VerticalAlignment="Center"></ProgressBar>
     </Grid>
 </Window>
