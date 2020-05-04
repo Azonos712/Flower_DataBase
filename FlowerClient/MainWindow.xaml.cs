@@ -1,21 +1,15 @@
 ﻿using ImageMagick;
-using Npgsql;
+using MaterialDesignThemes.Wpf;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace FlowerClient
 {
@@ -25,6 +19,7 @@ namespace FlowerClient
         private List<Card> gallery = new List<Card>(6);
         private DataTable results;
         private int currentPage;
+        private string currentSQL;
         public MainWindow()
         {
             InitializeComponent();
@@ -55,23 +50,6 @@ namespace FlowerClient
             this.Close();
         }
 
-        void ResetComboboxBoxs()
-        {
-            (FindName("author") as ComboBox).SelectedItem = "Все";
-            (FindName("exposition") as ComboBox).SelectedItem = "Все";
-            (FindName("life_form") as ComboBox).SelectedItem = "Все";
-            (FindName("species_name") as ComboBox).SelectedItem = "Все";
-            (FindName("group") as ComboBox).SelectedItem = "Все";
-            (FindName("econ_group") as ComboBox).SelectedItem = "Все";
-            (FindName("people") as ComboBox).SelectedItem = "Все";
-            (FindName("history") as ComboBox).SelectedItem = "Все";
-            (FindName("buildings") as ComboBox).SelectedItem = "Все";
-            (FindName("category") as ComboBox).SelectedItem = "Все";
-
-            season.SelectedItem = "Все";
-            year.SelectedItem = "Все";
-        }
-
         void LoadComboxBoxs()
         {
             loadReference("author");
@@ -98,10 +76,10 @@ namespace FlowerClient
             cards.Add(card6);
 
             LoadComboxBoxs();
-            ResetComboboxBoxs();
 
-            loadRecords(1);
+            //loadRecords(1);
             currentPage = 1;
+            createSearchQuery(currentPage);
 
             UpdateGallery();
         }
@@ -115,9 +93,6 @@ namespace FlowerClient
             {
                 years.Add(i.ToString());
             }
-
-            years.Add("Все");
-            seasons.Add("Все");
 
             seasons.Add("Весна");
             seasons.Add("Лето");
@@ -143,19 +118,61 @@ namespace FlowerClient
 
             if (d.ShowDialog() == true)
             {
+                //createSearchQuery(currentPage);
                 loadRecords(currentPage);
                 ClearGallery();
                 UpdateGallery();
             }
         }
 
+        public static T FindChild<T>(DependencyObject parent) where T : DependencyObject
+        {
+            if (parent != null)
+            {
+                for (int i = 0; i < VisualTreeHelper.GetChildrenCount(parent); i++)
+                {
+                    DependencyObject child = VisualTreeHelper.GetChild(parent, i);
+                    if (child != null && child is T)
+                    {
+                        return (T)child;
+                    }
+
+                    T childItem = FindChild<T>(child);
+                    if (childItem != null)
+                    {
+                        return childItem;
+                    }
+                }
+            }
+            return null;
+        }
+
+        void ConfirmFilterColor()
+        {
+            foreach (var t in tagPanel.Items)
+            {
+                var parentObject = tagPanel.ItemContainerGenerator.ContainerFromItem(t);
+                Chip c = FindChild<Chip>(parentObject);
+                c.Background = System.Windows.Media.Brushes.LightGreen;
+            }
+        }
+
         private void Search_btn_Click(object sender, RoutedEventArgs e)
         {
-            /*Button temp = sender as Button;
-            StackPanel tempst = temp.Parent as StackPanel;
-            DetailedDesc d = new DetailedDesc();
-            d.DataContext = tempst.DataContext;
-            d.Show();*/
+            currentPage = 1;
+            createSearchQuery(currentPage);
+            ConfirmFilterColor();
+            ClearGallery();
+            UpdateGallery();
+        }
+
+        private void reset_btn_Click(object sender, RoutedEventArgs e)
+        {
+            tagPanel.Items.Clear();
+            currentPage = 1;
+            createSearchQuery(currentPage);
+            ClearGallery();
+            UpdateGallery();
         }
 
         private void nextPage_Click(object sender, RoutedEventArgs e)
@@ -168,13 +185,13 @@ namespace FlowerClient
             loadPage(false);
         }
 
-        private void loadRecords(int currentPage)
+        private void loadRecords(int page)
         {
             if (results != null)
             {
                 results.Clear();
             }
-            Mediator.instance.SQL = "select * from plants_all_view limit 6 offset " + ((currentPage - 1) * 6).ToString();
+            Mediator.instance.SQL = currentSQL + " limit 6 offset " + ((page - 1) * 6).ToString();
             results = Mediator.instance.ConvertQueryToTable();
         }
 
@@ -182,6 +199,7 @@ namespace FlowerClient
         {
             if (direction)
             {
+                //createSearchQuery(currentPage + 1);
                 loadRecords(currentPage + 1);
 
                 if (results.Rows.Count > 0)
@@ -196,6 +214,7 @@ namespace FlowerClient
                 else
                     return;
 
+                //createSearchQuery(currentPage);
                 loadRecords(currentPage);
             }
 
@@ -255,6 +274,7 @@ namespace FlowerClient
         {
             if (new DetailedDesc().ShowDialog() == true)
             {
+                //createSearchQuery(currentPage);
                 loadRecords(currentPage);
                 ClearGallery();
                 UpdateGallery();
@@ -265,18 +285,104 @@ namespace FlowerClient
         {
             Mediator.instance.SQL = "select * from " + refName + "_view";
             ComboBox c = FindName(refName) as ComboBox;
-            var temp = Mediator.instance.ConvertQueryToComboBox();
-            temp.Add("Все");
-            c.ItemsSource = temp;
+
+            if(c != null)
+            {
+                var temp = Mediator.instance.ConvertQueryToComboBox();
+                c.ItemsSource = temp;
+            }
         }
 
         private void MenuItem_Click_3(object sender, RoutedEventArgs e)
         {
             new ReferenceTableWindow().ShowDialog();
+            //createSearchQuery(currentPage);
             loadRecords(currentPage);
             ClearGallery();
             LoadComboxBoxs();
             UpdateGallery();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                Button temp = sender as Button;
+                StackPanel s = temp.Parent as StackPanel;
+                ComboBox cbx = null;
+
+                foreach (var c in s.Children)
+                {
+                    if (c is ComboBox)
+                    {
+                        cbx = c as ComboBox;
+                    }
+                }
+
+                if(cbx.SelectedItem == null)
+                    throw new Exception("Выберете категорию для добавления!");
+
+                Tag tmp = new Tag();
+                tmp.categoryP = cbx.Name;
+                tmp.valP = cbx.SelectedItem.ToString();
+
+                for (int i = 0; i < tagPanel.Items.Count; i++)
+                {
+                    if ((tagPanel.Items[i] as Tag).valP == tmp.valP)
+                        throw new Exception("Такой фильтр уже используется!");
+                }
+
+                tagPanel.Items.Add(tmp);
+
+            }
+            catch (Exception ex)
+            {
+                new MsgBox(ex.Message, "Ошибка").ShowDialog();
+            }
+        }
+
+        private void Chip_DeleteClick(object sender, RoutedEventArgs e)
+        {
+            tagPanel.Items.Remove((sender as FrameworkElement).DataContext);
+        }
+        
+        private void createSearchQuery(int page)
+        {
+            Mediator.instance.SQL = "select * from plants_all_view";
+            if (tagPanel.Items.Count != 0)
+            {
+                if (results != null)
+                {
+                    results.Clear();
+                }
+
+                string result = string.Empty;
+
+                for (int i = 0; i < tagPanel.Items.Count; i++)
+                {
+                    
+                    if (result.Contains((tagPanel.Items[i] as Tag).categoryP))
+                    {
+                        result = result.Insert(result.IndexOf(")", result.IndexOf((tagPanel.Items[i] as Tag).categoryP)), " or \"" + (tagPanel.Items[i] as Tag).categoryP + "\" = '" + (tagPanel.Items[i] as Tag).valP + "'");
+                    }
+                    else
+                    {
+                        result += "\"" + (tagPanel.Items[i] as Tag).categoryP + "\" = '" + (tagPanel.Items[i] as Tag).valP + "')";
+                        result += " and (";
+                    }
+
+                }
+                if (result.Last() == '(')
+                {
+                    result = result.Remove(result.Length - 6, 6);
+                }
+
+                Mediator.instance.SQL += " where (" + result;
+            }
+            currentSQL = Mediator.instance.SQL;
+
+            Mediator.instance.SQL += " limit 6 offset " + ((page - 1) * 6).ToString();
+            results = Mediator.instance.ConvertQueryToTable();
         }
     }
 }

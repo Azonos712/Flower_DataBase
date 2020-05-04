@@ -9,7 +9,7 @@
     <Grid>
         <DockPanel>
             <StackPanel DockPanel.Dock="Left">
-                <Border Height="300" Width="300" BorderThickness="1" BorderBrush="Black" Margin="10,50,10,10">
+                <Border Height="300" Width="300" BorderThickness="1" BorderBrush="Black" Margin="10,27,10,10">
                     <Image x:Name="photo"  Source="{Binding ImageS}"/>
                 </Border>
                 

@@ -108,6 +108,7 @@
     <Compile Include="ReferenceTableWindow.xaml.cs">
       <DependentUpon>ReferenceTableWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Tag.cs" />
     <Page Include="AddUser.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
