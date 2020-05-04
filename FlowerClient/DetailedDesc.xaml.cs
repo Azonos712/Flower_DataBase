@@ -138,6 +138,9 @@ namespace FlowerClient
         {
             try
             {
+                if (Directory.Exists(Mediator.instance.Path) == false)
+                    throw new Exception("Путь сохранения фотографий не существует!");
+
                 Card temp = (Card)this.DataContext;
 
                 int fotoID = -1;
@@ -174,7 +177,6 @@ namespace FlowerClient
                 jpegBitmapEncoder.Frames.Add(BitmapFrame.Create(photo.Source as BitmapSource));
                 using (FileStream fileStream = new FileStream(Mediator.instance.Path + fotoID + ".jpg", FileMode.Create))
                     jpegBitmapEncoder.Save(fileStream);
-
 
                 new MsgBox("Действие завершено успешно!", "Информация").ShowDialog();
                 DialogResult = true;
@@ -245,7 +247,7 @@ namespace FlowerClient
             //    img.Resize(600, 800);
             //else
             //    img.Resize(800, 600);
-            
+
             img.Interlace = Interlace.Plane;
             img.Format = MagickFormat.Jpg;
 
