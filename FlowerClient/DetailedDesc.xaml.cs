@@ -254,7 +254,7 @@ namespace FlowerClient
             img.Interlace = Interlace.Plane;
             img.Format = MagickFormat.Jpg;
 
-            var watermark = new MagickImage(@"..\..\img\signature.png");
+            var watermark = new MagickImage(@"img\signature.png");
 
             watermark.Evaluate(Channels.Alpha, EvaluateOperator.Divide, 2);
             img.Composite(watermark, Gravity.Southwest, CompositeOperator.Over);
