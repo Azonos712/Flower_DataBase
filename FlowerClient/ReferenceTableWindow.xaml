@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FlowerClient"
         mc:Ignorable="d"
-        Title="Справочные таблицы" TextElement.FontSize="14" Height="450" Width="650" WindowStartupLocation="CenterScreen">
+        Title="Справочные таблицы" TextElement.FontSize="14" Height="450" Width="650" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
     <Grid>
         <DockPanel>
             <StackPanel Width="300" Margin="10" DockPanel.Dock="Left">
