@@ -31,7 +31,7 @@
                             <ComboBox x:Name="group" HorizontalAlignment="Left" Margin="20,0,0,0" Width="190"/>
 
                             <Label Content="Автор" HorizontalAlignment="Left" Margin="20,20,0,0"/>
-                            <ComboBox x:Name="author" HorizontalAlignment="Left" Text="{Binding authorP}" Margin="20,0,0,0" Width="190"/>
+                            <ComboBox x:Name="author" HorizontalAlignment="Left" Margin="20,0,0,0" Width="190"/>
 
                             <Label Content="Экспозиция" HorizontalAlignment="Left" Margin="20,20,0,0" />
                             <ComboBox x:Name="exposition" HorizontalAlignment="Left" Margin="20,0,0,0" Width="190"/>

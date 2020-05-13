@@ -48,7 +48,6 @@ namespace FlowerClient
         {
             try
             {
-                Card context = DataContext as Card;
 
                 loadReference("author");
                 loadReference("exposition");
@@ -62,6 +61,7 @@ namespace FlowerClient
                 loadReference("category");
                 fillYearsSeasons();
 
+                Card context = DataContext as Card;
                 if (context == null)
                 {
                     btn_foto.Content = "Добавить фото";
@@ -84,8 +84,8 @@ namespace FlowerClient
                     history.SelectedIndex = history.Items.IndexOf(context.historyP);
                     buildings.SelectedIndex = buildings.Items.IndexOf(context.buildingsP);
                     category.SelectedIndex = category.Items.IndexOf(context.categoryP);
-                    year.SelectedIndex = year.Items.IndexOf(Convert.ToInt32(context.yearP == "" ? "-1" : context.yearP));
-                    season.SelectedIndex = season.Items.IndexOf(context.seasonP);
+                    year.SelectedIndex = year.Items.IndexOf(context.yearP);
+                    season.SelectedIndex = season.Items.IndexOf(context.seasonP == "null" ? "": context.seasonP);
                 }
             }
             catch (Exception ex)
@@ -96,26 +96,34 @@ namespace FlowerClient
 
         private void fillYearsSeasons()
         {
-            List<int> years = new List<int>();
+            List<string> years = new List<string>();
             List<string> seasons = new List<string>();
 
+            years.Add("");
             for (int i = 1960; i < 2031; i++)
             {
-                years.Add(i);
+                years.Add(i.ToString());
             }
+
+            seasons.Add("");
             seasons.Add("Весна");
             seasons.Add("Лето");
             seasons.Add("Осень");
             seasons.Add("Зима");
 
             season.ItemsSource = seasons;
+            season.SelectedItem = "";
             year.ItemsSource = years;
+            year.SelectedItem = "";
         }
         private void loadReference(string refName)
         {
             Mediator.instance.SQL = "select * from " + refName + "_view";
             ComboBox c = FindName(refName) as ComboBox;
-            c.ItemsSource = Mediator.instance.ConvertQueryToComboBox();
+            var temp = Mediator.instance.ConvertQueryToComboBox();
+            temp.Insert(0, "");
+            c.ItemsSource = temp;
+            c.SelectedItem = "";
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -127,7 +135,11 @@ namespace FlowerClient
         private string itemToString(string name)
         {
             ComboBox c = FindName(name) as ComboBox;
-            if(c.SelectedItem == null)
+            
+            if (c.SelectedItem == null)
+                return "null";
+
+            if (c.SelectedItem.ToString() == "")
                 return "null";
 
             var temp = c.SelectedItem.ToString();
