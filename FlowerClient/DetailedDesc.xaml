@@ -24,46 +24,44 @@
                 <DockPanel>
                     <StackPanel Orientation="Horizontal" DockPanel.Dock="Top" HorizontalAlignment="Center">
                         <StackPanel>
-
-                            <Label Content="Автор" HorizontalAlignment="Left" Margin="20,20,0,0"/>
-                            <ComboBox x:Name="author" HorizontalAlignment="Left" Text="{Binding authorP}" Margin="20,0,0,0" Width="190"/>
-
-                            <Label Content="Сооружения" HorizontalAlignment="Left" Margin="20,20,0,0" />
-                            <ComboBox x:Name="buildings" HorizontalAlignment="Left" Margin="20,0,0,0" Width="190"/>
-
-                            <Label Content="Люди" HorizontalAlignment="Left" Margin="20,20,0,0"/>
-                            <ComboBox x:Name="people" HorizontalAlignment="Left" Margin="20,0,0,0" Width="190"/>
-
-                            <Label Content="История" HorizontalAlignment="Left" Margin="20,20,0,0" />
-                            <ComboBox x:Name="history" HorizontalAlignment="Left" Margin="20,0,0,0" Width="190"/>
-
-                            <Label Content="Категория" HorizontalAlignment="Left" Margin="20,20,0,0" />
-                            <ComboBox x:Name="category" HorizontalAlignment="Left" Margin="20,0,0,0" Width="190"/>
-
-                            <Label Content="Жизненная форма" HorizontalAlignment="Left" Margin="20,20,0,0" />
-                            <ComboBox x:Name="life_form" HorizontalAlignment="Left" Margin="20,0,0,0" Width="190"/>
-
-                        </StackPanel>
-                        <StackPanel>
-
-                            <Label Content="Экспозиция" HorizontalAlignment="Left" Margin="20,20,0,0" />
-                            <ComboBox x:Name="exposition" HorizontalAlignment="Left" Margin="20,0,0,0" Width="190"/>
-
                             <Label Content="Название вида" HorizontalAlignment="Left" Margin="20,20,0,0" />
                             <ComboBox x:Name="species_name" HorizontalAlignment="Left" Margin="20,0,0,0" Width="190"/>
 
                             <Label Content="Группа" HorizontalAlignment="Left" Margin="20,20,0,0" />
                             <ComboBox x:Name="group" HorizontalAlignment="Left" Margin="20,0,0,0" Width="190"/>
 
+                            <Label Content="Автор" HorizontalAlignment="Left" Margin="20,20,0,0"/>
+                            <ComboBox x:Name="author" HorizontalAlignment="Left" Text="{Binding authorP}" Margin="20,0,0,0" Width="190"/>
+
+                            <Label Content="Экспозиция" HorizontalAlignment="Left" Margin="20,20,0,0" />
+                            <ComboBox x:Name="exposition" HorizontalAlignment="Left" Margin="20,0,0,0" Width="190"/>
+
+                            <Label Content="Люди" HorizontalAlignment="Left" Margin="20,20,0,0"/>
+                            <ComboBox x:Name="people" HorizontalAlignment="Left" Margin="20,0,0,0" Width="190"/>
+                            
+                            <Label Content="Сооружения и сооружения" HorizontalAlignment="Left" Margin="20,20,0,0" />
+                            <ComboBox x:Name="buildings" HorizontalAlignment="Left" Margin="20,0,0,0" Width="190"/>
+                          
+                        </StackPanel>
+                        <StackPanel>
+
+                            <Label Content="Жизненная форма" HorizontalAlignment="Left" Margin="20,20,0,0" />
+                            <ComboBox x:Name="life_form" HorizontalAlignment="Left" Margin="20,0,0,0" Width="190"/>
+
                             <Label Content="Группа по хоз. назначению" HorizontalAlignment="Left" Margin="20,20,0,0" />
                             <ComboBox x:Name="econ_group" HorizontalAlignment="Left" Margin="20,0,0,0" Width="190"/>
-
+                                                       
+                            <Label Content="Год" HorizontalAlignment="Left" Margin="20,20,0,0" />
+                            <ComboBox x:Name="year" HorizontalAlignment="Left" Margin="20,0,0,0" Width="190"/>
+                            
                             <Label Content="Сезон" HorizontalAlignment="Left" Margin="20,20,0,0" />
                             <ComboBox x:Name="season" HorizontalAlignment="Left" Margin="20,0,0,0" Width="190"/>
 
+                            <Label Content="История" HorizontalAlignment="Left" Margin="20,20,0,0" />
+                            <ComboBox x:Name="history" HorizontalAlignment="Left" Margin="20,0,0,0" Width="190"/>
 
-                            <Label Content="Год" HorizontalAlignment="Left" Margin="20,20,0,0" />
-                            <ComboBox x:Name="year" HorizontalAlignment="Left" Margin="20,0,0,0" Width="190"/>
+                            <Label Content="Категория" HorizontalAlignment="Left" Margin="20,20,0,0" />
+                            <ComboBox x:Name="category" HorizontalAlignment="Left" Margin="20,0,0,0" Width="190"/>
 
                         </StackPanel>
                     </StackPanel>
