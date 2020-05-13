@@ -99,7 +99,7 @@ namespace FlowerClient
             List<int> years = new List<int>();
             List<string> seasons = new List<string>();
 
-            for (int i = 2017; i < 2031; i++)
+            for (int i = 1960; i < 2031; i++)
             {
                 years.Add(i);
             }

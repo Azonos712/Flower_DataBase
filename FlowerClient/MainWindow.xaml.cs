@@ -68,7 +68,7 @@ namespace FlowerClient
         List<string> LoadYears()
         {
             List<string> years = new List<string>();
-            for (int i = 2017; i < 2031; i++)
+            for (int i = 1960; i < 2031; i++)
             {
                 years.Add(i.ToString());
             }
