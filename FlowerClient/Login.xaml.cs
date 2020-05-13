@@ -1,5 +1,7 @@
 ﻿using Npgsql;
 using System;
+using System.IO;
+using System.Resources;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -12,6 +14,21 @@ namespace FlowerClient
         {
             InitializeComponent();
             OnControls();
+
+            try
+            {
+                if (File.Exists("server.ini"))
+                {
+                    StreamReader sw = File.OpenText("server.ini");
+
+                    txt_adress.Text = sw.ReadLine();
+                    sw.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
 
         void OnControls()
@@ -46,6 +63,24 @@ namespace FlowerClient
 
                 OnControls();
                 RoleAlert();
+
+                var fs = File.Create("server.ini");
+
+                fs.Close();
+
+                try
+                {
+                    using (StreamWriter sw = new StreamWriter("server.ini", false, System.Text.Encoding.Default))
+                    {
+                        sw.WriteLine(txt_adress.Text);
+                        sw.Close();
+                    }
+                    
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception(ex.Message);
+                }
 
                 new MainWindow().Show();
                 this.Close();

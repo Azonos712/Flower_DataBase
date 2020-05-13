@@ -84,7 +84,7 @@ namespace FlowerClient
                     history.SelectedIndex = history.Items.IndexOf(context.historyP);
                     buildings.SelectedIndex = buildings.Items.IndexOf(context.buildingsP);
                     category.SelectedIndex = category.Items.IndexOf(context.categoryP);
-                    year.SelectedIndex = year.Items.IndexOf(Convert.ToInt32(context.yearP));
+                    year.SelectedIndex = year.Items.IndexOf(Convert.ToInt32(context.yearP == "" ? "-1" : context.yearP));
                     season.SelectedIndex = season.Items.IndexOf(context.seasonP);
                 }
             }
@@ -127,11 +127,15 @@ namespace FlowerClient
         private string itemToString(string name)
         {
             ComboBox c = FindName(name) as ComboBox;
-            //ComboBoxItem item = (ComboBoxItem)c.SelectedItem;
-            if (c.SelectedItem == null)
-                throw new Exception("Выберите все поля!");
+            if(c.SelectedItem == null)
+                return "null";
 
-            return c.SelectedItem.ToString();
+            var temp = c.SelectedItem.ToString();
+            //ComboBoxItem item = (ComboBoxItem)c.SelectedItem;
+            //if (c.SelectedItem == null)
+            //    throw new Exception("Выберите все поля!");
+
+            return temp;
         }
 
         private void save_Click(object sender, RoutedEventArgs e)

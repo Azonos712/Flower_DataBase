@@ -771,6 +771,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_BD00265D38A34D759B72C720213A63C0"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_BEA0F7853535560611750CB9037358B5"
         "OwnerKey" = "8:_C9A6650F076347E7A168AEC8DB12536C"
         "MsmSig" = "8:_UNDEFINED"
@@ -909,12 +915,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_EE5B224F02714A9F9D715E2F852B92A3"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_F26D94B6C0897D1BB54CC258B3CBDB7E"
         "OwnerKey" = "8:_50AF2140ABFEAFD56414E6AE33AF8135"
         "MsmSig" = "8:_UNDEFINED"
@@ -947,12 +947,6 @@
         {
         "MsmKey" = "8:_F57259695C301951759A80109584AFC3"
         "OwnerKey" = "8:_C9A6650F076347E7A168AEC8DB12536C"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_EB5B3DF83C4697298D03B1389F83279A"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -1663,6 +1657,12 @@
         "OwnerKey" = "8:_6C7997BA817B9719DFA0F800B8CE5405"
         "MsmSig" = "8:_UNDEFINED"
         }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_EB5B3DF83C4697298D03B1389F83279A"
+        "MsmSig" = "8:_UNDEFINED"
+        }
     }
     "Configurations"
     {
@@ -1681,6 +1681,14 @@
         "PrivateKeyFile" = "8:"
         "TimeStampServer" = "8:"
         "InstallerBootstrapper" = "3:2"
+            "BootstrapperCfg:{63ACBE69-63AA-4F98-B2B6-99F9E24495F2}"
+            {
+            "Enabled" = "11:TRUE"
+            "PromptEnabled" = "11:TRUE"
+            "PrerequisitesLocation" = "2:1"
+            "Url" = "8:"
+            "ComponentsUrl" = "8:"
+            }
         }
         "Release"
         {
@@ -1697,6 +1705,14 @@
         "PrivateKeyFile" = "8:"
         "TimeStampServer" = "8:"
         "InstallerBootstrapper" = "3:2"
+            "BootstrapperCfg:{63ACBE69-63AA-4F98-B2B6-99F9E24495F2}"
+            {
+            "Enabled" = "11:TRUE"
+            "PromptEnabled" = "11:TRUE"
+            "PrerequisitesLocation" = "2:1"
+            "Url" = "8:"
+            "ComponentsUrl" = "8:"
+            }
         }
     }
     "Deployable"
@@ -4928,6 +4944,26 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_BD00265D38A34D759B72C720213A63C0"
+            {
+            "SourcePath" = "8:..\\Документация.docx"
+            "TargetName" = "8:Документация.docx"
+            "Tag" = "8:"
+            "Folder" = "8:_E28D2967D23A4A07B7653F5522271D3D"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_BEA0F7853535560611750CB9037358B5"
             {
             "AssemblyRegister" = "3:1"
@@ -5484,26 +5520,6 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_EE5B224F02714A9F9D715E2F852B92A3"
-            {
-            "SourcePath" = "8:..\\Руководство.docx"
-            "TargetName" = "8:Руководство.docx"
-            "Tag" = "8:"
-            "Folder" = "8:_E28D2967D23A4A07B7653F5522271D3D"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_F26D94B6C0897D1BB54CC258B3CBDB7E"
